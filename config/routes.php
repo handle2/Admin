@@ -34,6 +34,16 @@ $admin->addPost('/admin/profile/getUser',array(
     'action'     => 'getUser'
 ));
 
+$admin->addPost('/admin/role/getRoles',array(
+    'controller' => 'role',
+    'action'     => 'getRoles'
+));
+
+$admin->addPost('/admin/role/save',array(
+    'controller' => 'role',
+    'action'     => 'save'
+));
+
 $admin->addPost('/admin/right/getRights',array(
     'controller' => 'right',
     'action'     => 'getRights'

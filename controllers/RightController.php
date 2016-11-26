@@ -7,13 +7,12 @@
  */
 
 namespace Modules\Admin\Controllers;
-
+use Modules\BusinessLogic\ContentSettings;
 
 class RightController extends ControllerBase
 {
     public function getRightsAction(){
 
-        return $this->api(200,json_encode('jogok'));
     }
 
     public function uploadAction(){}

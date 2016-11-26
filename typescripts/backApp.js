@@ -17,6 +17,26 @@ var backApp;
             controller: 'RightController',
             controllerAs: 'ctrl'
         })
+            .when("/admin/role", {
+            templateUrl: '/modules/Admin/views/directives/role/role-index.html',
+            controller: 'RoleController',
+            controllerAs: 'ctrl',
+            resolve: {
+                id: [function () {
+                        return false;
+                    }]
+            }
+        })
+            .when("/admin/role/edit/:id?", {
+            templateUrl: '/modules/Admin/views/directives/role/role-edit.html',
+            controller: 'RoleController',
+            controllerAs: 'ctrl',
+            resolve: {
+                id: ["$route", function (route) {
+                        return route.current.params.id;
+                    }]
+            }
+        })
             .when("/admin/right/upload", {
             templateUrl: '/modules/Admin/views/directives/right/right-upload.html',
             controller: 'RightController',
