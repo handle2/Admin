@@ -1,0 +1,10 @@
+<section class="content">
+    <form name="form" novalidate>
+        <input data-ng-class="{'red' : form.username.$touched && !form.username.$valid}" placeholder="Username" name="username" type="text" data-ng-model="ctrl.form.username" required=""><br/>
+        <input data-ng-class="{'red' : form.name.$touched && !form.name.$valid}" placeholder="Name" name="name" type="text" data-ng-model="ctrl.form.name" required=""><br/>
+        <input data-ng-class="{'red' : form.email.$touched && !form.email.$valid}" placeholder="Email" name="email" type="email" data-ng-model="ctrl.form.email" required=""><br/>
+        <input data-ng-class="{'red' : form.password.$touched && !form.password.$valid}" placeholder="Password" name="password" type="password" data-ng-model="ctrl.form.password" required=""><br/>
+        <input data-ng-class="{'red' : form.password_again.$touched && !form.password_again.$valid || ctrl.form.password != ctrl.form.password_again}" placeholder="Password Again" name="password_again" type="password" data-ng-model="ctrl.form.password_again" required=""><br/>{{form.$valid}}
+        <input type="submit" data-ng-click="ctrl.register()" value="Save" data-ng-disabled="!form.$valid" />
+    </form>
+</section>

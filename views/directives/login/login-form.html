@@ -1,0 +1,8 @@
+<section class="content">
+    <div class="error" data-ng-show="ctrl.error != ''">{{ctrl.error}}</div>
+    <form>
+        <input name="username" type="text" data-ng-model="ctrl.form.username">
+        <input name="password" type="password" data-ng-model="ctrl.form.password">
+        <button data-ng-click="ctrl.login();">Submit</button>
+    </form>
+</section>

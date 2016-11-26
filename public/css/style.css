@@ -1,0 +1,225 @@
+.add {
+    width: 35px;
+    height: 35px;
+    background-color: #00a7d0;
+    color: red;
+    font-size: 35px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 35px;
+}
+
+.add_checkbox {
+    width: 20px;
+    height: 20px;
+    background-color: #4ad064;
+    color: #ffc44f;
+    font-size: 20px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 20px;
+}
+
+.add_radio {
+    width: 20px;
+    height: 20px;
+    background-color: #151115;
+    color: #fff4f0;
+    font-size: 20px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 20px;
+}
+
+.remove {
+    width: 20px;
+    height: 20px;
+    background-color: #7d1712;
+    color: #fff4f0;
+    font-size: 20px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 20px;
+}
+
+.ex_inputs {
+    margin-right: 0;
+    margin-left: auto;
+    float: right;
+    width: 200px;
+    height: 600px;
+    overflow: scroll;
+}
+
+.ex_inputs p {
+    background-color: gainsboro;
+    color: white;
+    font-size: 20px;
+}
+
+.ex_inputs p.text.active {
+    background-color: #4ad064;
+    color: black;
+}
+
+.ex_inputs p.textarea.active {
+    background-color: #ff49fa;
+    color: black;
+}
+
+.ex_inputs p.number.active {
+    background-color: #7d1712;
+    color: white;
+}
+
+.ex_inputs p.email.active {
+    background-color: #ffc44f;
+    color: black;
+}
+
+.ex_inputs p.checkbox.active {
+    background-color: #fff4f0;
+    color: black;
+}
+
+.ex_inputs p.radio.active {
+    background-color: #d01e34;
+    color: white;
+}
+
+.stuff {
+    width: 600px;
+}
+
+.hide {
+    visibility: hidden;
+    position: absolute;
+}
+
+table td {
+    width: 150px;
+}
+
+#master {
+    width: 500px;
+    height: 300px;
+    overflow: hidden;
+}
+
+#inner {
+    width: 500px;
+    height: 300px;
+    overflow-y: scroll;
+    padding: 0 5px;
+    border: 1px solid #b7b7b7;
+    background-color: skyblue;
+    padding-right: 20px; /* Increase/decrease this value for cross-browser compatibility */
+}
+
+.track3 {
+    width: 10px;
+    background: rgba(0, 0, 0, 0);
+    margin-right: 2px;
+    border-radius: 10px;
+    -webkit-transition: background 250ms linear;
+    transition: background 250ms linear;
+}
+
+.track3:hover,
+.track3.dragging {
+    background: #d9d9d9;
+    background: rgba(0, 0, 0, 0.15);
+}
+
+.handle3 {
+    width: 7px;
+    right: 0;
+    background: #999;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 7px;
+    -webkit-transition: width 250ms;
+    transition: width 250ms;
+}
+
+.track3:hover .handle3,
+.track3.dragging .handle3 {
+    width: 10px;
+}
+
+/*----------------------------Drag n Drop---------------------------------------*/
+.dropzone {
+
+    margin-top: 100px;
+    position: relative;
+    width: 300px;
+    height: 300px;
+    border: 2px dashed #ccc;
+    color: #ccc;
+    text-align: center;
+}
+
+.dropzone p {
+    line-height: 300px;
+}
+
+.dropzone.dragover {
+    border-color: black;
+    color: black;
+}
+
+.dropzone.dropped {
+    border-color: green;
+    color: green;
+}
+
+.dropzone img.wide {
+    max-width: 100%;
+    max-height: 100%;
+    height: auto;
+}
+
+.dropzone img.tall {
+    max-height: 100%;
+    max-width: 100%;
+    width: auto;
+}
+
+​
+#image {
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+#preview {
+    left: auto;
+    right: 0;
+}
+
+.thumbs {
+    position: relative;
+}
+
+.thumb {
+    position: relative;
+    float: left;
+    display: inline-block;
+    width: 200px;
+    max-height: 120px;
+    margin: 0 10px 0 0;
+    padding: 10px;
+    z-index: 1000;
+}
+
+/*------------------------------------------------------------------------------*/
+.edit{
+    display: inline-block;
+}
+#popover{
+    position: absolute;
+    right:150px;
+    top: 5px;
+}
+#popover img{
+    width: 40px;
+}

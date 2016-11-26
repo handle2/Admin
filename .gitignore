@@ -1,0 +1,8 @@
+/cache/
+/config/development/
+/.idea/
+/node_modules
+/bower_components
+/typings
+/dist
+/backend-scripts.js

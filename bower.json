@@ -1,0 +1,10 @@
+{
+  "name": "trygular",
+  "private": true,
+  "dependencies": {
+    "angular": "1.5.8",
+    "angular-route": "^1.5.8",
+    "bootstrap": "3.3.5",
+    "angular-local-storage": "^0.5.2"
+  }
+}
