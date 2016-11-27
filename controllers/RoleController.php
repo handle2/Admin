@@ -36,6 +36,12 @@ class RoleController extends ControllerBase
         return $this->api(200,json_encode($role));
     }
 
+    public function deleteAction(){
+        $id = $this->request->getJsonRawBody();
+        ContentSettings\Role::deleteRole($id);
+        return $this->api(200,json_encode("törölve"));
+    }
+
     public function uploadAction(){}
     public function editAction(){}
     public function indexAction(){}

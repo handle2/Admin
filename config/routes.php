@@ -39,6 +39,10 @@ $admin->addGet('/admin/role/getRoles',array(
     'controller' => 'role',
     'action'     => 'getRoles'
 ));
+$admin->addPost('/admin/:controller/delete',array(
+    'controller' => 1,
+    'action'     => 'delete'
+));
 
 $admin->addGet('/admin/role/getRole/:params',array(
     'controller' => 'role',
