@@ -1,0 +1,22 @@
+<table data-ng-init="ctrl.read(ctrl.scope.rows)" data-st-table="displayedCollection" data-st-safe-src="ctrl.scope.rows" class="table table-striped">
+    <thead>
+    <tr>
+        <th data-ng-repeat="key in ctrl.keys" data-st-sort="key">{{key}}</th>
+    </tr>
+    <tr>
+        <th colspan="5"><input data-st-search="" class="form-control" placeholder="global search ..." type="text"/></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr data-ng-repeat="row in displayedCollection">
+        <td data-ng-repeat="key in ctrl.keys">{{row[key]}}</td>
+    </tr>
+    </tbody>
+    <tfoot>
+    <tr>
+        <td colspan="5" class="text-center">
+            <div data-st-pagination="" data-st-items-by-page="ctrl.scope.count" data-st-displayed-pages="7"></div>
+        </td>
+    </tr>
+    </tfoot>
+</table>

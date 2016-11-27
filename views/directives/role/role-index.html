@@ -2,8 +2,4 @@
 <h2>Roles</h2>
 <a href="/admin/role/edit">Role feltöltése</a>
 <br/>
-<table>
-    <tr data-ng-repeat="role in ctrl.roleService.roles">
-        <td>{{role.id}}</td><td>{{role.name}}</td><td><a href="/admin/role/edit/{{role.id}}">Szerk</a></td>
-    </tr>
-</table>
+<smart-table  data-rows="ctrl.roleService.roles" data-count="7"></smart-table>
