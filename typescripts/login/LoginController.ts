@@ -17,7 +17,9 @@ module backApp {
 
             var self = this;
             this.http.post('/admin/logout').then(function successCallback(response) {
-                self.localStorageService.removeItem('username');
+                if(self.localStorageService.has('username')){
+                    self.localStorageService.removeItem('username');
+                }
                 self.window.open('/admin', '_self');
             }, function errorCallback(response) {
                 self.error = response.data;

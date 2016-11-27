@@ -24,7 +24,7 @@ module backApp{
             controller : 'RoleController',
             controllerAs: 'ctrl',
             resolve:	{
-                id:	[function () {
+                roleInit:	[function () {
                     return false;
                 }]
             }
@@ -34,8 +34,11 @@ module backApp{
             controller : 'RoleController',
             controllerAs: 'ctrl',
             resolve:	{
-                id:	["$route", function(route) {
-                    return route.current.params.id;
+                roleInit:	["$route","$http", function(route,http) {
+                    var role = http.get('/admin/role/getRole/'+route.current.params.id).then(function successCallback(response) {
+                        return response.data;
+                    });
+                    return role;
                 }]
             }
         })

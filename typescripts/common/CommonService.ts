@@ -25,8 +25,8 @@ module backApp{
 
 
         public getLoggedUser(){
-            var username = JSON.stringify(this.localStorageService.get('username'));
-            return this.http.post('/admin/profile/getUser', username);
+            var username = this.localStorageService.get('username');
+            return this.http.get('/admin/profile/getUser/'+username);
         }
     }
 

@@ -29,14 +29,21 @@ $admin->addPost('/admin/register/profile',array(
     'action'     => 'registerProfile'
 ));
 
-$admin->addPost('/admin/profile/getUser',array(
+$admin->addGet('/admin/profile/getUser/:params',array(
     'controller' => 'profile',
-    'action'     => 'getUser'
+    'action'     => 'getUser',
+    'params'     => 1
 ));
 
-$admin->addPost('/admin/role/getRoles',array(
+$admin->addGet('/admin/role/getRoles',array(
     'controller' => 'role',
     'action'     => 'getRoles'
+));
+
+$admin->addGet('/admin/role/getRole/:params',array(
+    'controller' => 'role',
+    'action'     => 'getRole',
+    'params'     => 1
 ));
 
 $admin->addPost('/admin/role/save',array(
@@ -44,7 +51,7 @@ $admin->addPost('/admin/role/save',array(
     'action'     => 'save'
 ));
 
-$admin->addPost('/admin/right/getRights',array(
+$admin->addGet('/admin/right/getRights',array(
     'controller' => 'right',
     'action'     => 'getRights'
 ));

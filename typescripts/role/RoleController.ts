@@ -9,15 +9,16 @@ module backApp {
         public error:string;
         public _formData : IRole;
         
-        constructor(private scope, private location, private http, private window ,public commonService, private localStorageService,private roleService,private id) {
+        constructor(private scope, private location, private http, private window ,public commonService, private localStorageService,private roleService,private roleInit) {
             if(!roleService.roles){
                 this.initRoles();
+            }
+            if(roleInit){
+                this._formData = JSON.parse(roleInit);
             }
         }
 
         public save(){
-            this._formData.id = this.id;
-            console.log("this._formDat",this._formData);
             var self = this;
             var data = JSON.stringify(this._formData);
             self.http.post('/admin/role/save', data).then(function successCallback(response) {
@@ -35,14 +36,14 @@ module backApp {
             if(!self.commonService.user){
                 self.commonService.getLoggedUser().then(function (response) {
                      this.commonService.user = JSON.parse(response.data);
-                     self.http.post('/admin/role/getRoles', this.commonService.user.level).then(function successCallback(response) {
+                     self.http.get('/admin/role/getRoles', this.commonService.user.level).then(function successCallback(response) {
                          self.roleService.roles = JSON.parse(response.data);
                      }, function errorCallback(response) {
                      self.error = response.data;
                      });
                 });
             }else{
-                self.http.post('/admin/role/getRoles', this.commonService.user.level).then(function successCallback(response) {
+                self.http.get('/admin/role/getRoles', this.commonService.user.level).then(function successCallback(response) {
                     self.roleService.roles = JSON.parse(response.data);
                 }, function errorCallback(response) {
                     self.error = response.data;
@@ -52,5 +53,5 @@ module backApp {
     }
 
     var backApp = angular.module('backApp');
-    backApp.controller('RoleController', ['$scope', '$location', '$http', '$window','CommonService','localStorageService','RoleService','id', RoleController]);
+    backApp.controller('RoleController', ['$scope', '$location', '$http', '$window','CommonService','localStorageService','RoleService','roleInit', RoleController]);
 }
