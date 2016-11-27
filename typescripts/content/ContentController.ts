@@ -7,11 +7,9 @@ module backApp {
 
 
         constructor(private scope, private location, private http, private window ,public commonService) {
-           console.log(commonService.loggedUsername);
         }
 
         public getUsername(){
-            console.log(this.commonService.loggedUsername);
         }
     }
 

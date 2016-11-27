@@ -22,7 +22,6 @@ module backApp {
             var self = this;
             var data = JSON.stringify(this._formData);
             self.http.post('/admin/role/save', data).then(function successCallback(response) {
-                console.log('response',response);
                 self.roleService.roles.push(JSON.parse(response.data));
                 self.location.path('/admin/role')
             }, function errorCallback(response) {
