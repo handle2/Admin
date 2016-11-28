@@ -35,29 +35,26 @@ $admin->addGet('/admin/profile/getUser/:params',array(
     'params'     => 1
 ));
 
-$admin->addGet('/admin/role/getRoles',array(
-    'controller' => 'role',
-    'action'     => 'getRoles'
-));
 $admin->addPost('/admin/:controller/delete',array(
     'controller' => 1,
     'action'     => 'delete'
 ));
 
-$admin->addGet('/admin/role/getRole/:params',array(
-    'controller' => 'role',
-    'action'     => 'getRole',
-    'params'     => 1
+$admin->addGet('/admin/:controller/get/:params',array(
+    'controller' => 1,
+    'action'     => 'get',
+    'params'     => 2
 ));
 
-$admin->addPost('/admin/role/save',array(
-    'controller' => 'role',
+$admin->addPost('/admin/:controller/save',array(
+    'controller' => 1,
     'action'     => 'save'
 ));
 
-$admin->addGet('/admin/right/getRights',array(
-    'controller' => 'right',
-    'action'     => 'getRights'
+$admin->addGet('/admin/:controller/list/:params',array(
+    'controller' => 1,
+    'action'     => 'list',
+    'params'     => 2
 ));
 
 $admin->addGet('/admin/:controller/:action/:params', array(

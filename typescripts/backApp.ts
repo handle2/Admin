@@ -14,11 +14,6 @@ module backApp{
         $routeProvider.when("/admin", {
             templateUrl : '/modules/Admin/views/directives/index/index.html'
         })
-            .when("/admin/right", {
-                templateUrl : '/modules/Admin/views/directives/right/right-index.html',
-                controller : 'RightController',
-                controllerAs: 'ctrl'
-            })
             .when("/admin/role", {
                 templateUrl : '/modules/Admin/views/directives/role/role-index.html',
                 controller : 'RoleController',
@@ -35,17 +30,35 @@ module backApp{
                 controllerAs: 'ctrl',
                 resolve:	{
                     roleInit:	["$route","$http", function(route,http) {
-                        var role = http.get('/admin/role/getRole/'+route.current.params.id).then(function successCallback(response) {
+                        var role = http.get('/admin/role/get/'+route.current.params.id).then(function successCallback(response) {
                             return response.data;
                         });
                         return role;
                     }]
                 }
             })
-            .when("/admin/right/upload", {
-                templateUrl : '/modules/Admin/views/directives/right/right-upload.html',
+            .when("/admin/right", {
+                templateUrl : '/modules/Admin/views/directives/right/right-index.html',
                 controller : 'RightController',
-                controllerAs: 'ctrl'
+                controllerAs: 'ctrl',
+                resolve:	{
+                    rightInit:	[function () {
+                        return false;
+                    }]
+                }
+            })
+            .when("/admin/right/edit/:id?", {
+                templateUrl : '/modules/Admin/views/directives/right/right-edit.html',
+                controller : 'RightController',
+                controllerAs: 'ctrl',
+                resolve:	{
+                    rightInit:	["$route","$http", function(route,http) {
+                        var right = http.get('/admin/right/get/'+route.current.params.id).then(function successCallback(response) {
+                            return response.data;
+                        });
+                        return right;
+                    }]
+                }
             })
             .when("/admin/content", {
                 templateUrl : '/modules/Admin/views/directives/content/content-index.html',

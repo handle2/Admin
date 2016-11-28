@@ -32,22 +32,12 @@ module backApp {
         public initRoles(){
 
             var self = this;
-            if(!self.commonService.user){
-                self.commonService.getLoggedUser().then(function (response) {
-                     this.commonService.user = JSON.parse(response.data);
-                     self.http.get('/admin/role/getRoles', this.commonService.user.level).then(function successCallback(response) {
-                         self.roleService.roles = JSON.parse(response.data);
-                     }, function errorCallback(response) {
-                     self.error = response.data;
-                     });
-                });
-            }else{
-                self.http.get('/admin/role/getRoles', this.commonService.user.level).then(function successCallback(response) {
-                    self.roleService.roles = JSON.parse(response.data);
-                }, function errorCallback(response) {
-                    self.error = response.data;
-                });
-            }
+
+            self.http.get('/admin/role/list').then(function successCallback(response) {
+                self.roleService.roles = JSON.parse(response.data);
+            }, function errorCallback(response) {
+                self.error = response.data;
+            });
         }
     }
 

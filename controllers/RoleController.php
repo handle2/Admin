@@ -12,7 +12,7 @@ use Modules\BusinessLogic\ContentSettings;
 class RoleController extends ControllerBase
 {
 
-    public function getRolesAction(){
+    public function listAction(){
         $roles = ContentSettings\Role::searchRoles([]);
         if($roles){
             return $this->api(200,json_encode($roles));
@@ -21,7 +21,7 @@ class RoleController extends ControllerBase
         }
     }
 
-    public function getRoleAction($id = false){
+    public function getAction($id = false){
         $roles = ContentSettings\Role::searchRoles(["id" => (int)$id]);
         if($roles){
             return $this->api(200,json_encode($roles[0]));
