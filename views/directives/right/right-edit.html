@@ -5,4 +5,12 @@
         <option selected value="group">Group</option>
     </select>
     <input type="submit" data-ng-click="ctrl.save()">
+    <button class="btn btn-success" data-ng-click="ctrl.addRight()">Add right</button>
+    <div data-ng-repeat="sub in ctrl.subRights">
+        <input type="text" name="name" data-ng-model="sub.name">
+        <input type="text" name="code" data-ng-model="sub.code">
+        <span data-ng-click="ctrl.removeSub(sub)">X</span>
+    </div>
+    <div data-ng-repeat="succ in ctrl.success">{{succ}}</div>
+    <button data-ng-if="ctrl.subRights.length > 0" class="btn btn-danger" data-ng-click="ctrl.saveSubs(ctrl._formData.code)">Save subs</button>
 </form>

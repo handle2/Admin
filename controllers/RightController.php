@@ -33,13 +33,18 @@ class RightController extends ControllerBase
         return $this->api(200,json_encode($right));
     }
 
+    public function getSubAction($parent){
+        $rights = ContentSettings\Right::searchRights(["type"=>"subRight","parent"=>$parent],["id"=>1,"name"=>1,"code"=>1,"type"=>1]);
+        return $this->api(200,json_encode($rights));
+    }
+
     public function deleteAction(){
         $id = $this->request->getJsonRawBody();
         $res = ContentSettings\Right::deleteRight($id);
         if($res){
-            return $this->api(200,json_encode("törölve"));
+            return $this->api(200,json_encode("okay"));
         }else{
-            return $this->api(400,json_encode("törlés_hiba"));
+            return $this->api(400,json_encode("nope"));
         }
 
     }

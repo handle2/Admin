@@ -57,6 +57,12 @@ $admin->addGet('/admin/:controller/list/:params',array(
     'params'     => 2
 ));
 
+$admin->addGet('/admin/right/getSub/:params',array(
+    'controller' => "right",
+    'action'     => 'getSub',
+    'params'     => 1
+));
+
 $admin->addGet('/admin/:controller/:action/:params', array(
         'controller' => 1,
         'action' => 2,
