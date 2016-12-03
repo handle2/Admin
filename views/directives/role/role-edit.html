@@ -1,33 +1,38 @@
-<style>
-    .horizontal-collapse {
-        height: 70px;
-    }
-
-    .navbar-collapse.in {
-        overflow-y: hidden;
-    }
-</style>
 <h2>Role Edit</h2>
 <form>
-    <div>
-        <button type="button" class="btn btn-default" data-ng-click="ctrl.main = !ctrl.main">Alap adatok
-        </button>
-        <div uib-collapse="ctrl.main">
-            <input type="text" data-ng-model="ctrl._formData.name">
-            <select data-ng-model="ctrl._formData.type">
-                <option value="client">Client</option>
-                <option value="cms">Cms</option>
-            </select>
+    <div class="panel-group" id="accordion">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" data-ng-click="ctrl.main = !ctrl.main">
+                        Alap adatok
+                    </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
+                </h4>
+            </div>
+            <div id="collapseOne" uib-collapse="ctrl.main" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    <input type="text" data-ng-model="ctrl._formData.name">
+                    <select data-ng-model="ctrl._formData.type">
+                        <option value="client">Client</option>
+                        <option value="cms">Cms</option>
+                    </select>
+                </div>
+            </div>
         </div>
-    </div>
-
-    <div data-ng-repeat="group in ctrl.roleService.orderedRights">
-
-        <button type="button" class="btn btn-default" data-ng-click="ctrl.toggleCollapse(group.id)">{{group.name}}
-        </button>
-        <div uib-collapse="ctrl.isCollapsed.indexOf(group.id)==-1">
-            <div data-ng-repeat="right in group.rights">
-                {{right.code}}
+        <div data-ng-repeat="group in ctrl.roleService.orderedRights" class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" data-ng-click="ctrl.toggleCollapse(group.id)">
+                        {{group.name}}
+                    </a><i class="indicator glyphicon glyphicon-chevron-up  pull-right"></i>
+                </h4>
+            </div>
+            <div uib-collapse="ctrl.isCollapsed.indexOf(group.id)==-1" id="collapseTwo" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <div data-ng-repeat="right in group.rights">
+                        {{right.code}}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
