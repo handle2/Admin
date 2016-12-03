@@ -12,15 +12,18 @@ use Modules\BusinessLogic\ContentSettings;
 class RightController extends ControllerBase
 {
     public function getAction($id = false){
-        $rights = ContentSettings\Right::searchRights(["id" => (int)$id],["id"=>1,"name"=>1,"code"=>1,"type"=>1]);
+        $rights = ContentSettings\Right::searchRights(["id" => (int)$id],["id"=>1,"name"=>1,"parent"=>1,"code"=>1,"type"=>1]);
         if($rights){
             return $this->api(200,json_encode($rights[0]));
         }
         return $this->api(200,false);
     }
     
-    public function listAction($type){
-        $rights = ContentSettings\Right::searchRights(["type"=>$type],["id"=>1,"name"=>1,"code"=>1,"type"=>1]);
+    public function listAction($type = []){
+        if(count($type)>0){
+            $type = ["type"=>$type];
+        }
+        $rights = ContentSettings\Right::searchRights($type,["id"=>1,"name"=>1,"parent"=>1,"code"=>1,"type"=>1]);
         return $this->api(200,json_encode($rights));
     }
 
@@ -34,7 +37,7 @@ class RightController extends ControllerBase
     }
 
     public function getSubAction($parent){
-        $rights = ContentSettings\Right::searchRights(["type"=>"subRight","parent"=>$parent],["id"=>1,"name"=>1,"code"=>1,"type"=>1]);
+        $rights = ContentSettings\Right::searchRights(["type"=>"subRight","parent"=>$parent],["id"=>1,"name"=>1,"parent"=>1,"code"=>1,"type"=>1]);
         return $this->api(200,json_encode($rights));
     }
 

@@ -1,9 +1,37 @@
+<style>
+    .horizontal-collapse {
+        height: 70px;
+    }
+
+    .navbar-collapse.in {
+        overflow-y: hidden;
+    }
+</style>
 <h2>Role Edit</h2>
 <form>
-    <input type="text" data-ng-model="ctrl._formData.name">
-    <select data-ng-model="ctrl._formData.type">
-        <option value="client">Client</option>
-        <option value="cms">Cms</option>
-    </select>
+    <div>
+        <button type="button" class="btn btn-default" data-ng-click="ctrl.main = !ctrl.main">Alap adatok
+        </button>
+        <div uib-collapse="ctrl.main">
+            <input type="text" data-ng-model="ctrl._formData.name">
+            <select data-ng-model="ctrl._formData.type">
+                <option value="client">Client</option>
+                <option value="cms">Cms</option>
+            </select>
+        </div>
+    </div>
+
+    <div data-ng-repeat="group in ctrl.roleService.orderedRights">
+
+        <button type="button" class="btn btn-default" data-ng-click="ctrl.toggleCollapse(group.id)">{{group.name}}
+        </button>
+        <div uib-collapse="ctrl.isCollapsed.indexOf(group.id)==-1">
+            <div data-ng-repeat="right in group.rights">
+                {{right.code}}
+            </div>
+        </div>
+    </div>
+
+
     <button data-ng-click="ctrl.save()" class="btn btn-default">Ment</button>
 </form>

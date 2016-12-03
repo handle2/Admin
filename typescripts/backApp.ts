@@ -1,6 +1,7 @@
 /// <reference path="./../typings/tsd.d.ts" />
 module backApp{
-    var backApp = angular.module('backApp',["ngRoute","LocalStorageModule","smart-table"]);
+    var backApp = angular.module('backApp',["ngRoute","LocalStorageModule","smart-table","ui.bootstrap"]);
+    
     backApp.config(function ($routeProvider,$locationProvider,localStorageServiceProvider) {
         localStorageServiceProvider
             .setPrefix('backApp');
@@ -21,6 +22,9 @@ module backApp{
                 resolve:	{
                     roleInit:	[function () {
                         return false;
+                    }],
+                    rights:	[function () {
+                        return false;
                     }]
                 }
             })
@@ -34,6 +38,13 @@ module backApp{
                             return response.data;
                         });
                         return role;
+                    }],
+                    rights:	["$route","$http", function(route,http) {
+                        var rights = http.get('/admin/right/list').then(function successCallback(response) {
+                            return JSON.parse(response.data);
+                        });
+                        
+                        return rights;
                     }]
                 }
             })

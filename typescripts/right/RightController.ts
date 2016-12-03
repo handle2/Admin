@@ -56,6 +56,7 @@ module backApp {
             var data = JSON.stringify(this._formData);
             this.http.post('/admin/right/save',data).then(function (response) {
                 var newRight = JSON.parse(response.data);
+                self.saveSubs(newRight.code);
                 if(!self._formData.id){
                     self.rightService.rights.push(newRight);
                 }else{

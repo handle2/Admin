@@ -9,6 +9,7 @@ module backApp{
 
     export class RoleService{
         public roles : Array<IRole>;
+        public orederedRights;
 
         constructor(rootScope,http,localStorageService){
 
