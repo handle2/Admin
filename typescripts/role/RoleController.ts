@@ -12,6 +12,7 @@ module backApp {
         id : number;
         code: string;
         type: string;
+        rights: Array<string>;
     }
     class RoleController{
         public error:string;
@@ -19,7 +20,8 @@ module backApp {
         public orderedRights = [];
         public main = false;
         public isCollapsed = [];
-
+        
+        public rightsObject = {};
         
         constructor(private scope, private location, private http, private window ,public commonService, private localStorageService,private roleService,private roleInit,private rights) {
             this.orderRights(rights);
@@ -28,8 +30,21 @@ module backApp {
             }
             if(roleInit){
                 this._formData = JSON.parse(roleInit);
+                for(var k = 0;k < this._formData.rights.length;k++){
+                    this.rightsObject[this._formData.rights[k]] = true;
+                }
             }
         }
+        
+        public toggleRight(code:string){
+            var index = this._formData.rights.indexOf(code);
+            if(index===-1){
+                this._formData.rights.push(code);
+            }else{
+                this._formData.rights.splice(index,1);
+            }
+        }
+
         public orderRights(rights){
             if(!this.roleService.orderedRights && rights) {
                 for (var i = 0; i < rights.length; i++) {

@@ -23,20 +23,19 @@
             <div class="panel-heading">
                 <h4 class="panel-title">
                     <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" data-ng-click="ctrl.toggleCollapse(group.id)">
-                        {{group.name}}
-                    </a><i class="indicator glyphicon glyphicon-chevron-up  pull-right"></i>
+                        {{group.name}}({{group.code}})
+                    </a><switch id="enabled" name="enabled" data-ng-change="ctrl.toggleRight(group.code)" data-ng-model="ctrl.rightsObject[group.code]" on="On" off="Off" class="green"></switch><i class="indicator glyphicon glyphicon-chevron-up  pull-right"></i>
                 </h4>
             </div>
             <div uib-collapse="ctrl.isCollapsed.indexOf(group.id)==-1" id="collapseTwo" class="panel-collapse collapse">
                 <div class="panel-body">
                     <div data-ng-repeat="right in group.rights">
-                        {{right.code}}
+                        {{right.name}}({{right.code}})<switch id="enabled" name="enabled" data-ng-change="ctrl.toggleRight(right.code)" data-ng-model="ctrl.rightsObject[right.code]" on="On" off="Off" class="green">
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 
     <button data-ng-click="ctrl.save()" class="btn btn-default">Ment</button>
 </form>

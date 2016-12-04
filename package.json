@@ -5,6 +5,7 @@
   "main": "app.js",
   "dependencies": {
     "angular": "^1.5.8",
+    "angular-ui-switch": "^0.1.1",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.0",
     "gulp-order": "^1.1.1",

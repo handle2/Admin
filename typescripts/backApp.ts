@@ -1,6 +1,6 @@
 /// <reference path="./../typings/tsd.d.ts" />
 module backApp{
-    var backApp = angular.module('backApp',["ngRoute","LocalStorageModule","smart-table","ui.bootstrap"]);
+    var backApp = angular.module('backApp',["ngRoute","LocalStorageModule","smart-table","ui.bootstrap","uiSwitch"]);
     
     backApp.config(function ($routeProvider,$locationProvider,localStorageServiceProvider) {
         localStorageServiceProvider

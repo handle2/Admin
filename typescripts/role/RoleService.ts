@@ -5,6 +5,7 @@ module backApp{
         id : number;
         code: string;
         type: string;
+        rights: Array<string>;
     }
 
     export class RoleService{
