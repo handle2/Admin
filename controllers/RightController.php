@@ -8,47 +8,63 @@
 
 namespace Modules\Admin\Controllers;
 use Modules\BusinessLogic\ContentSettings;
+use Modules\BusinessLogic\Search\RightSearch;
 
 class RightController extends ControllerBase
 {
     public function getAction($id = false){
-        $rights = ContentSettings\Right::searchRights(["id" => (int)$id],["id"=>1,"name"=>1,"parent"=>1,"code"=>1,"type"=>1]);
-        if($rights){
-            return $this->api(200,json_encode($rights[0]));
+        $search = RightSearch::createRightSearch();
+        $search->id = (int)$id;
+        $right = $search->findFirst();
+
+        if($right){
+            return $this->api(200,json_encode($right));
         }
         return $this->api(200,false);
     }
     
-    public function listAction($type = []){
-        if(count($type)>0){
-            $type = ["type"=>$type];
+    public function listAction($type = false){
+        $search = RightSearch::createRightSearch();
+        if($type){
+            $search->type = $type;
         }
-        $rights = ContentSettings\Right::searchRights($type,["id"=>1,"name"=>1,"parent"=>1,"code"=>1,"type"=>1]);
+        $rights = $search->find();
         return $this->api(200,json_encode($rights));
     }
 
     public function saveAction(){
+
+        $search = RightSearch::createRightSearch();
         $form = $this->request->getJsonRawBody();
-        if(empty($form->code)){
-            $form->code = $form->name;
-        }
-        $right = ContentSettings\Right::createRight($form);
+        /**@var \Modules\BusinessLogic\ContentSettings\Right $right*/
+        $right = $form->id?$search->create($form->id):$search->create();
+        $right->name = $form->name;
+        $right->parent = $form->parent;
+        $right->code = $form->code?$form->code:mb_strtolower($form->name);
+        $right->type = $form->type;
+
+        $right->save();
         return $this->api(200,json_encode($right));
+
     }
 
     public function getSubAction($parent){
-        $rights = ContentSettings\Right::searchRights(["type"=>"subRight","parent"=>$parent],["id"=>1,"name"=>1,"parent"=>1,"code"=>1,"type"=>1]);
+        $search = RightSearch::createRightSearch();
+        $search->type = "subRight";
+        $search->parent = $parent;
+        $rights = $search->find();
+
         return $this->api(200,json_encode($rights));
     }
 
     public function deleteAction(){
         $id = $this->request->getJsonRawBody();
-        $res = ContentSettings\Right::deleteRight($id);
-        if($res){
-            return $this->api(200,json_encode("okay"));
-        }else{
-            return $this->api(400,json_encode("nope"));
-        }
+        $search = RightSearch::createRightSearch();
+        /**@var \Modules\BusinessLogic\ContentSettings\Right $right*/
+        $right = $search->create($id);
+        $right->delete();
+
+        return $this->api(200,json_encode("törölve"));
 
     }
     
