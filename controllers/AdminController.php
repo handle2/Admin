@@ -46,7 +46,7 @@ class AdminController extends ControllerBase
             } else {
                 $ip = $_SERVER['REMOTE_ADDR'];
             }
-            ContentSettings\Login::createLogin(array('hash' => md5($profile->username),'ip'=>$ip));
+            ContentSettings\Login::createLogin(array('hash' => md5($profile->username),'ip'=>$ip,'id'=>$profile->id));
             return $this->api(200,'success');
         }
 

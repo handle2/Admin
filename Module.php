@@ -23,6 +23,7 @@ class Module
             'Modules\BusinessLogic\Models' => 'modules/BusinessLogic/models/',
             'Modules\BusinessLogic\AdminHelper' => 'modules/BusinessLogic/AdminHelper/',
             'Modules\BusinessLogic\ContentSettings' => 'modules/BusinessLogic/ContentSettings/',
+            'Modules\BusinessLogic\Search' => 'modules/BusinessLogic/Searches/',
         ));
 
         $loader->register();

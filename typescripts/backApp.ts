@@ -34,7 +34,9 @@ module backApp{
                 controllerAs: 'ctrl',
                 resolve:	{
                     roleInit:	["$route","$http", function(route,http) {
-                        var role = http.get('/admin/role/get/'+route.current.params.id).then(function successCallback(response) {
+                        var id = route.current.params.id!=undefined?route.current.params.id:false;
+                        var role = http.get('/admin/role/get/'+id).then(function successCallback(response) {
+
                             return response.data;
                         });
                         return role;

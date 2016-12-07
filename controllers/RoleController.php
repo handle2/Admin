@@ -8,12 +8,14 @@
 
 namespace Modules\Admin\Controllers;
 use Modules\BusinessLogic\ContentSettings;
+use Modules\BusinessLogic\Search\RoleSearch;
 
 class RoleController extends ControllerBase
 {
 
     public function listAction(){
-        $roles = ContentSettings\Role::searchRoles([]);
+        $search = RoleSearch::createRoleSearch();
+        $roles = $search->find();
         if($roles){
             return $this->api(200,json_encode($roles));
         }else{
@@ -22,23 +24,38 @@ class RoleController extends ControllerBase
     }
 
     public function getAction($id = false){
-        $roles = ContentSettings\Role::searchRoles(["id" => (int)$id]);
-        if($roles){
-            return $this->api(200,json_encode($roles[0]));
+        $roleSearch = RoleSearch::createRoleSearch();
+        $id = (int)$id!=0?(int)$id:false;
+        if($id){
+            $role = $roleSearch->create($id);
+        }else{
+            $role = false;
+        }
+
+        if($role){
+            return $this->api(200,json_encode($role));
         }
         return $this->api(200,false);
     }
 
     public function saveAction(){
+        $search = RoleSearch::createRoleSearch();
         $form = $this->request->getJsonRawBody();
-        $form->code = $form->name;
-        $role = ContentSettings\Role::createRole($form);
+        /**@var \Modules\BusinessLogic\ContentSettings\Role $role*/
+        $role = $form->id?$search->create($form->id):$search->create();
+        $role->code = $form->code?$form->code:mb_strtolower($form->name);
+        $role->name = $form->name;
+        $role->rights = $form->rights;
+        $role->save();
         return $this->api(200,json_encode($role));
     }
 
     public function deleteAction(){
         $id = $this->request->getJsonRawBody();
-        ContentSettings\Role::deleteRole($id);
+        $search = RoleSearch::createRoleSearch();
+        $role = $search->create($id);
+        $role->delete();
+
         return $this->api(200,json_encode("törölve"));
     }
 

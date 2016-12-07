@@ -1,22 +1,27 @@
 /// <reference path="./../../typings/tsd.d.ts" />
 module backApp {
-    interface IRight{
-        id : number;
-        name: string;
-        parent:string;
-        code:string;
-        type: string;
-    }
-
     interface IRole{
         id : number;
         code: string;
         type: string;
         rights: Array<string>;
     }
-    class RoleController{
+
+    interface IRoleController{
+        toggleRight(code:string):void;
+        orderRights(rights:Array<any>):void;
+        toggleCollapse(id:number):void;
+        save():void;
+        initRoles():void;
+    }
+    class RoleController implements IRoleController{
         public error:string;
-        public _formData : IRole;
+        public _formData : IRole = {
+            id:null,
+            code:null,
+            type:null,
+            rights : []
+        };
         public orderedRights = [];
         public main = false;
         public isCollapsed = [];
