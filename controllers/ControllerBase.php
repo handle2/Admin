@@ -1,6 +1,7 @@
 <?php
 namespace Modules\Admin\Controllers;
 
+use Modules\BusinessLogic\Search\ProfileSearch;
 use Phalcon\Mvc\Controller;
 
 use Modules\BusinessLogic\Models as Models;
@@ -13,6 +14,8 @@ use Phalcon\Mvc\Dispatcher;
 
 class ControllerBase extends Controller
 {
+    public $authUser;
+
     public function beforeExecuteRoute(Dispatcher $dispatcher){
 
         $result = $this->getPermission($this->router->getControllerName(),$this->router->getActionName());
@@ -39,6 +42,9 @@ class ControllerBase extends Controller
         }*/
 
         $login = ContentSettings\Login::getLogin($this->session->get("hash"));
+        $profileSearch = ProfileSearch::createProfileSearch();
+        $profileSearch->id = $login->userId;
+        $this->authUser = $profileSearch->findFirst();
         return $login;
     }
 

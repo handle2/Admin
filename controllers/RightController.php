@@ -12,16 +12,22 @@ use Modules\BusinessLogic\Search\RightSearch;
 
 class RightController extends ControllerBase
 {
+
     public function getAction($id = false){
         $search = RightSearch::createRightSearch();
-        $search->id = (int)$id;
-        $right = $search->findFirst();
+        $id = (int)$id!=0?(int)$id:false;
+        if($id){
+            $right = $search->create($id);
+        }else{
+            $right = false;
+        }
 
         if($right){
             return $this->api(200,json_encode($right));
         }
         return $this->api(200,false);
     }
+
     
     public function listAction($type = false){
         $search = RightSearch::createRightSearch();
