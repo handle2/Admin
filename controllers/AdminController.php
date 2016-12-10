@@ -3,6 +3,7 @@ namespace Modules\Admin\Controllers;
 
 use Modules\BusinessLogic\AdminHelper as Admin;
 use Modules\BusinessLogic\ContentSettings;
+use Modules\BusinessLogic\Search\ProfileSearch;
 
 class AdminController extends ControllerBase
 {
@@ -16,6 +17,7 @@ class AdminController extends ControllerBase
     }
     
     public function indexAction(){
+        
     }
     
     public function registerProfileAction(){
@@ -26,16 +28,22 @@ class AdminController extends ControllerBase
     public function logoutAction(){
         $hash = $this->session->get("hash");
         $login = ContentSettings\Login::getLogin($hash);
+        $this->session->remove("hash");
         $login->delete();
         return $this->api(200,'success');
     }
     
 
     public function enterAction(){
+
+
         $form = $this->request->getJsonRawBody(true);
 
-        /**@var $profile ContentSettings\Profile  */
-        $profile = ContentSettings\Profile::login($form['username'],$form['password']);
+        $profileSearch = ProfileSearch::createProfileSearch();
+        $profileSearch->password = $form['password'];
+        $profileSearch->username = $form['username'];
+        $profile = $profileSearch->findFirst();
+
         if($profile){
             $this->cookies->set('hash',md5($profile->username),time()+3600*24*7); //1 week
             $this->session->set("hash",md5($profile->username));

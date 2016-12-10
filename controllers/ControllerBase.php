@@ -42,9 +42,12 @@ class ControllerBase extends Controller
         }*/
 
         $login = ContentSettings\Login::getLogin($this->session->get("hash"));
-        $profileSearch = ProfileSearch::createProfileSearch();
-        $profileSearch->id = $login->userId;
-        $this->authUser = $profileSearch->findFirst();
+        if($login){
+            $profileSearch = ProfileSearch::createProfileSearch();
+            $profileSearch->id = $login->userId;
+            $this->authUser = $profileSearch->findFirst();
+        }
+
         return $login;
     }
 

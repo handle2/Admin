@@ -17,9 +17,7 @@ module backApp {
 
             var self = this;
             this.http.post('/admin/logout').then(function successCallback(response) {
-                if(self.localStorageService.has('username')){
-                    self.localStorageService.removeItem('username');
-                }
+                self.localStorageService.remove('username');
                 self.window.open('/admin', '_self');
             }, function errorCallback(response) {
                 self.error = response.data;
@@ -32,7 +30,6 @@ module backApp {
             this.http.post('/admin/enter', data).then(function successCallback(response) {
                 self.localStorageService.set('username',self.form.username);
                 self.window.open('/admin', '_self');
-                self.commonService.getLoggedUser();
             }, function errorCallback(response) {
                 self.error = response.data;
             });
