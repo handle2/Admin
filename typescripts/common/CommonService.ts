@@ -11,8 +11,11 @@ module backApp{
         password: string;
         role : any;
     }
-
-    export class CommonService{
+    interface ICommonService{
+        getLoggedUser():void;
+        hasPermission(code:string):boolean;
+    }
+    export class CommonService implements ICommonService{
         public user : IUser;
         public static instance : CommonService;
         constructor(private rootScope,private location,private window,private http,private localStorageService){
@@ -21,7 +24,6 @@ module backApp{
                 var self = this;
                 this.user = this.getLoggedUser().then(function (response) {
                     self.user = JSON.parse(response.data);
-                    console.log(self.user);
                 });
             }
         }
@@ -33,7 +35,15 @@ module backApp{
         }
 
         public hasPermission(code){
-            console.log(this.user);
+            if(this.user && !this.user['$$state']){
+                if(this.user.role.rights.indexOf(code)>-1){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+            return false;
+
         }
     }
 
