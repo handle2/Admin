@@ -9,16 +9,19 @@ module backApp{
         id:number;
         level : number;
         password: string;
+        role : any;
     }
 
     export class CommonService{
         public user : IUser;
         public static instance : CommonService;
         constructor(private rootScope,private location,private window,private http,private localStorageService){
+
             if(!this.user){
                 var self = this;
                 this.user = this.getLoggedUser().then(function (response) {
                     self.user = JSON.parse(response.data);
+                    console.log(self.user);
                 });
             }
         }
@@ -27,6 +30,10 @@ module backApp{
         public getLoggedUser(){
             var username = this.localStorageService.get('username');
             return this.http.get('/admin/profile/getUser/'+username);
+        }
+
+        public hasPermission(code){
+            console.log(this.user);
         }
     }
 
