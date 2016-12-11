@@ -56,7 +56,7 @@ class ControllerBase extends Controller
             $roleSearch = RoleSearch::createRoleSearch();
             $roleSearch->code = $this->authUser->role;
             $ownRole = $roleSearch->findFirst();
-            $this->authUser->availableRoles = $ownRole->roles;
+            $this->authUser->availableRoles = count($ownRole->roles)>0?$ownRole->roles:[false];
 
         }
 
