@@ -6,6 +6,7 @@ module backApp{
         code: string;
         type: string;
         rights: Array<string>;
+        roles: Array<string>;
     }
 
     export class RoleService{

@@ -17,8 +17,11 @@ class RoleController extends ControllerBase
         //todo a belépett user role id/code alapján kell lekérni a roleokat (sajátját nem lehet szerkeszteni)
 
         $search = RoleSearch::createRoleSearch();
+
+
+
         if($this->authUser->role != 'admin'){
-            $search->excludeRoles = [$this->authUser->role];
+            $search->roles = $this->authUser->availableRoles;
         }
 
         $roles = $search->find();
@@ -52,6 +55,7 @@ class RoleController extends ControllerBase
         $role->code = $form->code?$form->code:mb_strtolower($form->name);
         $role->name = $form->name;
         $role->rights = $form->rights;
+        $role->roles = $form->roles;
         $role->save();
         return $this->api(200,json_encode($role));
     }

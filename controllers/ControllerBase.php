@@ -2,6 +2,7 @@
 namespace Modules\Admin\Controllers;
 
 use Modules\BusinessLogic\Search\ProfileSearch;
+use Modules\BusinessLogic\Search\RoleSearch;
 use Phalcon\Mvc\Controller;
 
 use Modules\BusinessLogic\Models as Models;
@@ -45,7 +46,18 @@ class ControllerBase extends Controller
         if($login){
             $profileSearch = ProfileSearch::createProfileSearch();
             $profileSearch->id = $login->userId;
-            $this->authUser = $profileSearch->findFirst();
+            $profile = $profileSearch->findFirst();
+            $this->authUser = new \stdClass();
+            $this->authUser->username = $profile->username;
+            $this->authUser->email = $profile->email;
+            $this->authUser->name = $profile->name;
+            $this->authUser->role = $profile->role;
+
+            $roleSearch = RoleSearch::createRoleSearch();
+            $roleSearch->code = $this->authUser->role;
+            $ownRole = $roleSearch->findFirst();
+            $this->authUser->availableRoles = $ownRole->roles;
+
         }
 
         return $login;

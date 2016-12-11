@@ -27,12 +27,31 @@
             <div uib-collapse="ctrl.isCollapsed.indexOf(group.id)==-1" id="collapseTwo" class="panel-collapse collapse">
                 <div class="panel-body">
                     <div data-ng-repeat="right in group.rights">
-                        {{right.name}}({{right.code}})<switch id="enabled" name="enabled" data-ng-change="ctrl.toggleRight(right.code)" data-ng-model="ctrl.rightsObject[right.code]" on="On" off="Off" class="green">
+                        {{right.name}}({{right.code}})<switch id="enabled" name="enabled" data-ng-change="ctrl.toggleRight(right.code)" data-ng-model="ctrl.rightsObject[right.code]" on="On" off="Off" class="green"></switch>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" data-ng-click="ctrl.roles = !ctrl.roles">
+                    Elérhető szerepkörök
+                </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
+            </h4>
+        </div>
+        <div id="collapseRoles" uib-collapse="ctrl.main" class="panel-collapse collapse in">
+            <div class="panel-body row">
+                <div data-ng-repeat="role in ctrl.roleService.roles">
+                    <div class="col-md-1">
+                        {{role.name}}({{role.code}})<switch id="enabled" name="enabled" data-ng-change="ctrl.toggleRole(role.code)" data-ng-model="ctrl.rolesObject[role.code]" on="On" off="Off" class="green"></switch>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <button data-ng-click="ctrl.save()" class="btn btn-default">Ment</button>
 </form>

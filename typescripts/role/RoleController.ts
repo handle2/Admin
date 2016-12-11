@@ -5,10 +5,12 @@ module backApp {
         code: string;
         type: string;
         rights: Array<string>;
+        roles: Array<string>;
     }
 
     interface IRoleController{
         toggleRight(code:string):void;
+        toggleRole(code:string):void;
         orderRights(rights:Array<any>):void;
         toggleCollapse(id:number):void;
         save():void;
@@ -20,23 +22,31 @@ module backApp {
             id:null,
             code:null,
             type:null,
-            rights : []
+            rights : [],
+            roles: []
         };
         public orderedRights = [];
         public main = false;
+        public roles = false;
         public isCollapsed = [];
         
         public rightsObject = {};
+
+        public rolesObject = {};
         
         constructor(private scope, private location, private http, private window ,public commonService, private localStorageService,private roleService,private roleInit,private rights) {
             this.orderRights(rights);
-            if(!roleService.roles){
+            if(!roleService.roles || roleService.roles.length == 0){
                 this.initRoles();
             }
             if(roleInit){
                 this._formData = JSON.parse(roleInit);
                 for(var k = 0;k < this._formData.rights.length;k++){
                     this.rightsObject[this._formData.rights[k]] = true;
+                }
+
+                for(var k = 0;k < this._formData.roles.length;k++){
+                    this.rolesObject[this._formData.roles[k]] = true;
                 }
             }
         }
@@ -47,6 +57,15 @@ module backApp {
                 this._formData.rights.push(code);
             }else{
                 this._formData.rights.splice(index,1);
+            }
+        }
+
+        public toggleRole(code:string){
+            var index = this._formData.roles.indexOf(code);
+            if(index===-1){
+                this._formData.roles.push(code);
+            }else{
+                this._formData.roles.splice(index,1);
             }
         }
 
@@ -98,6 +117,7 @@ module backApp {
             }, function errorCallback(response) {
                 self.error = response.data;
             });
+
         }
     }
 
