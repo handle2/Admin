@@ -48,6 +48,7 @@ class RightController extends ControllerBase
         $right->parent = $form->parent;
         $right->code = $form->code?$form->code:mb_strtolower($form->name);
         $right->type = $form->type;
+        $right->actions = $form->actions;
 
         $right->save();
         return $this->api(200,json_encode($right));

@@ -1,11 +1,17 @@
 /// <reference path="./../../typings/tsd.d.ts" />
 
 module backApp{
+    interface IRoute{
+        action:string;
+        controller:string;
+    }
     interface IRight{
         id : number;
+        name: string;
         code: string;
-        categ: string;
-        types: Array<string>;
+        type: string;
+        parent: string;
+        actions: Array<IRoute>;
     }
 
     export class RightService{

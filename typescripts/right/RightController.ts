@@ -1,12 +1,16 @@
 /// <reference path="./../../typings/tsd.d.ts" />
 module backApp {
-
+    interface IRoute{
+        action:string;
+        controller:string;
+    }
     interface IRight{
         id : number;
         name: string;
         code: string;
         type: string;
         parent: string;
+        actions: Array<IRoute>;
     }
 
     interface IRightController{
@@ -17,6 +21,7 @@ module backApp {
         initRights(type:string) :void;
         save():void;
         addRight():void;
+        addRoute(sub:IRight):void;
         saveSubs(parentCode:string):void;
         removeSub(sub:any):void;
     }
@@ -75,6 +80,10 @@ module backApp {
             this.subRights.push({id:null,code:null,type:null,name:null});
         }
 
+        public addRoute(sub:IRight){
+            sub.actions.push({controller:"",action:""});
+        }
+
         public saveSubs(parentCode){
             var self = this;
             var newRights = [];
@@ -85,7 +94,7 @@ module backApp {
                 if(this.subRights[i].code.indexOf(parentCode)===-1){
                     this.subRights[i].code = parentCode+'.'+this.subRights[i].code;
                 }
-                var data = JSON.stringify(this.subRights[i]);
+                var data = angular.toJson(this.subRights[i]);
                 this.http.post('/admin/right/save',data).then(function (response) {
                     var res = JSON.parse(response.data);
                     newRights.push(res);
