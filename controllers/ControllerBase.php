@@ -2,6 +2,7 @@
 namespace Modules\Admin\Controllers;
 
 use Modules\BusinessLogic\Search\ProfileSearch;
+use Modules\BusinessLogic\Search\RightSearch;
 use Modules\BusinessLogic\Search\RoleSearch;
 use Phalcon\Mvc\Controller;
 
@@ -27,8 +28,34 @@ class ControllerBase extends Controller
         }
     }
 
+    /**
+     * @param $controller
+     * @param $action
+     * @return bool
+     */
     public function getPermission($controller,$action){
-       return $this->isLoggedIn();
+
+        $logged = $this->isLoggedIn();
+
+        $rightSearch = RightSearch::createRightSearch();
+        $rightSearch->action = $action;
+        $rightSearch->controller = $controller;
+        $rootedRight = $rightSearch->findFirst();
+
+        $roleSearch = RoleSearch::createRoleSearch();
+        $roleSearch->code = $this->authUser->role;
+        $selfRole = $roleSearch->findFirst();
+
+        $enabledAction = true;
+        if($rootedRight){
+            $enabledAction = in_array($rootedRight->code,$selfRole->rights)?true:false;
+        }
+
+        if($logged && $enabledAction){
+            return true;
+        }else{
+            return false;
+        }
     }
     /**
      * vizsgálja ,hogy be vagy-e lépve
