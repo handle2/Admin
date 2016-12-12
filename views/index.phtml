@@ -229,28 +229,28 @@
                     <li class="treeview" data-ng-show="ctrl.hasPermission('rights')">
                         <a href="#"><i class="fa fa-gears"></i> <span>Jogok</span> <i class="fa fa-angle-left pull-right"></i></a>
                         <ul class="treeview-menu">
-                            <li><a href="/admin/right">Felhasználói</a></li>
-                            <li><a href="/admin/role">Szerepkörök</a></li>
-                            <li><a href="/admin/right/conrights">Tartalmi</a></li>
-                            <li><a href="/admin/right/categupload">Kategória feltöltés</a></li>
+                            <li data-ng-show="ctrl.hasPermission('rights.user')"><a href="/admin/right">Felhasználói</a></li>
+                            <li data-ng-show="ctrl.hasPermission('rights.roles')"><a href="/admin/role">Szerepkörök</a></li>
+                            <li data-ng-show="ctrl.hasPermission('rights.cms')"><a href="/admin/right/conrights">Tartalmi</a></li>
+                            <li data-ng-show="ctrl.hasPermission('rights.category')"><a href="/admin/right/categupload">Kategória feltöltés</a></li>
                         </ul>
                     </li>
 
-                    <li class="treeview">
+                    <li class="treeview" data-ng-show="ctrl.hasPermission('cms')">
                         <a href="#"><i class="fa fa-files-o"></i> <span>Tartalmak</span> <i class="fa fa-angle-left pull-right"></i></a>
                         <ul class="treeview-menu">
-                            <li><a href="/admin/content">Tartalmak kezelése</a></li>
-                            <li><a href="/admin/content/labels">Címkék kezelése</a></li>
+                            <li data-ng-show="ctrl.hasPermission('cms.content')"><a href="/admin/content">Tartalmak kezelése</a></li>
+                            <li data-ng-show="ctrl.hasPermission('cms.labels')"><a href="/admin/content/labels">Címkék kezelése</a></li>
                         </ul>
                     </li>
 
-                    <li>
+                    <li data-ng-show="ctrl.hasPermission('partner')">
                         <a href="/admin/partner">
                             <i class="fa fa-male"></i> <span>Partnerek</span>
                         </a>
                     </li>
 
-                    <li class="treeview">
+                    <li class="treeview" data-ng-show="ctrl.hasPermission('items')">
                         <a href="#"><i class="fa fa-shopping-cart"></i> <span>Termékek</span> <i class="fa fa-angle-left pull-right"></i></a>
                         <ul class="treeview-menu">
                             <li><a href="/admin/product">Feltöltés</a></li>
@@ -259,7 +259,7 @@
                         </ul>
                     </li>
 
-                    <li>
+                    <li data-ng-show="ctrl.hasPermission('storage')">
                         <a href="/admin/storage">
                             <i class="fa fa-star-half-full"></i> <span>Storage</span>
                         </a>
