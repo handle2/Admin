@@ -21,10 +21,7 @@ module backApp{
         constructor(private rootScope,private location,private window,private http,private localStorageService){
 
             if(!this.user){
-                var self = this;
-                this.user = this.getLoggedUser().then(function (response) {
-                    self.user = JSON.parse(response.data);
-                });
+                this.reloadUserData();
             }
         }
 
@@ -32,6 +29,13 @@ module backApp{
         public getLoggedUser(){
             var username = this.localStorageService.get('username');
             return this.http.get('/admin/profile/getUser/'+username);
+        }
+
+        public reloadUserData(){
+            var self = this;
+            this.getLoggedUser().then(function (response) {
+                self.user = JSON.parse(response.data);
+            });
         }
 
         public hasPermission(code){

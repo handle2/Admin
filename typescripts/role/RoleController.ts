@@ -102,6 +102,7 @@ module backApp {
             var data = JSON.stringify(this._formData);
             self.http.post('/admin/role/save', data).then(function successCallback(response) {
                 self.roleService.roles.push(JSON.parse(response.data));
+                self.commonService.reloadUserData();
                 self.location.path('/admin/role')
             }, function errorCallback(response) {
                 self.error = response.data;
