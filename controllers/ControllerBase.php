@@ -22,12 +22,17 @@ class ControllerBase extends Controller
         //todo login és missing_right error legyen külön
 
         $result = $this->getPermission($this->router->getControllerName(),$this->router->getActionName());
-
-        if(!$result){
-            $this->view->setMainView('login');
-            return false;
-        }else{
-            $this->view->setMainView('index');
+        switch ($result['response']){
+            case 'ok':
+                $this->view->setMainView('index');
+                break;
+            case 'not_logged':
+                $this->view->setMainView('login');
+                break;
+            case 'not_authorized':
+                $this->api(404,json_encode(array('message'=>'not_authorized')));
+                return false;
+                break;
         }
     }
 
@@ -39,7 +44,9 @@ class ControllerBase extends Controller
     public function getPermission($controller,$action){
 
         $logged = $this->isLoggedIn();
-
+        if(!$logged){
+            return array('response' => 'not_logged');
+        }
         $rightSearch = RightSearch::createRightSearch();
         $rightSearch->action = $action;
         $rightSearch->controller = $controller;
@@ -54,10 +61,10 @@ class ControllerBase extends Controller
             $enabledAction = in_array($rootedRight->code,$selfRole->rights)?true:false;
         }
 
-        if($logged && $enabledAction){
-            return true;
+        if($enabledAction){
+            return array('response' => 'ok');
         }else{
-            return false;
+            return array('response' => 'not_authorized');
         }
     }
     /**
