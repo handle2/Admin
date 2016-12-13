@@ -5,7 +5,7 @@ module backApp {
 
         public keys : Array<string>;
 
-        constructor(private scope,private http) {
+        constructor(private scope,private http,private commonService) {
             var self = this;
             if(!scope.keys){
                 this.scope.$watch('rows', (newValue) => {
@@ -38,10 +38,20 @@ module backApp {
                 }
             });
         }
+
+        public checkPerm(action:string){
+            if(action == 'delete'){
+                return this.commonService.hasPermission(this.scope.delete);
+            }
+            if(action == 'save'){
+                return this.commonService.hasPermission(this.scope.update);
+            }
+            return true;
+        }
     }
 
     var backApp = angular.module('backApp');
-    backApp.controller('TableController', ['$scope','$http', TableController]);
+    backApp.controller('TableController', ['$scope','$http','CommonService', TableController]);
 
     backApp.directive('smartTable', function() {
         return {
@@ -53,7 +63,9 @@ module backApp {
                 rows : '=',
                 count : '=',
                 type : '=',
-                keys : '='
+                keys : '=',
+                delete : '=',
+                update : '='
             }
         };
     });

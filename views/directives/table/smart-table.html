@@ -12,8 +12,8 @@
     <tr data-ng-repeat="row in displayedCollection">
         <td data-ng-repeat="key in ctrl.keys">{{row[key]}}</td>
         <td>
-            <a class="btn btn-success" href="/admin/{{type}}/edit/{{row.id}}">Szerkeszt</a>
-            <a class="btn btn-danger" data-ng-click="ctrl.delete(type,row.id)">Töröl</a>
+            <a class="btn btn-success" data-ng-show="ctrl.checkPerm('save')" href="/admin/{{type}}/edit/{{row.id}}">Szerkeszt</a>
+            <a class="btn btn-danger" data-ng-show="ctrl.checkPerm('delete')" data-ng-click="ctrl.delete(type,row.id)">Töröl</a>
         </td>
     </tr>
     </tbody>
