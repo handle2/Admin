@@ -9,20 +9,11 @@ class AdminController extends ControllerBase
 {
     public function initialize()
     {
-       if(!$this->hasPermission()){
-           $this->view->setMainView('login');
-       }else{
-           $this->view->setMainView('index');
-       }
+
     }
     
     public function indexAction(){
         
-    }
-    
-    public function registerProfileAction(){
-        $form = $this->request->getJsonRawBody(true);
-        ContentSettings\Profile::createProfile($form);
     }
 
     public function logoutAction(){

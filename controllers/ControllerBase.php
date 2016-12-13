@@ -19,10 +19,13 @@ class ControllerBase extends Controller
     public $authUser;
 
     public function beforeExecuteRoute(Dispatcher $dispatcher){
+        //todo login és missing_right error legyen külön
 
         $result = $this->getPermission($this->router->getControllerName(),$this->router->getActionName());
+
         if(!$result){
             $this->view->setMainView('login');
+            return false;
         }else{
             $this->view->setMainView('index');
         }

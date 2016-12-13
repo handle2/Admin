@@ -14,11 +14,7 @@ class RoleController extends ControllerBase
 {
 
     public function listAction(){
-        //todo a belépett user role id/code alapján kell lekérni a roleokat (sajátját nem lehet szerkeszteni)
-
         $search = RoleSearch::createRoleSearch();
-
-
 
         if($this->authUser->role != 'admin'){
             $search->roles = $this->authUser->availableRoles;
@@ -63,6 +59,7 @@ class RoleController extends ControllerBase
     public function deleteAction(){
         $id = $this->request->getJsonRawBody();
         $search = RoleSearch::createRoleSearch();
+        /** @var ContentSettings\Role $role */
         $role = $search->create($id);
         $role->delete();
 
