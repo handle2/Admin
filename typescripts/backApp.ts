@@ -73,6 +73,19 @@ module backApp{
                     }]
                 }
             })
+            .when("/admin/prodcateg", {
+                templateUrl : '/modules/Admin/views/directives/prodcateg/prodcateg-edit.html',
+                controller : 'ProdcategController',
+                controllerAs: 'ctrl',
+                resolve:	{
+                    prodcategs:	["$route","$http", function(route,http) {
+                        var prodcategs = http.get('/admin/prodcateg/list').then(function successCallback(response) {
+                            return response.data;
+                        });
+                        return prodcategs;
+                    }]
+                }
+            })
             .when("/admin/content", {
                 templateUrl : '/modules/Admin/views/directives/content/content-index.html',
                 controller : 'ContentController',

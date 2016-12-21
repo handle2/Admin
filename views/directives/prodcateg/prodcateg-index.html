@@ -1,0 +1,5 @@
+<div data-ng-init="ctrl.initProdcategs()"></div>
+<h2>Roles</h2>
+<a href="/admin/prodcateg/edit">Role feltöltése</a>
+<br/>
+<smart-table data-rows="ctrl.prodcategService.prodcategs" data-count="7" data-type="'prodcateg'" data-delete="'product.category.delete'" data-update="'product.category.save'" data-keys="['id','name','code']"></smart-table>
