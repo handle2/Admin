@@ -1,35 +1,112 @@
 /// <reference path="./../../typings/tsd.d.ts" />
 module backApp {
-    interface IProdcateg{
+        interface IProdcateg{
+            id : number,
+            name : string,
+            url : string,
+            inputs: Array<Object>
+        }
+        interface IChild{
+            seq : number,
+            name : string,
+            url : string
+        }
+        interface IInput{
+            id: number,
+            type: string,
+            url: string,
+            name: string,
+            children: Array<IChild>,
+            length: number
+        }
 
-    }
+        interface IProdcategController{
+            save():void;
+            initProdcateg():void;
+            addInput():void;
+            removeInput(id:number):void;
+            addItem(input:IInput):void;
+        }
+    
+        class ProdcategController implements IProdcategController{
+            public error:string;
+            public _formData : IProdcateg = {
+                id : null,
+                name : null,
+                url : null,
+                inputs: []
+            };
 
-    interface IProdcategController{
-        save():void;
-        initProdcateg():void;
-    }
-    class ProdcategController implements IProdcategController{
-        public error:string;
-        public _formData : IProdcateg = {
-
-        };
+        public inputs : Array<IInput> = [];
 
 
-        constructor(private scope, private location, private http, private window , private localStorageService,private prodcategService) {
+        constructor(private scope, private location, private http, private window , private localStorageService,private prodcategService, private prodcateg,private prodcategs) {
+            if(prodcateg){
+                this._formData = JSON.parse(prodcateg);
+            }
             if(!prodcategService.prodcategs || prodcategService.prodcategs.length == 0){
-                this.initProdcateg();
+                prodcategService.prodcategs = JSON.parse(prodcategs);
             }
         }
 
         public initProdcateg(){
+            var self = this;
 
+            self.http.get('/admin/prodcateg/list').then(function successCallback(response) {
+                self.prodcategService.prodcategs = JSON.parse(response.data);
+            }, function errorCallback(response) {
+                self.error = response.data;
+            });
+        }
+            
+        public addInput(){
+            var actId = this.inputs.length > 0? this.inputs[this.inputs.length - 1].id+1:1;
+            var input = {
+                id: actId,
+                type: null,
+                url: null,
+                name: null,
+                children: [],
+                length: null
+            };
+            this.inputs.push(input);
+        }
+
+        public removeInput(id:number){
+            for(var i = 0;i<this.inputs.length;i++){
+                if(this.inputs[i].id == id){
+                    this.inputs.splice(i,1);
+                }
+            }
+        }
+
+        public addItem(input:IInput){
+            console.log(input);
+            var seq = input.children.length>0?input.children[input.children.length-1].seq+1:1;
+            var item = {
+                seq : seq,
+                name : null,
+                url : null
+            };
+            input.children.push(item);
         }
 
         public save(){
             var self = this;
-            var data = JSON.stringify(this._formData);
+            var notInputs = [];
+            for(var i = 0;i<this.inputs.length;i++){
+                if(!this.inputs[i].url){
+                    notInputs.push(this.inputs[i]);
+                }
+            }
+            var all = {
+                data : this._formData,
+                inputs: notInputs
+            };
+            var data = angular.toJson(all);
             self.http.post('/admin/prodcateg/save', data).then(function successCallback(response) {
-               
+                console.log(response);
+                self._formData.inputs.concat(response.data.ids);
             }, function errorCallback(response) {
                 self.error = response.data;
             });
@@ -37,5 +114,5 @@ module backApp {
     }
 
     var backApp = angular.module('backApp');
-    backApp.controller('ProdcategController', ['$scope', '$location', '$http', '$window','localStorageService','ProdcategService', ProdcategController]);
+    backApp.controller('ProdcategController', ['$scope', '$location', '$http', '$window','localStorageService','ProdcategService','prodcateg','prodcategs', ProdcategController]);
 }

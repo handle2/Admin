@@ -3,10 +3,9 @@
 module backApp{
     export interface IProdcateg{
         id : number;
-        code: string;
-        type: string;
-        rights: Array<string>;
-        roles: Array<string>;
+        url : string;
+        name : string;
+        inputs : Array<number>;
     }
 
     export class ProdcategService{

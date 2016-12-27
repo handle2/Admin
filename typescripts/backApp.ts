@@ -74,16 +74,35 @@ module backApp{
                 }
             })
             .when("/admin/prodcateg", {
-                templateUrl : '/modules/Admin/views/directives/prodcateg/prodcateg-edit.html',
+                templateUrl : '/modules/Admin/views/directives/prodcateg/prodcateg-index.html',
                 controller : 'ProdcategController',
                 controllerAs: 'ctrl',
                 resolve:	{
+                    prodcateg:	[function () {
+                        return false;
+                    }],
                     prodcategs:	["$route","$http", function(route,http) {
                         var prodcategs = http.get('/admin/prodcateg/list').then(function successCallback(response) {
                             return response.data;
                         });
                         return prodcategs;
                     }]
+                }
+            })
+            .when("/admin/prodcateg/edit/:id?", {
+                templateUrl : '/modules/Admin/views/directives/prodcateg/prodcateg-edit.html',
+                controller : 'ProdcategController',
+                controllerAs: 'ctrl',
+                resolve:	{
+                    prodcateg:	["$route","$http", function(route,http) {
+                        var prodcateg = http.get('/admin/prodcateg/get/'+route.current.params.id).then(function successCallback(response) {
+                            return response.data;
+                        });
+                        return prodcateg;
+                    }],
+                    prodcategs:	[function () {
+                        return false;
+                    }],
                 }
             })
             .when("/admin/content", {
