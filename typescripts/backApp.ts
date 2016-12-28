@@ -81,6 +81,9 @@ module backApp{
                     prodcateg:	[function () {
                         return false;
                     }],
+                    extInputs:	[function () {
+                        return false;
+                    }],
                     prodcategs:	["$route","$http", function(route,http) {
                         var prodcategs = http.get('/admin/prodcateg/list').then(function successCallback(response) {
                             return response.data;
@@ -99,6 +102,12 @@ module backApp{
                             return response.data;
                         });
                         return prodcateg;
+                    }],
+                    extInputs:	["$route","$http", function (route,http) {
+                        var inputs = http.get('/admin/prodcateg/getInputs').then(function successCallback(response) {
+                            return response.data;
+                        });
+                        return inputs;
                     }],
                     prodcategs:	[function () {
                         return false;

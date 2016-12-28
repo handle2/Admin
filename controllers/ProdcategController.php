@@ -42,6 +42,12 @@ class ProdcategController extends ControllerBase
         return $this->api(200,false);
     }
 
+    public function getInputsAction(){
+        $search = InputSearch::createInputSearch();
+        $inputs = $search->find();
+        return $this->api(200,$inputs);
+    }
+
     public function saveAction(){
 
         $form = $this->request->getJsonRawBody();
@@ -67,11 +73,17 @@ class ProdcategController extends ControllerBase
         $prodcateg->url = mb_strtolower($form->data->name);
         $prodcateg->inputs = array_merge($form->data->inputs,$inputIds);
         $prodcateg->save();
-        return $this->api(200,$inputIds);
+        return $this->api(200,[$prodcateg->id,$inputIds]);
     }
 
     public function deleteAction(){
+        $id = $this->request->getJsonRawBody();
+        $search = ProdcategSearch::createProdcategSearch();
+        /** @var Prodcateg $prodcateg */
+        $prodcateg = $search->create($id);
+        $prodcateg->delete();
 
+        return $this->api(200,json_encode("törölve"));
     }
 
     public function uploadAction(){}

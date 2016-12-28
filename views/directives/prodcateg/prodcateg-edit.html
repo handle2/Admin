@@ -45,4 +45,7 @@
         </div>
     </div>
 </div>
+<div class="ex_inputs">
+    <div data-ng-repeat="input in ctrl.exsInputs" data-ng-click="ctrl.toggleExtInput(input)"><p data-ng-class="{'active':ctrl.checkActiveInput(input.id)}" class="{{input.type}}">{{input.name}} ({{input.type}})</p></div>
+</div>
 <button class="btn btn-default" data-ng-click="ctrl.save()">Save</button>
