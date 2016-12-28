@@ -22,7 +22,7 @@ module backApp {
         }
 
         interface IProdcategController{
-            save():void;
+            save(back?:boolean):void;
             initProdcateg():void;
             addInput():void;
             removeInput(id:number):void;
@@ -127,7 +127,7 @@ module backApp {
             }
 
         }
-        public save(){
+        public save(back?:boolean){
             var self = this;
             var notInputs = [];
             for(var i = 0;i<this.inputs.length;i++){
@@ -143,8 +143,12 @@ module backApp {
             self.http.post('/admin/prodcateg/save', data).then(function successCallback(response) {
 
                 self._formData.inputs.concat(response.data[1]);
+                if(back){
+                    self.window.open('/admin/prodcateg', '_self');
+                }else{
+                    self.window.open('/admin/prodcateg/edit/'+response.data[0], '_self');
+                }
 
-                self.window.open('/admin/prodcateg/edit/'+response.data[0], '_self');
             }, function errorCallback(response) {
                 self.error = response.data;
             });
