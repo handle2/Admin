@@ -114,6 +114,38 @@ module backApp{
                     }],
                 }
             })
+            .when("/admin/product", {
+                templateUrl : '/modules/Admin/views/directives/product/product-index.html',
+                controller : 'ProductController',
+                controllerAs: 'ctrl',
+                resolve:	{
+                    prodcategs:	["$route","$http", function(route,http) {
+                        var product = http.get('/admin/product/list').then(function successCallback(response) {
+                            return response.data;
+                        });
+                        return product;
+                    }]
+                }
+            })
+            .when("/admin/product/edit/:id?", {
+                templateUrl : '/modules/Admin/views/directives/product/product-edit.html',
+                controller : 'ProductController',
+                controllerAs: 'ctrl',
+                resolve:	{
+                    product:	["$route","$http", function(route,http) {
+                        var product = http.get('/admin/product/get/'+route.current.params.id).then(function successCallback(response) {
+                            return response.data;
+                        });
+                        return product;
+                    }],
+                    prodcategs:	["$route","$http", function(route,http) {
+                        var prodcategs = http.get('/admin/product/getProdcategs').then(function successCallback(response) {
+                            return JSON.parse(response.data);
+                        });
+                        return prodcategs;
+                    }],
+                }
+            })
             .when("/admin/content", {
                 templateUrl : '/modules/Admin/views/directives/content/content-index.html',
                 controller : 'ContentController',

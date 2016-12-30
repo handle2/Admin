@@ -46,7 +46,7 @@ class RightController extends ControllerBase
         $right = $form->id?$search->create($form->id):$search->create();
         $right->name = $form->name;
         $right->parent = $form->parent;
-        $right->code = $form->code?$form->code:mb_strtolower($form->name);
+        $right->code = $form->code?$form->code:$this->urlMakeup($form->name);
         $right->type = $form->type;
         $right->actions = $form->actions;
 

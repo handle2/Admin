@@ -14,7 +14,7 @@ class ProfileController extends ControllerBase
         $profile = $profileSearch->findFirst();
   
         $roleSearch = RoleSearch::createRoleSearch();
-        $roleSearch->code = $profile->role;
+        $roleSearch->code = $this->urlMakeup($profile->role);
         $role = $roleSearch->findFirst();
         $profile->role = $role;
         return $this->api(200,json_encode($profile));

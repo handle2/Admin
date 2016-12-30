@@ -28,6 +28,7 @@ module backApp {
             removeInput(id:number):void;
             addItem(input:IInput):void;
             toggleExtInput(input:IInput):void;
+            checkActiveInput(id:number):boolean;
         }
     
         class ProdcategController implements IProdcategController{
@@ -48,7 +49,8 @@ module backApp {
             if(prodcateg){
                 this._formData = JSON.parse(prodcateg);
             }
-            if(!prodcategService.prodcategs || prodcategService.prodcategs.length == 0){
+            
+            if((!prodcategService.prodcategs || prodcategService.prodcategs.length == 0) && prodcategs){
                 prodcategService.prodcategs = JSON.parse(prodcategs);
             }
             this.initInputs(extInputs);
@@ -87,11 +89,18 @@ module backApp {
         }
 
         public removeInput(id:number){
+
             for(var i = 0;i<this.inputs.length;i++){
                 if(this.inputs[i].id == id){
                     this.inputs.splice(i,1);
                 }
             }
+            for(var i = 0;i<this._formData.inputs.length;i++){
+                if(this._formData.inputs[i] == id){
+                    this._formData.inputs.splice(i,1);
+                }
+            }
+
         }
 
         public addItem(input:IInput){
@@ -101,7 +110,9 @@ module backApp {
                 name : null,
                 url : null
             };
-            input.children.push(item);
+            if(!input.url){
+                input.children.push(item);
+            }
         }
             
         public toggleExtInput(input){

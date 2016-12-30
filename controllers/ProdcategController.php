@@ -23,7 +23,7 @@ class ProdcategController extends ControllerBase
         if($prodcategs){
             return $this->api(200,json_encode($prodcategs));
         }else{
-            //return $this->api(404,"nincsenek elérhető kategóriák");
+            return $this->api(200,false);
         }
     }
 
@@ -58,8 +58,11 @@ class ProdcategController extends ControllerBase
             /** @var Input $cInput */
             $cInput = $inputSearch->create();
             $cInput->name = $input->name;
-            $cInput->url = mb_strtolower($input->name);
+            $cInput->url = $this->urlMakeup($input->name);
             $cInput->type = $input->type;
+            foreach ($input->children as &$child){
+                $child->url = $this->urlMakeup($child->name);
+            }
             $cInput->children = $input->children;
             $cInput->length = $input->length;
             $inputIds[] = $cInput->id;
@@ -70,7 +73,7 @@ class ProdcategController extends ControllerBase
         /** @var Prodcateg $prodcateg */
         $prodcateg = $categSearch->create($form->data->id);
         $prodcateg->name = $form->data->name;
-        $prodcateg->url = mb_strtolower($form->data->name);
+        $prodcateg->url = $this->urlMakeup($form->data->name);
         $prodcateg->inputs = array_merge($form->data->inputs,$inputIds);
         $prodcateg->save();
         return $this->api(200,[$prodcateg->id,$inputIds]);

@@ -2,42 +2,42 @@
 <div class="add" data-ng-click="ctrl.addInput()">Add</div>
 <div class="inputs">
     <div class="stuff" data-ng-repeat="item in ctrl.inputs">
-        <label class='checkbox-inline'><input type="radio" data-ng-model="item.type" value="text">text</label>
-        <label class='checkbox-inline'><input type="radio" data-ng-model="item.type" value="textarea">textarea</label>
-        <label class='checkbox-inline'><input type="radio" data-ng-model="item.type" value="radio">radio</label>
-        <label class='checkbox-inline'><input type="radio" data-ng-model="item.type" value="checkbox">checkbox</label>
-        <label class='checkbox-inline'><input type="radio" data-ng-model="item.type" value="number">number</label>
-        <label class='checkbox-inline'><input type="radio" data-ng-model="item.type" value="email">email</label>
+        <label class='radio-inline'><input type="radio" data-ng-disabled="item.url" data-ng-model="item.type" value="text">text</label>
+        <label class='radio-inline'><input type="radio" data-ng-disabled="item.url" data-ng-model="item.type" value="textarea">textarea</label>
+        <label class='radio-inline'><input type="radio" data-ng-disabled="item.url" data-ng-model="item.type" value="radio">radio</label>
+        <label class='radio-inline'><input type="radio" data-ng-disabled="item.url" data-ng-model="item.type" value="checkbox">checkbox</label>
+        <label class='radio-inline'><input type="radio" data-ng-disabled="item.url" data-ng-model="item.type" value="number">number</label>
+        <label class='radio-inline'><input type="radio" data-ng-disabled="item.url" data-ng-model="item.type" value="email">email</label>
         <div class="remove" data-ng-click="ctrl.removeInput(item.id)">-</div>
         <br>
         <div data-ng-if="item.type == 'text'">
             Text attributumok <br/>
-            <input type='text' data-ng-model="item.name" placeholder='name'><br/>
-            <input type='number' data-ng-model="item.length" placeholder='length'>
+            <input data-ng-disabled="item.url" type='text' data-ng-model="item.name" placeholder='name'><br/>
+            <input data-ng-disabled="item.url" type='number' data-ng-model="item.length" placeholder='length'>
         </div>
         <div data-ng-if="item.type == 'textarea'">
             Textarea attributumok <br/>
-            <input type='text'   data-ng-model="item.name"  placeholder='name'><br/>
-            <input type='number' data-ng-model="item.length" placeholder='length'>
+            <input data-ng-disabled="item.url" type='text'   data-ng-model="item.name"  placeholder='name'><br/>
+            <input data-ng-disabled="item.url" type='number' data-ng-model="item.length" placeholder='length'>
         </div>
         <div data-ng-if="item.type == 'radio'">
             Radio button attributumok <br/>
-            <input type='text' data-ng-model="item.name" placeholder='name'><br/>
+            <input data-ng-disabled="item.url" type='text' data-ng-model="item.name" placeholder='name'><br/>
             <div class="add_radio" data-ng-click="ctrl.addItem(item)">+</div>
             <br/>
-            <input data-ng-repeat="child in item.children" class='radio_child' type='text' data-ng-model="child.name" placeholder="{{child.seq}} radiobutton név"><br/>
+            <input data-ng-disabled="item.url" data-ng-repeat="child in item.children" class='radio_child' type='text' data-ng-model="child.name" placeholder="{{child.seq}} radiobutton név"><br/>
         </div>
         <div data-ng-if="item.type == 'checkbox'">
             Checkbox attributumok <br/>
-            <input type='text' data-ng-model="item.name" placeholder='name'><br/>
+            <input data-ng-disabled="item.url" type='text' data-ng-model="item.name" placeholder='name'><br/>
             <div class="add_checkbox" data-ng-click="ctrl.addItem(item)">+</div>
             <br/>
-            <input data-ng-repeat="child in item.children" class='checkbox_child' type='text' data-ng-model="child.name" placeholder="{{child.seq}} checkbox név"><br/>
+            <input data-ng-disabled="item.url" data-ng-repeat="child in item.children" class='checkbox_child' type='text' data-ng-model="child.name" placeholder="{{child.seq}} checkbox név"><br/>
         </div>
         <div data-ng-if="item.type == 'number'">
             Number attributumok <br/>
-            <input type='text' data-ng-model="item.name" placeholder='name'><br/>
-            <input type='number' data-ng-model="item.length" placeholder='length'>
+            <input data-ng-disabled="item.url" type='text' data-ng-model="item.name" placeholder='name'><br/>
+            <input data-ng-disabled="item.url" type='number' data-ng-model="item.length" placeholder='length'>
         </div>
         <div data-ng-if="item.type == 'email'">
             Email attributumok <br/>

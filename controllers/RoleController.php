@@ -24,7 +24,7 @@ class RoleController extends ControllerBase
         if($roles){
             return $this->api(200,json_encode($roles));
         }else{
-            return $this->api(404,"nincsenek elérhető szerepkörök");
+            return $this->api(404,false);
         }
     }
 
@@ -48,7 +48,7 @@ class RoleController extends ControllerBase
         $form = $this->request->getJsonRawBody();
         /**@var \Modules\BusinessLogic\ContentSettings\Role $role*/
         $role = $form->id?$search->create($form->id):$search->create();
-        $role->code = $form->code?$form->code:mb_strtolower($form->name);
+        $role->code = $form->code?$form->code:$this->urlMakeup($form->name);
         $role->name = $form->name;
         $role->rights = $form->rights;
         $role->roles = $form->roles;

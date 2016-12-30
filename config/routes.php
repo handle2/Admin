@@ -40,6 +40,11 @@ $admin->addPost('/admin/:controller/delete',array(
     'action'     => 'delete'
 ));
 
+$admin->addPost('/admin/product/getInputs',array(
+    'controller' => 'product',
+    'action'     => 'getInputs'
+));
+
 $admin->addGet('/admin/:controller/get/:params',array(
     'controller' => 1,
     'action'     => 'get',

@@ -1,0 +1,32 @@
+<h2>Termékek</h2>
+<div class='form-group'>
+    <label class='radio-inline' data-ng-repeat="prodcateg in ctrl.prodcategs"><input type="radio" name="prodcateg" data-ng-value="prodcateg.url" data-ng-change="ctrl.setInputs(prodcateg.inputs)" data-ng-model="ctrl.categ">{{prodcateg.name}}</label>
+</div>
+<div data-ng-repeat="input in ctrl.inputs">
+    <div class='form-group' data-ng-if="input.type == 'text'">
+        <label>{{input.name}}</label>
+        <input class="form-control" type="text" data-ng-maxlength="input.length" name="input.url" data-ng-model="ctrl._formData[input.url]">
+    </div>
+    <div class='form-group' data-ng-if="input.type == 'textarea'">
+        <label>{{input.name}}</label>
+        <textarea class='form-control' data-ng-maxlength="input.length" name="input.url" data-ng-model="ctrl._formData[input.url]"></textarea>
+    </div>
+    <div class='form-group' data-ng-if="input.type == 'radio'">
+        <label class='radio-inline' data-ng-repeat="child in input.children"><input type="radio" data-ng-value="child.url" data-ng-model="ctrl._formData[input.url]">{{child.name}}</label>
+    </div>
+    <div class='form-group' data-ng-if="input.type == 'checkbox'">
+        <label class='checkbox-inline' data-ng-repeat="child in input.children"><input type="checkbox" name="input.url+[]" data-ng-model="ctrl._formData[input.url][child.url]">{{child.name}}</label>
+    </div>
+    <div class='form-group' data-ng-if="input.type == 'number'">
+        <label>{{input.name}}</label>
+        <input class="form-control" type="number" data-ng-maxlength="input.length" name="input.url" data-ng-model="ctrl._formData[input.url]">
+    </div>
+    <div class='form-group' data-ng-if="input.type == 'email'">
+        <label>{{input.name}}</label>
+        <input class="form-control" type="email" data-ng-maxlength="input.length" name="input.url" data-ng-model="ctrl._formData[input.url]">
+    </div>
+</div>
+<pre>
+    {{ctrl._formData}}
+</pre>
+<button class="btn btn-success" data-ng-click="ctrl.save()">Save</button>
