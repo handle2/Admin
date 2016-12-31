@@ -8,6 +8,7 @@
 
 namespace Modules\Admin\Controllers;
 
+use Modules\BusinessLogic\ContentSettings\Product;
 use Modules\BusinessLogic\Search\InputSearch;
 use Modules\BusinessLogic\Search\ProdcategSearch;
 use Modules\BusinessLogic\Search\ProductSearch;
@@ -60,6 +61,30 @@ class ProductController extends ControllerBase
         }else{
             return $this->api(200,false);
         }
+    }
+
+    public function saveAction(){
+        $form = $this->request->getJsonRawBody();
+        $search = ProductSearch::createProductSearch();
+        /** @var Product $product */
+        $product = $form->id?$search->create($form->id):$search->create();
+        foreach ($form as $key => $prop){
+            if($key != 'id'){
+                $product->{$key} = $prop;
+            }
+        }
+        $product->save();
+        return $this->api(200,$product->id);
+    }
+
+    public function deleteAction(){
+        $id = $this->request->getJsonRawBody();
+        $search = ProductSearch::createProductSearch();
+        /** @var Product $product */
+        $product = $search->create($id);
+        $product->delete();
+
+        return $this->api(200,json_encode("törölve"));
     }
 
     public function uploadAction(){}

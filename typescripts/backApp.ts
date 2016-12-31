@@ -119,12 +119,18 @@ module backApp{
                 controller : 'ProductController',
                 controllerAs: 'ctrl',
                 resolve:	{
-                    prodcategs:	["$route","$http", function(route,http) {
-                        var product = http.get('/admin/product/list').then(function successCallback(response) {
+                    product:	[function () {
+                        return false;
+                    }],
+                    products:	["$route","$http", function(route,http) {
+                        var products = http.get('/admin/product/list').then(function successCallback(response) {
                             return response.data;
                         });
-                        return product;
-                    }]
+                        return products;
+                    }],
+                    prodcategs:	[function () {
+                        return false;
+                    }],
                 }
             })
             .when("/admin/product/edit/:id?", {
@@ -137,6 +143,9 @@ module backApp{
                             return response.data;
                         });
                         return product;
+                    }],
+                    products:	[function () {
+                        return false;
                     }],
                     prodcategs:	["$route","$http", function(route,http) {
                         var prodcategs = http.get('/admin/product/getProdcategs').then(function successCallback(response) {

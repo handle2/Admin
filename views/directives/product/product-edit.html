@@ -1,6 +1,6 @@
 <h2>Termékek</h2>
 <div class='form-group'>
-    <label class='radio-inline' data-ng-repeat="prodcateg in ctrl.prodcategs"><input type="radio" name="prodcateg" data-ng-value="prodcateg.url" data-ng-change="ctrl.setInputs(prodcateg.inputs)" data-ng-model="ctrl.categ">{{prodcateg.name}}</label>
+    <label class='radio-inline' data-ng-repeat="prodcateg in ctrl.prodcategs"><input data-ng-disabled="ctrl._formData.id" type="radio" name="prodcateg" data-ng-value="prodcateg.url" data-ng-change="ctrl.setInputs(prodcateg.inputs)" data-ng-model="ctrl.categ">{{prodcateg.name}}</label>
 </div>
 <div data-ng-repeat="input in ctrl.inputs">
     <div class='form-group' data-ng-if="input.type == 'text'">
@@ -29,4 +29,4 @@
 <pre>
     {{ctrl._formData}}
 </pre>
-<button class="btn btn-success" data-ng-click="ctrl.save()">Save</button>
+<button class="btn btn-success" data-ng-click="ctrl.save()">Save</button><button class="btn btn-default" data-ng-click="ctrl.save(true)">Save</button>
