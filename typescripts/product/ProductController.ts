@@ -11,7 +11,7 @@ module backApp {
         public error;
         public inputs;
 
-        constructor(private scope, private http, private window, private productService, public prodcategs, public product, public products){
+        constructor(private scope, private http, private window, private productService, public prodcategs, public product, public products, public discounts){
 
             if(products){
                 productService.products = JSON.parse(products);
@@ -57,5 +57,5 @@ module backApp {
     }
 
     var backApp = angular.module('backApp');
-    backApp.controller('ProductController', ['$scope', '$http','$window','ProductService','prodcategs','product','products', ProductController]);
+    backApp.controller('ProductController', ['$scope', '$http','$window','ProductService','prodcategs','product','products','discounts', ProductController]);
 }

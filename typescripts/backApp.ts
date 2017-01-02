@@ -131,6 +131,9 @@ module backApp{
                     prodcategs:	[function () {
                         return false;
                     }],
+                    discounts:	[function () {
+                        return false;
+                    }],
                 }
             })
             .when("/admin/product/edit/:id?", {
@@ -152,6 +155,44 @@ module backApp{
                             return JSON.parse(response.data);
                         });
                         return prodcategs;
+                    }],
+                    discounts:	["$route","$http", function(route,http) {
+                        var discounts = http.get('/admin/discount/list').then(function successCallback(response) {
+                            return angular.fromJson(response.data);
+                        });
+                        return discounts;
+                    }]
+                }
+            })
+            .when("/admin/discount", {
+                templateUrl : '/modules/Admin/views/directives/discount/discount-index.html',
+                controller : 'DiscountController',
+                controllerAs: 'ctrl',
+                resolve:	{
+                    discount:	[function () {
+                        return false;
+                    }],
+                    discounts:	["$route","$http", function(route,http) {
+                        var discounts = http.get('/admin/discount/list').then(function successCallback(response) {
+                            return response.data;
+                        });
+                        return discounts;
+                    }]
+                }
+            })
+            .when("/admin/discount/edit/:id?", {
+                templateUrl : '/modules/Admin/views/directives/discount/discount-edit.html',
+                controller : 'DiscountController',
+                controllerAs: 'ctrl',
+                resolve:	{
+                    discount:	["$route","$http", function(route,http) {
+                        var discount = http.get('/admin/discount/get/'+route.current.params.id).then(function successCallback(response) {
+                            return response.data;
+                        });
+                        return discount;
+                    }],
+                    discounts:	[function () {
+                        return false;
                     }],
                 }
             })

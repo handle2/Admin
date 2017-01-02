@@ -26,6 +26,12 @@
         <input class="form-control" type="email" data-ng-maxlength="input.length" name="input.url" data-ng-model="ctrl._formData[input.url]">
     </div>
 </div>
+<div class="form-group" data-ng-if="ctrl.discounts.length > 0">
+    <label>Discounts</label>
+    <div data-ng-repeat="discount in ctrl.discounts">
+        <label class='checkbox-inline'><input type="checkbox" name="discount.url+[]" data-ng-model="ctrl._formData.discounts[discount.url]">{{discount.name}}</label>
+    </div>
+</div>
 <pre>
     {{ctrl._formData}}
 </pre>
