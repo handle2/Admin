@@ -55,7 +55,7 @@ module backApp {
 
     backApp.directive('smartTable', function() {
         return {
-            templateUrl : '/modules/Admin/views/directives/table/smart-table.html',
+            templateUrl : '/modules/Admin/views/directives/helpers/smart-table.html',
             controller : 'TableController',
             controllerAs: 'ctrl',
             restrict: 'E',
