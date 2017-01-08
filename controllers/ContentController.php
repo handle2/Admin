@@ -3,7 +3,9 @@ namespace Modules\Admin\Controllers;
 
 
 use Modules\BusinessLogic\ContentSettings\Content;
+use Modules\BusinessLogic\ContentSettings\Document;
 use Modules\BusinessLogic\Search\ContentSearch;
+use Modules\BusinessLogic\Search\DocumentSearch;
 
 class ContentController extends ControllerBase{
     public function listAction(){
@@ -22,6 +24,12 @@ class ContentController extends ControllerBase{
         $id = (int)$id!=0?(int)$id:false;
         if($id){
             $content = $search->create($id);
+            if(!empty($content->pictureIds)){
+                $picSearch = DocumentSearch::createDocumentSearch();
+                $picSearch->ids = $content->pictureIds;
+                $pictures = $picSearch->find();
+                $content->pictures = $pictures;
+            }
         }else{
             $content = false;
         }
@@ -44,7 +52,20 @@ class ContentController extends ControllerBase{
         $content->type = $form->type;
         $content->text = $form->text;
         $content->lead = $form->lead;
-        $content->pictures = $form->pictures;
+
+        $pictureSearch = DocumentSearch::createDocumentSearch();
+
+        foreach ($form->pictures as $picture){
+            /**@var Document $p */
+            /**@var Document $picture */
+            $p = $pictureSearch->create($picture->id);
+            $p->sourceImage = $picture->sourceImage;
+            $p->croppedImage = $picture->croppedImage;
+            $p->bounds = $picture->bounds;
+            $p->save();
+            $content->pictureIds[] = $p->id;
+        }
+
         $content->save();
         return $this->api(200,$content->id);
     }
