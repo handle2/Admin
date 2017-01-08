@@ -55,15 +55,20 @@ class ContentController extends ControllerBase{
 
         $pictureSearch = DocumentSearch::createDocumentSearch();
 
-        foreach ($form->pictures as $picture){
-            /**@var Document $p */
-            /**@var Document $picture */
-            $p = $pictureSearch->create($picture->id);
-            $p->sourceImage = $picture->sourceImage;
-            $p->croppedImage = $picture->croppedImage;
-            $p->bounds = $picture->bounds;
-            $p->save();
-            $content->pictureIds[] = $p->id;
+        if(!empty($form->pictures)){
+            foreach ($form->pictures as $picture){
+                $add = !empty($picture->id)?false:true;
+                /**@var Document $p */
+                /**@var Document $picture */
+                $p = $pictureSearch->create($picture->id);
+                $p->sourceImage = $picture->sourceImage;
+                $p->croppedImage = $picture->croppedImage;
+                $p->bounds = $picture->bounds;
+                $p->save();
+                if($add){
+                    $content->pictureIds[] = $p->id;
+                }
+            }
         }
 
         $content->save();

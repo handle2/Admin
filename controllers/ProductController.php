@@ -8,7 +8,9 @@
 
 namespace Modules\Admin\Controllers;
 
+use Modules\BusinessLogic\ContentSettings\Document;
 use Modules\BusinessLogic\ContentSettings\Product;
+use Modules\BusinessLogic\Search\DocumentSearch;
 use Modules\BusinessLogic\Search\InputSearch;
 use Modules\BusinessLogic\Search\ProdcategSearch;
 use Modules\BusinessLogic\Search\ProductSearch;
@@ -31,6 +33,12 @@ class ProductController extends ControllerBase
         $id = (int)$id!=0?(int)$id:false;
         if($id){
             $product = $search->create($id);
+            if(!empty($product->pictureIds)){
+                $picSearch = DocumentSearch::createDocumentSearch();
+                $picSearch->ids = $product->pictureIds;
+                $pictures = $picSearch->find();
+                $product->pictures = $pictures;
+            }
         }else{
             $product = false;
         }
@@ -67,10 +75,26 @@ class ProductController extends ControllerBase
         $form = $this->request->getJsonRawBody();
         $search = ProductSearch::createProductSearch();
         /** @var Product $product */
-        $product = $form->id?$search->create($form->id):$search->create();
+        $product = !empty($form->id)?$search->create($form->id):$search->create();
         foreach ($form as $key => $prop){
-            if($key != 'id'){
+            if($key != 'id' && $key != 'pictureIds' && $key != 'pictures'){
                 $product->{$key} = $prop;
+            }
+        }
+        $pictureSearch = DocumentSearch::createDocumentSearch();
+        if(!empty($form->pictures)){
+            foreach ($form->pictures as $picture){
+                $add = !empty($picture->id)?false:true;
+                /**@var Document $p */
+                /**@var Document $picture */
+                $p = $pictureSearch->create($picture->id);
+                $p->sourceImage = $picture->sourceImage;
+                $p->croppedImage = $picture->croppedImage;
+                $p->bounds = $picture->bounds;
+                $p->save();
+                if($add){
+                    $product->pictureIds[] = $p->id;
+                }
             }
         }
         $product->save();
