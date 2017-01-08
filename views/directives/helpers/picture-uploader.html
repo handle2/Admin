@@ -1,18 +1,18 @@
 <div class="row">
-    <div class="col-md-1 add" data-ng-click="ctrl.addImages()">+</div>
-    <div class="col-md-1" data-ng-repeat="(key, picture) in ctrl.files">
-        <img style="max-height: 50px" data-ng-src="{{picture}}" data-ng-click="ctrl.setCurrent(key)">
+    <div style="font-size: 50px;max-width: 55px;" class="col-xs-1" data-ng-click="ctrl.addImages()">+</div>
+    <div style="max-width: 55px;" class="col-md-1" data-ng-repeat="(key, picture) in images">
+        <img style="max-height: 50px" data-ng-src="{{picture.sourceImage}}" data-ng-click="ctrl.setCurrent(key)">
     </div>
 </div>
 <div class="row">
     <div class="col-md-4">
-        <input style="visibility: hidden" type="file" id="fileInput" data-fileread="ctrl.files" multiple/>
-        <div class="cropArea">
-            <img-crop image="ctrl.files[ctrl.current]" change-on-fly="true" area-type="square" result-image="ctrl.myCroppedImage"></img-crop>
+        <input style="visibility: hidden" type="file" id="fileInput" data-fileread="images" multiple/>
+        <div>
+            <canvas width="500" height="300" id="canvas" image-cropper image="images[ctrl.current].sourceImage" cropped-image="images[ctrl.current].croppedImage" crop-width="400" crop-height="200" keep-aspect="true" touch-radius="30" crop-area-bounds="images[ctrl.current].bounds"></canvas>
         </div>
     </div>
     <div class="col-md-4">
-        <div>Cropped Image:</div>
-        <div><img data-ng-src="{{ctrl.myCroppedImage}}" /></div>
+        <div>Cropped Image (Left: {{images[ctrl.current].bounds.left}} Right: {{images[ctrl.current].bounds.right}} Top: {{images[ctrl.current].bounds.top}} Bottom: {{images[ctrl.current].bounds.bottom}})</div>
+        <div ng-show="images[ctrl.current].croppedImage!=null"><img ng-src="{{images[ctrl.current].croppedImage}}" /></div>
     </div>
 </div>

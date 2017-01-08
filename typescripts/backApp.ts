@@ -1,6 +1,7 @@
 /// <reference path="./../typings/tsd.d.ts" />
 module backApp{
-    var backApp = angular.module('backApp',["ngRoute","LocalStorageModule","smart-table","ui.bootstrap","uiSwitch","ngImgCrop"]);
+    
+    var backApp = angular.module('backApp',["ngRoute","LocalStorageModule","smart-table","ui.bootstrap","uiSwitch","angular-img-cropper"]); //,"ngImgCrop"
     
     backApp.config(function ($routeProvider,$locationProvider,localStorageServiceProvider) {
         localStorageServiceProvider
@@ -199,7 +200,34 @@ module backApp{
             .when("/admin/content", {
                 templateUrl : '/modules/Admin/views/directives/content/content-index.html',
                 controller : 'ContentController',
-                controllerAs: 'ctrl'
-            });
+                controllerAs: 'ctrl',
+                resolve:	{
+                    content:	[function () {
+                        return false;
+                    }],
+                    contents:	["$route","$http", function(route,http) {
+                        var contents = http.get('/admin/content/list').then(function successCallback(response) {
+                            return angular.fromJson(response.data);
+                        });
+                        return contents;
+                    }]
+                }
+            })
+            .when("/admin/content/edit/:id?", {
+                templateUrl : '/modules/Admin/views/directives/content/content-edit.html',
+                controller : 'ContentController',
+                controllerAs: 'ctrl',
+                resolve:	{
+                    content:	["$route","$http", function(route,http) {
+                        var content = http.get('/admin/content/get/'+route.current.params.id).then(function successCallback(response) {
+                            return angular.fromJson(response.data);
+                        });
+                        return content;
+                    }],
+                    contents:	[function () {
+                        return false;
+                    }],
+                }
+            })
     });
 }
