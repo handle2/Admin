@@ -70,7 +70,7 @@ class ContentController extends ControllerBase{
                 }
             }
         }
-
+        $content->labels = $form->labels;
         $content->save();
         return $this->api(200,$content->id);
     }
