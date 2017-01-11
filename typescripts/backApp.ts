@@ -1,9 +1,20 @@
 /// <reference path="./../typings/tsd.d.ts" />
 module backApp{
     
-    var backApp = angular.module('backApp',["ngRoute","LocalStorageModule","smart-table","ui.bootstrap","uiSwitch","angular-img-cropper"]); //,"ngImgCrop"
+    var backApp = angular.module('backApp',["ngRoute","LocalStorageModule","smart-table","ui.bootstrap","uiSwitch","angular-img-cropper","pascalprecht.translate"]); //,"ngImgCrop"
     
-    backApp.config(function ($routeProvider,$locationProvider,localStorageServiceProvider) {
+    backApp.config(function ($routeProvider,$locationProvider,localStorageServiceProvider,$translateProvider) {
+
+
+        $translateProvider.useSanitizeValueStrategy('escapeParameters');
+
+        $translateProvider.useStaticFilesLoader({
+            prefix: '/modules/Admin/lang/',
+            suffix: '.json'
+        });
+
+        $translateProvider.preferredLanguage('hu');
+
         localStorageServiceProvider
             .setPrefix('backApp');
 

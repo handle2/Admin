@@ -13,7 +13,7 @@ gulp.task("typescript",()=>
 
 
 
-gulp.task('scripts',["typescript"], function() {
+gulp.task('init',["typescript"], function() {
     return gulp.src('./dist/**/*.js')
         .pipe(order(['/dist/backApp.js']))
         .pipe(concat('backend-scripts.js'))
@@ -21,5 +21,5 @@ gulp.task('scripts',["typescript"], function() {
 });
 
 gulp.task('watch',function () {
-    gulp.watch('./typescripts/**/*.ts',['scripts']);
+    gulp.watch('./typescripts/**/*.ts',['init']);
 })

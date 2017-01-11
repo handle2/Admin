@@ -6,7 +6,7 @@ module backApp {
     class CommonController implements ICommonController{
 
 
-        constructor(private scope,public commonService) {
+        constructor(private scope,public commonService,public translate) {
         }
 
         public hasPermission(code){
@@ -15,5 +15,5 @@ module backApp {
     }
 
     var backApp = angular.module('backApp');
-    backApp.controller('CommonController', ['$scope', 'CommonService', CommonController]);
+    backApp.controller('CommonController', ['$scope', 'CommonService','$translate', CommonController]);
 }
