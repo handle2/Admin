@@ -36,6 +36,7 @@ class ProductController extends ControllerBase
             if(!empty($product->pictureIds)){
                 $picSearch = DocumentSearch::createDocumentSearch();
                 $picSearch->ids = $product->pictureIds;
+                $picSearch->disableCache();
                 $pictures = $picSearch->find();
                 $product->pictures = $pictures;
             }

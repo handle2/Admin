@@ -130,5 +130,18 @@ class ControllerBase extends Controller
         $text = $url = str_replace($ekezet, $normal, mb_strtolower($text));
         return preg_replace('/[^a-z0-9]/i', '_', $text);
     }
+
+    public function showMeCache($justKeys = false){
+        /**@var \Predis\Client $redis*/
+        $keys = $this->redis->keys('*');
+        if($justKeys){
+            dd($keys);
+        }
+        foreach ($keys as $key){
+            var_dump($key,json_decode($this->redis->get($key)));
+        }
+        die;
+
+    }
     
 }

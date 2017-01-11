@@ -27,6 +27,7 @@ class ContentController extends ControllerBase{
             if(!empty($content->pictureIds)){
                 $picSearch = DocumentSearch::createDocumentSearch();
                 $picSearch->ids = $content->pictureIds;
+                $picSearch->disableCache();
                 $pictures = $picSearch->find();
                 $content->pictures = $pictures;
             }

@@ -33,6 +33,7 @@ class RightController extends ControllerBase
         $search = RightSearch::createRightSearch();
         if($type){
             $search->type = $type;
+            $search->setCacheType($type);
         }
         $rights = $search->find();
         return $this->api(200,json_encode($rights));
@@ -59,6 +60,7 @@ class RightController extends ControllerBase
         $search = RightSearch::createRightSearch();
         $search->type = "subRight";
         $search->parent = $parent;
+        $search->setCacheType($parent.'_subRight');
         $rights = $search->find();
 
         return $this->api(200,json_encode($rights));
