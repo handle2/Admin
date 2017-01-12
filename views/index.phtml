@@ -58,96 +58,6 @@
             <!-- Navbar Right Menu -->
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
-                    <!-- Messages: style can be found in dropdown.less-->
-                    <li class="dropdown messages-menu">
-                        <!-- Menu toggle button -->
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-envelope-o"></i>
-                            <span class="label label-success">4</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li class="header">You have 4 messages</li>
-                            <li>
-                                <!-- inner menu: contains the messages -->
-                                <ul class="menu">
-                                    <li><!-- start message -->
-                                        <a href="#">
-                                            <div class="pull-left">
-                                                <!-- User Image -->
-                                                <img src="/modules/Admin/public/img/user.jpg" class="img-circle" alt="User Image">
-                                            </div>
-                                            <!-- Message title and timestamp -->
-                                            <h4>
-                                                Support Team
-                                                <small><i class="fa fa-clock-o"></i> 5 mins</small>
-                                            </h4>
-                                            <!-- The message -->
-                                            <p>Why not buy a new awesome theme?</p>
-                                        </a>
-                                    </li><!-- end message -->
-                                </ul><!-- /.menu -->
-                            </li>
-                            <li class="footer"><a href="#">See All Messages</a></li>
-                        </ul>
-                    </li><!-- /.messages-menu -->
-
-                    <!-- Notifications Menu -->
-                    <li class="dropdown notifications-menu">
-                        <!-- Menu toggle button -->
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-bell-o"></i>
-                            <span class="label label-warning">10</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li class="header">You have 10 notifications</li>
-                            <li>
-                                <!-- Inner Menu: contains the notifications -->
-                                <ul class="menu">
-                                    <li><!-- start notification -->
-                                        <a href="#">
-                                            <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                                        </a>
-                                    </li><!-- end notification -->
-                                </ul>
-                            </li>
-                            <li class="footer"><a href="#">View all</a></li>
-                        </ul>
-                    </li>
-                    <!-- Tasks Menu -->
-                    <li class="dropdown tasks-menu">
-                        <!-- Menu Toggle Button -->
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-flag-o"></i>
-                            <span class="label label-danger">9</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li class="header">You have 9 tasks</li>
-                            <li>
-                                <!-- Inner menu: contains the tasks -->
-                                <ul class="menu">
-                                    <li><!-- Task item -->
-                                        <a href="#">
-                                            <!-- Task title and progress text -->
-                                            <h3>
-                                                Design some buttons
-                                                <small class="pull-right">20%</small>
-                                            </h3>
-                                            <!-- The progress bar -->
-                                            <div class="progress xs">
-                                                <!-- Change the css width attribute to simulate progress -->
-                                                <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                                    <span class="sr-only">20% Complete</span>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li><!-- end task item -->
-                                </ul>
-                            </li>
-                            <li class="footer">
-                                <a href="#">View all tasks</a>
-                            </li>
-                        </ul>
-                    </li>
                     <!-- User Account Menu -->
                     <li class="dropdown user user-menu">
                         <!-- Menu Toggle Button -->
@@ -169,19 +79,19 @@
                             <!-- Menu Body -->
                             <li class="user-body">
                                 <div class="col-xs-4 text-center">
-                                    <a href="#">Followers</a>
+                                    <a href="#">{{'followers'|translate}}</a>
                                 </div>
                                 <div class="col-xs-4 text-center">
-                                    <a href="#">Sales</a>
+                                    <a href="#">{{'sales'|translate}}</a>
                                 </div>
                                 <div class="col-xs-4 text-center">
-                                    <a href="#">Friends</a>
+                                    <a href="#">{{'friends'|translate}}</a>
                                 </div>
                             </li>
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                    <a href="#" class="btn btn-default btn-flat">{{'profile'|translate}}</a>
                                 </div>
                                 <div class="pull-right">
                                    <logout-button></logout-button>
@@ -211,7 +121,7 @@
                 <div class="pull-left info">
                     <p>Fullname</p>
                     <!-- Status -->
-                    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                    <a href="#"><i class="fa fa-circle text-success"></i>{{'online'|translate}}</a>
                 </div>
             </div>
 
@@ -220,7 +130,7 @@
                 <div class="input-group">
                     <input type="text" name="q" class="form-control" placeholder="Search..." autocomplete="off">
               <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
+                <button type="submit" name="{{'search'|translate}}" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
               </span>
                 </div>
             </form>
@@ -232,39 +142,39 @@
                 <!-- Optionally, you can add icons to the links -->
 
                     <li class="treeview" data-ng-show="ctrl.hasPermission('rights')">
-                        <a href="#"><i class="fa fa-gears"></i> <span>Jogok</span> <i class="fa fa-angle-left pull-right"></i></a>
+                        <a href="#"><i class="fa fa-gears"></i> <span>{{'rights'|translate}}</span> <i class="fa fa-angle-left pull-right"></i></a>
                         <ul class="treeview-menu">
-                            <li data-ng-show="ctrl.hasPermission('rights.user')"><a href="/admin/right">Felhasználói</a></li>
-                            <li data-ng-show="ctrl.hasPermission('rights.roles')"><a href="/admin/role">Szerepkörök</a></li>
+                            <li data-ng-show="ctrl.hasPermission('rights.user')"><a href="/admin/right">{{'user-rights'|translate}}</a></li>
+                            <li data-ng-show="ctrl.hasPermission('rights.roles')"><a href="/admin/role">{{'roles'|translate}}</a></li>
                         </ul>
                     </li>
 
                     <li class="treeview" data-ng-show="ctrl.hasPermission('cms')">
-                        <a href="#"><i class="fa fa-files-o"></i> <span>Tartalmak</span> <i class="fa fa-angle-left pull-right"></i></a>
+                        <a href="#"><i class="fa fa-files-o"></i> <span>{{'contents'|translate}}</span> <i class="fa fa-angle-left pull-right"></i></a>
                         <ul class="treeview-menu">
-                            <li data-ng-show="ctrl.hasPermission('cms.content')"><a href="/admin/content">Tartalmak kezelése</a></li>
-                            <li data-ng-show="ctrl.hasPermission('cms.labels')"><a href="/admin/label">Címkék kezelése</a></li>
+                            <li data-ng-show="ctrl.hasPermission('cms.content')"><a href="/admin/content">{{'handle-content'|translate}}</a></li>
+                            <li data-ng-show="ctrl.hasPermission('cms.labels')"><a href="/admin/label">{{'handle-labels'|translate}}</a></li>
                         </ul>
                     </li>
 
                     <li data-ng-show="ctrl.hasPermission('partner')">
                         <a href="/admin/partner">
-                            <i class="fa fa-male"></i> <span>Partnerek</span>
+                            <i class="fa fa-male"></i> <span>{{'partners'|translate}}</span>
                         </a>
                     </li>
 
                     <li class="treeview" data-ng-show="ctrl.hasPermission('product')">
-                        <a href="#"><i class="fa fa-shopping-cart"></i> <span>Termékek</span> <i class="fa fa-angle-left pull-right"></i></a>
+                        <a href="#"><i class="fa fa-shopping-cart"></i> <span>{{'products'|translate}}</span> <i class="fa fa-angle-left pull-right"></i></a>
                         <ul class="treeview-menu">
-                            <li><a href="/admin/product">Feltöltés</a></li>
-                            <li><a href="/admin/prodcateg">Kategóriák</a></li>
-                            <li><a href="/admin/discount">Kedvezmények</a></li>
+                            <li><a href="/admin/product">{{'upload'|translate}}</a></li>
+                            <li><a href="/admin/prodcateg">{{'categories'|translate}}</a></li>
+                            <li><a href="/admin/discount">{{'discounts'|translate}}</a></li>
                         </ul>
                     </li>
 
                     <li data-ng-show="ctrl.hasPermission('storage')">
                         <a href="/admin/storage">
-                            <i class="fa fa-star-half-full"></i> <span>Storage</span>
+                            <i class="fa fa-star-half-full"></i> <span>{{'storage'|translate}}</span>
                         </a>
                     </li>
 
@@ -291,10 +201,10 @@
     <footer class="main-footer">
         <!-- To the right -->
         <div class="pull-right hidden-xs">
-            Anything you want
+            {{'footer-slogan'|translate}}
         </div>
         <!-- Default to the left -->
-        <strong>Copyright &copy; <?php echo date("Y"); ?> <a data-ng-href="/admin">BrainCore</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; <?php echo date("Y"); ?> <a data-ng-href="/admin">BrainCore</a>.</strong> {{'all-right-reserved'|translate}}
     </footer>
 
     <!-- Control Sidebar -->
@@ -308,7 +218,7 @@
         <div class="tab-content">
             <!-- Home tab content -->
             <div class="tab-pane active" id="control-sidebar-home-tab">
-                <h3 class="control-sidebar-heading">Recent Activity</h3>
+                <h3 class="control-sidebar-heading">{{'recent-activity'|translate}}</h3>
                 <ul class="control-sidebar-menu">
                     <li>
                         <a href="#">
@@ -321,7 +231,7 @@
                     </li>
                 </ul><!-- /.control-sidebar-menu -->
 
-                <h3 class="control-sidebar-heading">Tasks Progress</h3>
+                <h3 class="control-sidebar-heading">{{'task-progress'|translate}}</h3>
                 <ul class="control-sidebar-menu">
                     <li>
                         <a href="javascript::;">
@@ -342,14 +252,16 @@
             <!-- Settings tab content -->
             <div class="tab-pane" id="control-sidebar-settings-tab">
                 <form method="post">
-                    <h3 class="control-sidebar-heading">General Settings</h3>
+                    <h3 class="control-sidebar-heading">{{'languages'|translate}}</h3>
+                    <change-language></change-language>
+                    <h3 class="control-sidebar-heading">{{'general-settings'|translate}}</h3>
                     <div class="form-group">
                         <label class="control-sidebar-subheading">
-                            Report panel usage
+                            {{'report-panel-usage'|translate}}
                             <input type="checkbox" class="pull-right" checked>
                         </label>
                         <p>
-                            Some information about this general settings option
+                            {{'general-option-info'|translate}}
                         </p>
                     </div><!-- /.form-group -->
                 </form>

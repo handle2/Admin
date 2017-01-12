@@ -50,7 +50,7 @@ module backApp {
         return {
             restrict: 'E',
             controller: 'LoginController',
-            controllerAs: 'ctrl',
+            controllerAs: 'lctrl',
             templateUrl: '/modules/Admin/views/directives/login/logout-button.html'
         }
     });

@@ -13,6 +13,7 @@ module backApp{
             suffix: '.json'
         });
 
+        // todo config itt kell beállítani a default nyelvet
         $translateProvider.preferredLanguage('hu');
 
         localStorageServiceProvider
