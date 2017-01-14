@@ -17,9 +17,13 @@ use Phalcon\Mvc\Dispatcher;
 class ControllerBase extends Controller
 {
     public $authUser;
+    public $lang;
+
 
     public function beforeExecuteRoute(Dispatcher $dispatcher){
         //todo login és missing_right error legyen külön
+
+        $this->lang = $this->session->get('lang');
 
         $result = $this->getPermission($this->router->getControllerName(),$this->router->getActionName());
         switch ($result['response']){

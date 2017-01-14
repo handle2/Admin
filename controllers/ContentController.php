@@ -10,7 +10,7 @@ use Modules\BusinessLogic\Search\DocumentSearch;
 class ContentController extends ControllerBase{
     public function listAction(){
         $search = ContentSearch::createContentSearch();
-
+        $search->lang = $this->lang;
         $contents = $search->find();
         if($contents){
             return $this->api(200,json_encode($contents));
@@ -45,7 +45,7 @@ class ContentController extends ControllerBase{
 
         $form = $this->request->getJsonRawBody();
         $search = ContentSearch::createContentSearch();
-
+        
         /** @var Content $content */
         $content = $form->id?$search->create($form->id):$search->create();
         $content->name = $form->name;

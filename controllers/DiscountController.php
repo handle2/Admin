@@ -16,7 +16,7 @@ class DiscountController extends ControllerBase
 {
     public function listAction(){
         $search = DiscountSearch::createDiscountSearch();
-
+        $search->lang = $this->lang;
         $discounts = $search->find();
         if($discounts){
             return $this->api(200,json_encode($discounts));
@@ -27,6 +27,7 @@ class DiscountController extends ControllerBase
 
     public function getAction($id = false){
         $search = DiscountSearch::createDiscountSearch();
+        $search->lang = $this->lang;
         $id = (int)$id!=0?(int)$id:false;
         if($id){
             $discount = $search->create($id);

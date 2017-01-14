@@ -15,6 +15,9 @@ class RightController extends ControllerBase
 
     public function getAction($id = false){
         $search = RightSearch::createRightSearch();
+        
+        $search->lang = $this->lang;
+        
         $id = (int)$id!=0?(int)$id:false;
         if($id){
             $right = $search->create($id);
@@ -31,6 +34,9 @@ class RightController extends ControllerBase
     
     public function listAction($type = false){
         $search = RightSearch::createRightSearch();
+
+        $search->lang = $this->lang;
+        
         if($type){
             $search->type = $type;
             $search->setCacheType($type);
@@ -42,6 +48,9 @@ class RightController extends ControllerBase
     public function saveAction(){
 
         $search = RightSearch::createRightSearch();
+
+        $search->lang = $this->lang;
+        
         $form = $this->request->getJsonRawBody();
         /**@var \Modules\BusinessLogic\ContentSettings\Right $right*/
         $right = $form->id?$search->create($form->id):$search->create();
@@ -58,6 +67,9 @@ class RightController extends ControllerBase
 
     public function getSubAction($parent){
         $search = RightSearch::createRightSearch();
+
+        $search->lang = $this->lang;
+        
         $search->type = "subRight";
         $search->parent = $parent;
         $search->setCacheType($parent.'_subRight');

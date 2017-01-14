@@ -18,7 +18,7 @@ class ProdcategController extends ControllerBase
 {
     public function listAction(){
         $search = ProdcategSearch::createProdcategSearch();
-
+        $search->lang = $this->lang;
         $prodcategs = $search->find();
         if($prodcategs){
             return $this->api(200,json_encode($prodcategs));
@@ -29,6 +29,7 @@ class ProdcategController extends ControllerBase
 
     public function getAction($id = false){
         $search = ProdcategSearch::createProdcategSearch();
+        $search->lang = $this->lang;
         $id = (int)$id!=0?(int)$id:false;
         if($id){
             $prodcateg = $search->create($id);

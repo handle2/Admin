@@ -16,6 +16,8 @@ class RoleController extends ControllerBase
     public function listAction(){
         $search = RoleSearch::createRoleSearch();
 
+        $search->lang = $this->lang;
+        
         if($this->authUser->role != 'admin'){
             $search->roles = $this->authUser->availableRoles;
         }
@@ -29,10 +31,13 @@ class RoleController extends ControllerBase
     }
 
     public function getAction($id = false){
-        $roleSearch = RoleSearch::createRoleSearch();
+        $search = RoleSearch::createRoleSearch();
+
+        $search->lang = $this->lang;
+        
         $id = (int)$id!=0?(int)$id:false;
         if($id){
-            $role = $roleSearch->create($id);
+            $role = $search->create($id);
         }else{
             $role = false;
         }

@@ -1,12 +1,14 @@
 /// <reference path="./../../typings/tsd.d.ts" />
 module backApp {
     interface ICommonController{
+        changeLang(langKey):void;
+        hasPermission(code):boolean;
     }
 
     class CommonController implements ICommonController{
 
 
-        constructor(private root , private scope,public commonService,public translate, private localStorageService) {
+        constructor(private root , private scope, private window, private location, public commonService,public translate, private localStorageService) {
 
             if(!localStorageService.get('lang')){
                 localStorageService.set('lang','hu');
@@ -15,6 +17,7 @@ module backApp {
                 translate.use(localStorageService.get('lang'));
             }
 
+            this.setLangSession(localStorageService.get('lang'));
             root.language = localStorageService.get('lang');
 
         }
@@ -25,20 +28,25 @@ module backApp {
 
         public changeLang(langKey){
 
-            this.localStorageService.set('lang',langKey);
-            this.translate.use(langKey);
+            if(this.localStorageService.get('lang')!=langKey){
+                this.localStorageService.set('lang',langKey);
+                this.translate.use(langKey);
+                this.setLangSession(langKey);
+                this.root.language = this.localStorageService.get('lang');
+            }
 
-            this.root.language = this.localStorageService.get('lang');
-
+            var currentUrl =  this.location.path();
+            this.window.open(currentUrl, '_self');
         }
 
-        public logout(){
-            console.log('common dafuq');
+        private setLangSession(code){
+            this.commonService.http.post('/service/setLang',angular.toJson(code));
         }
+
     }
 
     var backApp = angular.module('backApp');
-    backApp.controller('CommonController', ['$rootScope','$scope', 'CommonService','$translate', 'localStorageService', CommonController]);
+    backApp.controller('CommonController', ['$rootScope','$scope','$window','$location', 'CommonService','$translate', 'localStorageService', CommonController]);
 
     backApp.directive('changeLanguage', function () {
         return {

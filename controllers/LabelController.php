@@ -16,7 +16,7 @@ class LabelController extends ControllerBase
 {
     public function listAction(){
         $search = LabelSearch::createLabelSearch();
-
+        $search->lang = $this->lang;
         $found = $search->find();
         if($found){
             return $this->api(200,json_encode($found));
@@ -27,6 +27,7 @@ class LabelController extends ControllerBase
 
     public function getAction($id = false){
         $search = LabelSearch::createLabelSearch();
+        $search->lang = $this->lang;
         $id = (int)$id!=0?(int)$id:false;
         if($id){
             $found = $search->create($id);

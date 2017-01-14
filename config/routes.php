@@ -45,6 +45,11 @@ $admin->addPost('/admin/product/getInputs',array(
     'action'     => 'getInputs'
 ));
 
+$admin->addPost('/service/setLang',array(
+    'controller' => 'service',
+    'action'     => 'setLang'
+));
+
 $admin->addGet('/admin/:controller/get/:params',array(
     'controller' => 1,
     'action'     => 'get',

@@ -20,6 +20,7 @@ class ProductController extends ControllerBase
     public function listAction(){
         $search = ProductSearch::createProductSearch();
 
+        $search->lang = $this->lang;
         $products = $search->find();
         if($products){
             return $this->api(200,json_encode($products));
@@ -30,6 +31,7 @@ class ProductController extends ControllerBase
 
     public function getAction($id = false){
         $search = ProductSearch::createProductSearch();
+        $search->lang = $this->lang;
         $id = (int)$id!=0?(int)$id:false;
         if($id){
             $product = $search->create($id);
@@ -63,6 +65,7 @@ class ProductController extends ControllerBase
     public function getInputsAction(){
         $ids = $this->request->getJsonRawBody();
         $search = InputSearch::createInputSearch();
+        $search->lang = $this->lang;
         $search->ids = $ids;
         $inputs = $search->find();
         if($inputs){

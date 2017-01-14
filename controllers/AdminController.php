@@ -7,9 +7,11 @@ use Modules\BusinessLogic\Search\ProfileSearch;
 
 class AdminController extends ControllerBase
 {
+    
+
     public function initialize()
     {
-
+        
     }
     
     public function indexAction(){
@@ -31,6 +33,7 @@ class AdminController extends ControllerBase
         $form = $this->request->getJsonRawBody(true);
 
         $profileSearch = ProfileSearch::createProfileSearch();
+        $profileSearch->lang = $this->lang;
         $profileSearch->password = $form['password'];
         $profileSearch->username = $form['username'];
         $profile = $profileSearch->findFirst();
