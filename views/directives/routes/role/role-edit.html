@@ -1,18 +1,18 @@
-<h2>Role Edit</h2>
+<h2>{{'role-edit'|translate}}</h2>
 <form>
     <div class="panel-group" id="accordion">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
                     <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" data-ng-click="ctrl.main = !ctrl.main">
-                        Alap adatok
+                        {{'basic-data'|translate}}
                     </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
                 </h4>
             </div>
             <div id="collapseOne" uib-collapse="ctrl.main" class="panel-collapse collapse in">
                 <div class="panel-body">
-                    <label>Név : </label><input type="text" data-ng-model="ctrl._formData.name">
-                    <label>Code : </label><input type="text" data-ng-model="ctrl._formData.code">
+                    <label>{{'name'|translate}} : </label><input type="text" data-ng-model="ctrl._formData.name">
+                    <label>{{'code'|translate}} : </label><input type="text" data-ng-model="ctrl._formData.code">
                 </div>
             </div>
         </div>
@@ -36,7 +36,7 @@
             <div class="panel-heading">
                 <h4 class="panel-title">
                     <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" data-ng-click="ctrl.roles = !ctrl.roles">
-                        Elérhető szerepkörök
+                        {{'available-roles'|translate}}
                     </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
                 </h4>
             </div>
@@ -51,5 +51,5 @@
             </div>
         </div>
     </div>
-    <button data-ng-click="ctrl.save()" class="btn btn-default">Ment</button>
+    <button data-ng-click="ctrl.save()" class="btn btn-default">{{'save'|translate}}</button>
 </form>

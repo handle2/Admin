@@ -40,11 +40,7 @@ module backApp{
 
         public hasPermission(code){
             if(this.user && !this.user['$$state']){
-                if(this.user.role.rights.indexOf(code)>-1){
-                    return true;
-                }else{
-                    return false;
-                }
+                return this.user.role.rights.indexOf(code)>-1?true:false;
             }
             return false;
 

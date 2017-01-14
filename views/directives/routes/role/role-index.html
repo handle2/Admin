@@ -1,5 +1,5 @@
 <div data-ng-init="ctrl.initRoles()"></div>
-<h2>Roles</h2>
-<a href="/admin/role/edit">Role feltöltése</a>
+<h2>{{'roles'|translate}}</h2>
+<a href="/admin/role/edit">{{'role-upload'|translate}}</a>
 <br/>
 <smart-table data-rows="ctrl.roleService.roles" data-count="7" data-type="'role'" data-delete="'rights.roles.delete'" data-update="'rights.roles.save'" data-keys="['id','name','code']"></smart-table>

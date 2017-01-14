@@ -1,19 +1,19 @@
-<h2>Kedvezmények</h2>
+<h2>{{'discount'|translate}}</h2>
 <form name="form" novalidate>
     <div class='form-group'>
-        <label class='radio-inline'><input type="radio" data-ng-disabled="ctrl._formData.id" data-ng-model="ctrl._formData.type" value="percent" data-ng-required="!ctrl._formData.type">Százalékos</label>
-        <label class='radio-inline'><input type="radio" data-ng-disabled="ctrl._formData.id" data-ng-model="ctrl._formData.type" value="fix_value" data-ng-required="!ctrl._formData.type">Fix összeg</label>
+        <label class='radio-inline'><input type="radio" data-ng-disabled="ctrl._formData.id" data-ng-model="ctrl._formData.type" value="percent" data-ng-required="!ctrl._formData.type">{{'percent'|translate}}</label>
+        <label class='radio-inline'><input type="radio" data-ng-disabled="ctrl._formData.id" data-ng-model="ctrl._formData.type" value="fix_value" data-ng-required="!ctrl._formData.type">{{'fix-value'|translate}}</label>
     </div>
 
     <div class='form-group'>
-        <label>Name</label>
+        <label>{{'name'|translate}}</label>
         <input class="form-control" type="text" data-ng-model="ctrl._formData.name">
     </div>
 
     <div class='form-group'>
-        <label>Value</label>
+        <label>{{'value'|translate}}</label>
         <input class="form-control" type="number" data-ng-model="ctrl._formData.value">
     </div>
 
-    <button class="btn btn-success" data-ng-click="ctrl.save()" data-ng-disabled="!form.$valid">Save</button> <button class="btn btn-default" data-ng-click="ctrl.save(true)" data-ng-disabled="!form.$valid">Save and Exit</button>
+    <button class="btn btn-success" data-ng-click="ctrl.save()" data-ng-disabled="!form.$valid">{{'save'|translate}}</button> <button class="btn btn-default" data-ng-click="ctrl.save(true)" data-ng-disabled="!form.$valid">{{'save-exit'|translate}}</button>
 </form>

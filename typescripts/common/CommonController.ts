@@ -6,7 +6,17 @@ module backApp {
     class CommonController implements ICommonController{
 
 
-        constructor(private scope,public commonService,public translate) {
+        constructor(private root , private scope,public commonService,public translate, private localStorageService) {
+
+            if(!localStorageService.get('lang')){
+                localStorageService.set('lang','hu');
+                translate.use(localStorageService.get('lang'));
+            }else{
+                translate.use(localStorageService.get('lang'));
+            }
+
+            root.language = localStorageService.get('lang');
+
         }
 
         public hasPermission(code){
@@ -14,8 +24,12 @@ module backApp {
         }
 
         public changeLang(langKey){
-            console.log('dafuq',langKey);
+
+            this.localStorageService.set('lang',langKey);
             this.translate.use(langKey);
+
+            this.root.language = this.localStorageService.get('lang');
+
         }
 
         public logout(){
@@ -24,7 +38,7 @@ module backApp {
     }
 
     var backApp = angular.module('backApp');
-    backApp.controller('CommonController', ['$scope', 'CommonService','$translate', CommonController]);
+    backApp.controller('CommonController', ['$rootScope','$scope', 'CommonService','$translate', 'localStorageService', CommonController]);
 
     backApp.directive('changeLanguage', function () {
         return {

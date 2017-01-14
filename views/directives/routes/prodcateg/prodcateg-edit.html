@@ -1,51 +1,51 @@
 <input type='text' name="name" data-ng-model="ctrl._formData.name" placeholder='name'>
-<div class="add" data-ng-click="ctrl.addInput()">Add</div>
+<div class="add" data-ng-click="ctrl.addInput()">{{'add'|translate}}</div>
 <div class="inputs">
     <div class="stuff" data-ng-repeat="item in ctrl.inputs">
-        <label class='radio-inline'><input type="radio" data-ng-disabled="item.url" data-ng-model="item.type" value="text">text</label>
-        <label class='radio-inline'><input type="radio" data-ng-disabled="item.url" data-ng-model="item.type" value="textarea">textarea</label>
-        <label class='radio-inline'><input type="radio" data-ng-disabled="item.url" data-ng-model="item.type" value="radio">radio</label>
-        <label class='radio-inline'><input type="radio" data-ng-disabled="item.url" data-ng-model="item.type" value="checkbox">checkbox</label>
-        <label class='radio-inline'><input type="radio" data-ng-disabled="item.url" data-ng-model="item.type" value="number">number</label>
-        <label class='radio-inline'><input type="radio" data-ng-disabled="item.url" data-ng-model="item.type" value="email">email</label>
+        <label class='radio-inline'><input type="radio" data-ng-disabled="item.url" data-ng-model="item.type" value="text">{{'text'|translate}}</label>
+        <label class='radio-inline'><input type="radio" data-ng-disabled="item.url" data-ng-model="item.type" value="textarea">{{'textarea'|translate}}</label>
+        <label class='radio-inline'><input type="radio" data-ng-disabled="item.url" data-ng-model="item.type" value="radio">{{'radio'|translate}}</label>
+        <label class='radio-inline'><input type="radio" data-ng-disabled="item.url" data-ng-model="item.type" value="checkbox">{{'checkbox'|translate}}</label>
+        <label class='radio-inline'><input type="radio" data-ng-disabled="item.url" data-ng-model="item.type" value="number">{{'number'|translate}}</label>
+        <label class='radio-inline'><input type="radio" data-ng-disabled="item.url" data-ng-model="item.type" value="email">{{'email'|translate}}</label>
         <div class="remove" data-ng-click="ctrl.removeInput(item.id)">-</div>
         <br>
         <div data-ng-if="item.type == 'text'">
-            Text attributumok <br/>
-            <input data-ng-disabled="item.url" type='text' data-ng-model="item.name" placeholder='name'><br/>
-            <input data-ng-disabled="item.url" type='number' data-ng-model="item.length" placeholder='length'>
+            {{'text-attributes'|translate}} <br/>
+            <input data-ng-disabled="item.url" type='text' data-ng-model="item.name" placeholder="{{'name'|translate}}"><br/>
+            <input data-ng-disabled="item.url" type='number' data-ng-model="item.length" placeholder="{{'length'|translate}}">
         </div>
         <div data-ng-if="item.type == 'textarea'">
-            Textarea attributumok <br/>
-            <input data-ng-disabled="item.url" type='text'   data-ng-model="item.name"  placeholder='name'><br/>
-            <input data-ng-disabled="item.url" type='number' data-ng-model="item.length" placeholder='length'>
+            {{'textarea-attributes'|translate}} <br/>
+            <input data-ng-disabled="item.url" type='text'   data-ng-model="item.name" placeholder="{{'name'|translate}}"><br/>
+            <input data-ng-disabled="item.url" type='number' data-ng-model="item.length" placeholder="{{'length'|translate}}">
         </div>
         <div data-ng-if="item.type == 'radio'">
-            Radio button attributumok <br/>
-            <input data-ng-disabled="item.url" type='text' data-ng-model="item.name" placeholder='name'><br/>
+            {{'radio-attributes'|translate}} <br/>
+            <input data-ng-disabled="item.url" type='text' data-ng-model="item.name" placeholder="{{'name'|translate}}"><br/>
             <div class="add_radio" data-ng-click="ctrl.addItem(item)">+</div>
             <br/>
-            <input data-ng-disabled="item.url" data-ng-repeat="child in item.children" class='radio_child' type='text' data-ng-model="child.name" placeholder="{{child.seq}} radiobutton név"><br/>
+            <input data-ng-disabled="item.url" data-ng-repeat="child in item.children" class='radio_child' type='text' data-ng-model="child.name" placeholder="{{child.seq}} {{'radio-name'|translate}}"><br/>
         </div>
         <div data-ng-if="item.type == 'checkbox'">
-            Checkbox attributumok <br/>
-            <input data-ng-disabled="item.url" type='text' data-ng-model="item.name" placeholder='name'><br/>
+            {{'checkbox-attributes'|translate}} <br/>
+            <input data-ng-disabled="item.url" type='text' data-ng-model="item.name" placeholder="{{'name'|translate}}"><br/>
             <div class="add_checkbox" data-ng-click="ctrl.addItem(item)">+</div>
             <br/>
-            <input data-ng-disabled="item.url" data-ng-repeat="child in item.children" class='checkbox_child' type='text' data-ng-model="child.name" placeholder="{{child.seq}} checkbox név"><br/>
+            <input data-ng-disabled="item.url" data-ng-repeat="child in item.children" class='checkbox_child' type='text' data-ng-model="child.name" placeholder="{{child.seq}} {{'checkbox-name'|translate}}"><br/>
         </div>
         <div data-ng-if="item.type == 'number'">
-            Number attributumok <br/>
-            <input data-ng-disabled="item.url" type='text' data-ng-model="item.name" placeholder='name'><br/>
-            <input data-ng-disabled="item.url" type='number' data-ng-model="item.length" placeholder='length'>
+            {{'number-attributes'|translate}} <br/>
+            <input data-ng-disabled="item.url" type='text' data-ng-model="item.name" placeholder="{{'name'|translate}}"><br/>
+            <input data-ng-disabled="item.url" type='number' data-ng-model="item.length" placeholder="{{'length'|translate}}">
         </div>
         <div data-ng-if="item.type == 'email'">
-            Email attributumok <br/>
-            <input type='text' data-ng-model="item.name" placeholder='name'><br/>
+            {{'email-attributes'|translate}} <br/>
+            <input type='text' data-ng-model="item.name" placeholder="{{'name'|translate}}"><br/>
         </div>
     </div>
 </div>
 <div class="ex_inputs">
     <div data-ng-repeat="input in ctrl.exsInputs" data-ng-click="ctrl.toggleExtInput(input)"><p data-ng-class="{'active':ctrl.checkActiveInput(input.id)}" class="{{input.type}}">{{input.name}} ({{input.type}})</p></div>
 </div>
-<button class="btn btn-default" data-ng-click="ctrl.save()">Save</button><button class="btn btn-default" data-ng-click="ctrl.save(true)">Save and Back</button>
+<button class="btn btn-default" data-ng-click="ctrl.save()">{{'save'|translate}}</button><button class="btn btn-default" data-ng-click="ctrl.save(true)">{{'save-exit'|translate}}</button>
