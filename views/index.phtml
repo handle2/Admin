@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="/modules/Admin/public/css/style.css">
     <link rel="stylesheet" href="/node_modules/angular-ui-bootstrap/dist/ui-bootstrap-csp.css">
     <link rel="stylesheet" href="/node_modules/angular-ui-switch/angular-ui-switch.min.css">
+    <link rel="stylesheet" href="/modules/Admin/node_modules/angular-loading-bar/src/loading-bar.css" type='text/css' media='all' >
 
     
     <link rel="stylesheet" href="/modules/Admin/public/css/cropper.css">
@@ -178,6 +179,12 @@
                         </a>
                     </li>
 
+                    <li data-ng-show="ctrl.hasPermission('language')">
+                        <a href="/admin/language">
+                            <i class="fa fa-globe"></i> <span>{{'languages'|translate}}</span>
+                        </a>
+                    </li>
+
             </ul>
         </section>
         <!-- /.sidebar -->
@@ -293,7 +300,7 @@
 <script src="/modules/Admin/bower_components/ng-img-crop/compile/minified/ng-img-crop.js"></script>
 <script src="/modules/Admin/bower_components/angular-img-cropper/dist/angular-img-cropper.min.js"></script>
 <!-- ANGULAR IMAGE CROPPER END -->
-
+<script src="/modules/Admin/node_modules/angular-loading-bar/src/loading-bar.js"></script>
 
 
 <script src="/modules/Admin/bower_components/angular-smart-table/dist/smart-table.min.js"></script>

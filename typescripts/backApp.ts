@@ -1,8 +1,12 @@
 /// <reference path="./../typings/tsd.d.ts" />
 module backApp{
     
-    var backApp = angular.module('backApp',["ngRoute","LocalStorageModule","smart-table","ui.bootstrap","uiSwitch","angular-img-cropper","pascalprecht.translate"]); //,"ngImgCrop"
-    
+    var backApp = angular.module('backApp',["ngRoute","LocalStorageModule","smart-table","ui.bootstrap","uiSwitch","angular-img-cropper","pascalprecht.translate","angular-loading-bar"]); //,"ngImgCrop"
+
+    backApp.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
+        cfpLoadingBarProvider.includeSpinner = false;
+    }]);
+
     backApp.config(function ($routeProvider,$locationProvider,localStorageServiceProvider,$translateProvider) {
 
 
@@ -264,5 +268,36 @@ module backApp{
                     }],
                 }
             })
+            .when("/admin/language", {
+                templateUrl : '/modules/Admin/views/directives/routes/language/language-index.html',
+                controller : 'LanguageController',
+                controllerAs: 'ctrl',
+                resolve:	{
+                    language:	[function () {
+                        return false;
+                    }],
+                    languages:	["$route","$http", function(route,http) {
+                        return http.get('/admin/language/list').then(function successCallback(response) {
+                            return angular.fromJson(response.data);
+                        });
+                    }]
+                }
+            })
+            .when("/admin/language/edit/:id?", {
+                templateUrl : '/modules/Admin/views/directives/routes/language/language-edit.html',
+                controller : 'LanguageController',
+                controllerAs: 'ctrl',
+                resolve:	{
+                    language:	["$route","$http", function(route,http) {
+                        return http.get('/admin/language/get/'+route.current.params.id).then(function successCallback(response) {
+                            return angular.fromJson(response.data);
+                        });
+                    }],
+                    languages:	[function () {
+                        return false;
+                    }],
+                }
+            })
     });
+
 }
