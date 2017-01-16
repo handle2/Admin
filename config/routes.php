@@ -50,7 +50,7 @@ $admin->addGet('/admin/language/getLangs',array(
     'action'     => 'getLangs'
 ));
 
-$admin->addPost('/language/setLang',array(
+$admin->addPost('/admin/language/setLang',array(
     'controller' => 'language',
     'action'     => 'setLang'
 ));

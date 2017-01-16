@@ -15,9 +15,7 @@ module backApp {
                 this._formData = language;
             }
             if(languages && !languageService.languages){
-                console.log(languageService.languages,languages);
                 languageService.languages = languages;
-                console.log(languageService.languages,languages);
             }
         }
 

@@ -17,12 +17,15 @@ module backApp{
     }
     export class CommonService implements ICommonService{
         public user : IUser;
+        public langs;
+
         public static instance : CommonService;
         constructor(private rootScope,private location,private window,private http,private localStorageService){
 
             if(!this.user){
                 this.reloadUserData();
             }
+            this.getLangs();
         }
 
 
@@ -44,6 +47,13 @@ module backApp{
             }
             return false;
 
+        }
+
+        private getLangs(){
+            var self = this;
+            this.http.get('/admin/language/getLangs').then(function (response) {
+                self.langs = angular.fromJson(response.data);
+            });
         }
     }
 

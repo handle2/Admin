@@ -36,7 +36,7 @@
     <![endif]-->
 
 </head>
-<body class="hold-transition skin-yellow sidebar-mini">
+<body class="hold-transition skin-yellow sidebar-mini" data-ng-controller="CommonController as ctrl">
 <div class="wrapper">
 
     <!-- Main Header -->
@@ -138,7 +138,7 @@
             <!-- /.search form -->
 
             <!-- Sidebar Menu -->
-            <ul class="sidebar-menu" data-ng-controller="CommonController as ctrl">
+            <ul class="sidebar-menu">
                 <li class="header">HEADER</li>
                 <!-- Optionally, you can add icons to the links -->
 
@@ -260,7 +260,7 @@
             <div class="tab-pane" id="control-sidebar-settings-tab">
                 <form method="post">
                     <h3 class="control-sidebar-heading">{{'languages'|translate}}</h3>
-                    <change-language></change-language>
+                    <div data-ng-repeat="lang in ctrl.commonService.langs" data-ng-click="ctrl.changeLang(lang.code)">{{lang.name}}</div>
                     <h3 class="control-sidebar-heading">{{'general-settings'|translate}}</h3>
                     <div class="form-group">
                         <label class="control-sidebar-subheading">

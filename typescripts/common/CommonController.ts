@@ -40,7 +40,7 @@ module backApp {
         }
 
         private setLangSession(code){
-            this.commonService.http.post('/service/setLang',angular.toJson(code));
+            this.commonService.http.post('/admin/language/setLang',angular.toJson(code));
         }
 
     }
