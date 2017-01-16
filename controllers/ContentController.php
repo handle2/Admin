@@ -53,6 +53,7 @@ class ContentController extends ControllerBase{
         $content->type = $form->type;
         $content->text = $form->text;
         $content->lead = $form->lead;
+        $content->langs = $form->langs;
 
         $pictureSearch = DocumentSearch::createDocumentSearch();
 

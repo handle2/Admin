@@ -1,0 +1,5 @@
+<div data-ng-repeat="lang in ctrl.commonService.langs" data-ng-if="lang.code!='hu'">
+    <div data-ng-repeat="field in fields">
+        {{field}}<input data-ng-model="langs[lang.code][field]">
+    </div>
+</div>

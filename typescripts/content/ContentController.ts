@@ -16,8 +16,10 @@ module backApp {
 
         public frontLabels : Array<any> = [];
 
+        public langData : any = {};
+        
         public _formData : any = {
-
+            langs : {}
         };
 
         constructor(private scope, private location, private http, private window ,public contentService,public content, public contents, public labels) {
