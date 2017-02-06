@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="/node_modules/angular-ui-switch/angular-ui-switch.min.css">
     <link rel="stylesheet" href="/modules/Admin/node_modules/angular-loading-bar/src/loading-bar.css" type='text/css' media='all' >
 
-    
+    <link rel="stylesheet" href="/modules/Admin/node_modules/ng-datepicker/src/css/ngDatepicker.css">
     <link rel="stylesheet" href="/modules/Admin/public/css/cropper.css">
     <link rel="stylesheet" href="/modules/Admin/public/css/main.css">
 
@@ -260,7 +260,7 @@
             <div class="tab-pane" id="control-sidebar-settings-tab">
                 <form method="post">
                     <h3 class="control-sidebar-heading">{{'languages'|translate}}</h3>
-                    <div data-ng-repeat="lang in ctrl.commonService.langs" data-ng-click="ctrl.changeLang(lang.code)">{{lang.name}}</div>
+                    <div class="pointer" data-ng-repeat="lang in ctrl.commonService.langs" data-ng-click="ctrl.changeLang(lang.code)">{{lang.name}}</div>
                     <h3 class="control-sidebar-heading">{{'general-settings'|translate}}</h3>
                     <div class="form-group">
                         <label class="control-sidebar-subheading">
@@ -302,7 +302,8 @@
 <!-- ANGULAR IMAGE CROPPER END -->
 <script src="/modules/Admin/node_modules/angular-loading-bar/src/loading-bar.js"></script>
 
-
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment-with-locales.min.js"></script>
+<script type="text/javascript" src="/modules/Admin/node_modules/ng-datepicker/src/js/ngDatepicker.min.js"></script>
 <script src="/modules/Admin/bower_components/angular-smart-table/dist/smart-table.min.js"></script>
 <script src="/node_modules/angular-ui-switch/angular-ui-switch.min.js"></script>
 <script src="/modules/Admin/backend-scripts.js"></script>

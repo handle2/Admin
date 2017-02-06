@@ -1,5 +1,14 @@
-<div data-ng-repeat="lang in ctrl.commonService.langs" data-ng-if="lang.code!='hu'">
+<style>
+    .invisible{
+        display: none;
+    }
+    .bold{
+        font-weight: bold;
+    }
+</style>
+<div class="pointer" data-ng-class="{bold:!ctrl.getDefaultLang(lang.code)}" data-ng-repeat="lang in ctrl.commonService.langs" data-ng-if="lang.code!='hu'" data-ng-click="ctrl.setDefaultLang(lang.code)">{{lang.name}}</div>
+<div data-ng-class="{invisible:ctrl.getDefaultLang(lang.code)}" data-ng-repeat="lang in ctrl.commonService.langs" data-ng-if="lang.code!='hu'">
     <div data-ng-repeat="field in fields">
-        {{field}}<input data-ng-model="langs[lang.code][field]">
+        {{field|translate}}<input data-ng-model="langs[lang.code][field]">
     </div>
 </div>

@@ -57,6 +57,7 @@ class RoleController extends ControllerBase
         $role->name = $form->name;
         $role->rights = $form->rights;
         $role->roles = $form->roles;
+        $role->langs = $form->langs;
         $role->save();
         return $this->api(200,json_encode($role));
     }

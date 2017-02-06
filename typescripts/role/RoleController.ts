@@ -6,6 +6,7 @@ module backApp {
         type: string;
         rights: Array<string>;
         roles: Array<string>;
+        langs : Object;
     }
 
     interface IRoleController{
@@ -23,7 +24,8 @@ module backApp {
             code:null,
             type:null,
             rights : [],
-            roles: []
+            roles: [],
+            langs: {}
         };
         public orderedRights = [];
         public main = false;
@@ -47,6 +49,9 @@ module backApp {
 
                 for(var k = 0;k < this._formData.roles.length;k++){
                     this.rolesObject[this._formData.roles[k]] = true;
+                }
+                if(!this._formData.langs){
+                    this._formData.langs = {};
                 }
             }
         }

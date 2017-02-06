@@ -235,3 +235,6 @@ body {
   background-color: #fff;
   content: "♥";
 }
+.pointer{
+  cursor: pointer;
+}

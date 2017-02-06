@@ -3,10 +3,18 @@ module backApp {
 
     class MultilanguageController{
 
-        public multi : any = {};
+        public defaultLang : string = 'en';
         
         constructor(private scope,private http,private commonService) {
             var self = this;
+        }
+        
+        public setDefaultLang(code:string):void{
+            this.defaultLang = code;
+        }
+        
+        public getDefaultLang(code){
+            return code != this.defaultLang?true:false;
         }
     }
 
