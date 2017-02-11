@@ -1,7 +1,7 @@
 /// <reference path="./../typings/tsd.d.ts" />
 module backApp{
     
-    var backApp = angular.module('backApp',["ngRoute","LocalStorageModule","smart-table","ui.bootstrap","uiSwitch","angular-img-cropper","pascalprecht.translate","angular-loading-bar","jkuri.datepicker"]); //,"ngImgCrop"
+    var backApp = angular.module('backApp',["ngRoute","LocalStorageModule","smart-table","ui.bootstrap","uiSwitch","angular-img-cropper","pascalprecht.translate","angular-loading-bar","jkuri.datepicker","angularModalService"]); //,"ngImgCrop"
 
     backApp.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
         cfpLoadingBarProvider.includeSpinner = false;
@@ -310,7 +310,10 @@ module backApp{
                     return http.get('/admin/storage/list').then(function successCallback(response) {
                         return angular.fromJson(response.data);
                     });
-                }]
+                }],
+                products:	[function () {
+                    return false;
+                }],
             }
         })
         .when("/admin/storage/edit/:id?", {
@@ -326,7 +329,17 @@ module backApp{
                 storages:	[function () {
                     return false;
                 }],
+                products:	["$route","$http", function(route,http) {
+                    return http.get('/admin/product/list').then(function successCallback(response) {
+                        return angular.fromJson(response.data);
+                    });
+                }],
             }
+        })
+        .when("/admin/master", {
+            templateUrl : '/modules/Admin/views/directives/routes/master/master-index.html',
+            controller : 'MasterController',
+            controllerAs: 'ctrl'
         })
     });
 

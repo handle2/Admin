@@ -1,0 +1,13 @@
+<div class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"  data-ng-click="close('Cancel')" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Felvihető termékek</h4>
+            </div>
+            <div class="modal-body">
+                <label class='checkbox-inline' data-ng-repeat="product in ctrl.products"><input type="checkbox" name="prodCheckbox[]" data-ng-click="ctrl.addSelected(product)" data-ng-model="ctrl.prodCheckbox[product.id]">{{product.name}}</label>
+            </div>
+        </div>
+    </div>
+</div>

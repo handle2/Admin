@@ -47,6 +47,10 @@ class StorageController extends ControllerBase
         /** @var Storage $storage */
         $storage = $form->id?$search->create($form->id):$search->create();
         $storage->name = $form->name;
+        $storage->products = $form->products;
+        $storage->type = $form->type;
+        $storage->dateFrom = $form->dateFrom;
+        $storage->dateTo = $form->dateTo;
         $storage->code = !empty($form->code)?$this->urlMakeup($form->code):$this->urlMakeup($form->name);
         $storage->save();
         return $this->api(200,$storage->id);
