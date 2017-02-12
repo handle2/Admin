@@ -34,14 +34,10 @@ class ProductController extends ControllerBase
         $search->lang = $this->lang;
         $id = (int)$id!=0?(int)$id:false;
         if($id){
+            /** @var Product $product */
             $product = $search->create($id);
-            if(!empty($product->pictureIds)){
-                $picSearch = DocumentSearch::createDocumentSearch();
-                $picSearch->ids = $product->pictureIds;
-                $picSearch->disableCache();
-                $pictures = $picSearch->find();
-                $product->pictures = $pictures;
-            }
+            $product->pictures = $product->getPictures();
+
         }else{
             $product = false;
         }

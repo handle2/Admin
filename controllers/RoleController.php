@@ -22,6 +22,7 @@ class RoleController extends ControllerBase
             $search->roles = $this->authUser->availableRoles;
         }
 
+        $search->cacheByLogin($this->urlMakeup($this->authUser->username));
         $roles = $search->find();
         if($roles){
             return $this->api(200,json_encode($roles));

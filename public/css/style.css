@@ -230,3 +230,7 @@ table td {
     width:500px;
     height:350px;
 }
+
+.panel-body.row{
+    padding: 25px;
+}

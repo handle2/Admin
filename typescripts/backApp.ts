@@ -336,6 +336,36 @@ module backApp{
                 }],
             }
         })
+        .when("/admin/partner", {
+            templateUrl : '/modules/Admin/views/directives/routes/partner/partner-index.html',
+            controller : 'PartnerController',
+            controllerAs: 'ctrl',
+            resolve:	{
+                partner:	[function () {
+                    return false;
+                }],
+                partners:	["$route","$http", function(route,http) {
+                    return http.get('/admin/partner/list').then(function successCallback(response) {
+                        return angular.fromJson(response.data);
+                    });
+                }]
+            }
+        })
+        .when("/admin/partner/edit/:id?", {
+            templateUrl : '/modules/Admin/views/directives/routes/partner/partner-edit.html',
+            controller : 'PartnerController',
+            controllerAs: 'ctrl',
+            resolve:	{
+                partner:	["$route","$http", function(route,http) {
+                    return http.get('/admin/partner/get/'+route.current.params.id).then(function successCallback(response) {
+                        return angular.fromJson(response.data);
+                    });
+                }],
+                partners:	[function () {
+                    return false;
+                }]
+            }
+        })
         .when("/admin/master", {
             templateUrl : '/modules/Admin/views/directives/routes/master/master-index.html',
             controller : 'MasterController',

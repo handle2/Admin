@@ -41,6 +41,7 @@ class RightController extends ControllerBase
             $search->type = $type;
             $search->setCacheType($type);
         }
+        $search->cacheByLogin($this->urlMakeup($this->authUser->username));
         $rights = $search->find();
         return $this->api(200,json_encode($rights));
     }
@@ -73,6 +74,7 @@ class RightController extends ControllerBase
         $search->type = "subRight";
         $search->parent = $parent;
         $search->setCacheType($parent.'_subRight');
+        $search->cacheByLogin($this->urlMakeup($this->authUser->username));
         $rights = $search->find();
 
         return $this->api(200,json_encode($rights));
