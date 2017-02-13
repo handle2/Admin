@@ -16,7 +16,7 @@
                 </div>
             </div>
         </div>
-        <div data-ng-repeat="group in ctrl.roleService.orderedRights" class="panel panel-default">
+        <div data-ng-if="ctrl.commonService.hasPermission(group.code)" data-ng-repeat="group in ctrl.roleService.orderedRights" class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
                     <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" data-ng-click="ctrl.toggleCollapse(group.id)">
@@ -26,7 +26,7 @@
             </div>
             <div uib-collapse="ctrl.isCollapsed.indexOf(group.id)==-1" id="collapseTwo" class="panel-collapse collapse">
                 <div class="panel-body">
-                    <div data-ng-repeat="right in group.rights">
+                    <div data-ng-if="ctrl.commonService.hasPermission(right.code)" data-ng-repeat="right in group.rights">
                         {{right.name}}({{right.code}})<switch id="enabled" name="enabled" data-ng-change="ctrl.toggleRight(right.code)" data-ng-model="ctrl.rightsObject[right.code]" on="On" off="Off" class="green"></switch>
                     </div>
                 </div>

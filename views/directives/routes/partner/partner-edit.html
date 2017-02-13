@@ -14,9 +14,37 @@
         <div id="collapsePictures" data-uib-collapse="ctrl.accordion.pictures" class="panel-collapse collapse in">
             <div class="panel-body row">
                 <div class='form-group span5'>
-                    <div class="col-md-6">
+                    <div class="col-md-3">
                         <label>{{'name'|translate}}</label>
                         <input class="form-control" type="text" data-ng-model="ctrl._formData.name" required>
+                    </div>
+                    <div class="col-md-3">
+                        <label>{{'username'|translate}}</label>
+                        <input class="form-control" type="text" data-ng-model="ctrl._formData.username" required>
+                    </div>
+                    <div class="col-md-3">
+                        <label>{{'email'|translate}}</label>
+                        <input class="form-control" type="text" data-ng-model="ctrl._formData.email" required>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" data-ng-click="ctrl.accordion.roles = !ctrl.accordion.roles">
+                    {{'roles'|translate}}
+                </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
+            </h4>
+        </div>
+
+        <div id="collapseRoles" data-uib-collapse="ctrl.accordion.roles" class="panel-collapse collapse in">
+            <div class="panel-body row">
+                <div class='form-group span5'>
+                    <div class="col-md-6">
+                        <select data-ng-model="ctrl._formData.role">
+                            <option data-ng-repeat="role in ctrl.roles" value="{{role.code}}">{{role.name}}</option>
+                        </select>
                     </div>
                 </div>
             </div>

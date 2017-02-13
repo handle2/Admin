@@ -10,7 +10,8 @@ module backApp {
 
         };
 
-        constructor(private scope, private location, private http, private window ,public partnerService,public partner, public partners) {
+        constructor(private scope, private location, private http, private window ,public partnerService,public partner, public partners, public roles) {
+            
             if(partner){
                 this._formData = partner;
             }
@@ -37,5 +38,5 @@ module backApp {
     }
 
     var backApp = angular.module('backApp');
-    backApp.controller('PartnerController', ['$scope', '$location', '$http', '$window','PartnerService','partner','partners', PartnerController]);
+    backApp.controller('PartnerController', ['$scope', '$location', '$http', '$window','PartnerService','partner','partners','roles', PartnerController]);
 }

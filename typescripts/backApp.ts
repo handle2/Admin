@@ -348,7 +348,10 @@ module backApp{
                     return http.get('/admin/partner/list').then(function successCallback(response) {
                         return angular.fromJson(response.data);
                     });
-                }]
+                }],
+                roles:	[function () {
+                    return false;
+                }],
             }
         })
         .when("/admin/partner/edit/:id?", {
@@ -363,7 +366,12 @@ module backApp{
                 }],
                 partners:	[function () {
                     return false;
-                }]
+                }],
+                roles:	["$route","$http", function(route,http) {
+                    return http.get('/admin/role/list').then(function successCallback(response) {
+                        return angular.fromJson(response.data);
+                    });
+                }],
             }
         })
         .when("/admin/master", {

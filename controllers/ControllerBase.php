@@ -34,9 +34,7 @@ class ControllerBase extends Controller
                 $this->view->setMainView('login');
                 break;
             case 'not_authorized':
-                $this->api(404,json_encode(array('message'=>'not_authorized')));
-                return false;
-                break;
+               die('not_authorized');
         }
     }
 
