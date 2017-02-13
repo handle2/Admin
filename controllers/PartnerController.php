@@ -93,7 +93,10 @@ class PartnerController extends ControllerBase
     }
 
     public function sendPasswordAction($id){
-        return $this->api(200,json_encode($id." küldve"));
+        $search = ProfileSearch::createProfileSearch();
+        /** @var Profile $profile */
+        $profile = $search->create((int)$id);
+        $profile->setPassword("asd123");
     }
 
     public function uploadAction(){}

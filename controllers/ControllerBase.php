@@ -85,12 +85,16 @@ class ControllerBase extends Controller
         if($login){
             $profileSearch = ProfileSearch::createProfileSearch();
             $profileSearch->id = $login->userId;
+            /** @var ContentSettings\Profile $profile */
             $profile = $profileSearch->findFirst();
             $this->authUser = new \stdClass();
             $this->authUser->username = $profile->username;
             $this->authUser->email = $profile->email;
             $this->authUser->name = $profile->name;
             $this->authUser->role = $profile->role;
+            $picture = $profile->getPictures();
+            /**@var ContentSettings\Document $picture*/
+            $this->view->cover = count($picture)>0?$picture[0]->croppedImage:false;
 
             $roleSearch = RoleSearch::createRoleSearch();
             $roleSearch->code = $this->authUser->role;
