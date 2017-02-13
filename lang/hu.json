@@ -74,5 +74,6 @@
   "label":"Címke",
   "labels":"Címkék",
   "labels-upload":"Címke feltöltése",
-  "master" : "Okoska"
+  "master" : "Okoska",
+  "send_new_password":"Küldj út jelszót"
 }

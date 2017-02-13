@@ -92,6 +92,10 @@ class PartnerController extends ControllerBase
         return $this->api(200,json_encode("törölve"));
     }
 
+    public function sendPasswordAction($id){
+        return $this->api(200,json_encode($id." küldve"));
+    }
+
     public function uploadAction(){}
     public function editAction(){}
     public function indexAction(){}

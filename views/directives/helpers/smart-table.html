@@ -14,6 +14,7 @@
         <td>
             <a class="btn btn-success" data-ng-show="ctrl.checkPerm('save')" href="/admin/{{type}}/edit/{{row.id}}">{{'edit'|translate}}</a>
             <a class="btn btn-danger" data-ng-show="ctrl.checkPerm('delete')" data-ng-click="ctrl.delete(type,row.id)">{{'delete'|translate}}</a>
+            <a class="{{option.buttonclass}}" data-ng-show="ctrl.checkPerm(option.permission)" data-ng-repeat="option in ctrl.options" data-ng-click="option.method(row.id)">{{option.name|translate}}</a>
         </td>
     </tr>
     </tbody>

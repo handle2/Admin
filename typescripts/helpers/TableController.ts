@@ -4,9 +4,16 @@ module backApp {
     class TableController{
 
         public keys : Array<string>;
+        public options = [];
+
 
         constructor(private scope,private http,private commonService) {
             var self = this;
+
+            if(scope.options){
+                this.options = scope.options;
+            }
+
             if(!scope.keys){
                 this.scope.$watch('rows', (newValue) => {
                     self.readKeys(newValue);
@@ -46,8 +53,9 @@ module backApp {
             if(action == 'save'){
                 return this.commonService.hasPermission(this.scope.update);
             }
-            return true;
+            return this.commonService.hasPermission(action);
         }
+
     }
 
     var backApp = angular.module('backApp');
@@ -65,7 +73,8 @@ module backApp {
                 type : '=',
                 keys : '=',
                 delete : '=',
-                update : '='
+                update : '=',
+                options: '='
             }
         };
     });

@@ -91,4 +91,6 @@ $admin->addGet('/admin/:controller', array(
     )
 );
 
+$router->removeExtraSlashes(true);
+
 $router->mount($admin);
