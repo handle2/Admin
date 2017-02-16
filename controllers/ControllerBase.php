@@ -32,10 +32,10 @@ class ControllerBase extends Controller
                 break;
             case 'not_logged':
                 if($this->router->getControllerName()!='admin'){
-                    die('not valid user');
+                    die(json_encode('not valid user'));
                 }
-                if(!empty($this->request->getHeader("XAuth"))){
-                    die('wrong hash code');
+                if(!empty($this->request->getHeader("XAuth")) && $this->router->getActionName() != 'enter'){
+                    die(json_encode('wrong hash code'));
                 }
                 $this->view->setMainView('login');
                 break;
