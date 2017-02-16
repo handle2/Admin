@@ -17,7 +17,7 @@ module backApp {
 
             var self = this;
             this.http.post('/admin/logout').then(function successCallback(response) {
-                self.localStorageService.remove('username');
+                self.localStorageService.remove('hash');
                 self.window.open('/admin', '_self');
             }, function errorCallback(response) {
                 self.error = response.data;
@@ -28,7 +28,9 @@ module backApp {
             var self = this;
             var data = JSON.stringify(this.form);
             this.http.post('/admin/enter', data).then(function successCallback(response) {
-                self.localStorageService.set('username',self.form.username);
+                var data = angular.fromJson(response.data);
+                console.log(data);
+                self.localStorageService.set('hash',data.hash);
                 self.window.open('/admin', '_self');
             }, function errorCallback(response) {
                 self.error = response.data;

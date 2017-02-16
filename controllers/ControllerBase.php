@@ -31,6 +31,12 @@ class ControllerBase extends Controller
                 $this->view->setMainView('index');
                 break;
             case 'not_logged':
+                if($this->router->getControllerName()!='admin'){
+                    die('not valid user');
+                }
+                if(!empty($this->request->getHeader("XAuth"))){
+                    die('wrong hash code');
+                }
                 $this->view->setMainView('login');
                 break;
             case 'not_authorized':
@@ -45,6 +51,8 @@ class ControllerBase extends Controller
      */
     public function getPermission($controller,$action){
 
+        $token = $this->request->getHeader('XAuth');
+        
         $logged = $this->isLoggedIn();
         if(!$logged){
             return array('response' => 'not_logged');
@@ -73,15 +81,12 @@ class ControllerBase extends Controller
      * vizsgálja ,hogy be vagy-e lépve
      */
     public function isLoggedIn(){
-        //adatbázisban létezik-e a cookie hash
-       /* if(!$this->cookies->has("hash")){
-            return false;
-        }
-        if(!$this->session->has("hash") && $this->cookies->has("hash")){
-            $this->session->set("hash",$this->cookies->get("hash"));
-        }*/
 
-        $login = ContentSettings\Login::getLogin($this->session->get("hash"));
+        $hash = $this->request->getHeader('XAuth');
+
+        $token = !empty($hash)?$hash:$this->session->get("hash");
+
+        $login = ContentSettings\Login::getLogin($token);
         if($login){
             $profileSearch = ProfileSearch::createProfileSearch();
             $profileSearch->id = $login->userId;

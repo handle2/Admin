@@ -36,8 +36,8 @@ class AdminController extends ControllerBase
         $profileSearch->lang = $this->lang;
         $profileSearch->password = $form['password'];
         $profileSearch->username = $form['username'];
+        /** @var ContentSettings\Profile $profile */
         $profile = $profileSearch->findFirst();
-
         if($profile){
             $this->cookies->set('hash',md5($profile->username),time()+3600*24*7); //1 week
             $this->session->set("hash",md5($profile->username));
@@ -48,8 +48,8 @@ class AdminController extends ControllerBase
             } else {
                 $ip = $_SERVER['REMOTE_ADDR'];
             }
-            ContentSettings\Login::createLogin(array('hash' => md5($profile->username),'ip'=>$ip,'id'=>$profile->id));
-            return $this->api(200,'success');
+            $login = ContentSettings\Login::createLogin(array('hash' => md5($profile->username),'ip'=>$ip,'id'=>$profile->id));
+            return $this->api(200,json_encode($login));
         }
 
         return $this->api(404,'username_or_password_fail');

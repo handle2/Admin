@@ -30,8 +30,7 @@ module backApp{
 
 
         public getLoggedUser(){
-            var username = this.localStorageService.get('username');
-            return this.http.get('/admin/profile/getUser/'+username);
+            return this.http.get('/admin/profile/getUser');
         }
 
         public reloadUserData(){

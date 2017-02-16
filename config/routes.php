@@ -29,10 +29,9 @@ $admin->addPost('/admin/register/profile',array(
     'action'     => 'registerProfile'
 ));
 
-$admin->addGet('/admin/profile/getUser/:params',array(
+$admin->addGet('/admin/profile/getUser',array(
     'controller' => 'profile',
     'action'     => 'getUser',
-    'params'     => 1
 ));
 
 $admin->addPost('/admin/:controller/delete',array(
