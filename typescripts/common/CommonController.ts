@@ -7,19 +7,25 @@ module backApp {
 
     class CommonController implements ICommonController{
 
+        public defaultLang : string;
 
         constructor(private root , private scope, private window, private location, public commonService,public translate, private localStorageService) {
 
-            if(!localStorageService.get('lang')){
-                localStorageService.set('lang','hu');
-                translate.use(localStorageService.get('lang'));
+
+
+        }
+
+        public langInit(key){
+            this.commonService.defaultLang = key;
+            if(!this.localStorageService.get('lang')){
+                this.localStorageService.set('lang',key);
+                this.translate.use(this.localStorageService.get('lang'));
             }else{
-                translate.use(localStorageService.get('lang'));
+                this.translate.use(this.localStorageService.get('lang'));
             }
 
-            this.setLangSession(localStorageService.get('lang'));
-            root.language = localStorageService.get('lang');
-
+            this.setLangSession(this.localStorageService.get('lang'));
+            this.root.language = this.localStorageService.get('lang');
         }
 
         public hasPermission(code){
@@ -47,13 +53,5 @@ module backApp {
 
     var backApp = angular.module('backApp');
     backApp.controller('CommonController', ['$rootScope','$scope','$window','$location', 'CommonService','$translate', 'localStorageService', CommonController]);
-
-    backApp.directive('changeLanguage', function () {
-        return {
-            restrict: 'E',
-            controller: 'CommonController',
-            controllerAs: 'ctrl',
-            templateUrl: '/modules/Admin/views/directives/helpers/change-language.html'
-        }
-    });
+    
 }

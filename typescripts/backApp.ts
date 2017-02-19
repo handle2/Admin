@@ -36,9 +36,6 @@ module backApp{
             suffix: '.json'
         });
 
-        // todo config itt kell beállítani a default nyelvet
-        $translateProvider.preferredLanguage('hu');
-
         /**
          * locale storage beállítása
          */
@@ -62,6 +59,9 @@ module backApp{
                     config.headers = config.headers || {};
                     if (localStorageService.get('hash')) {
                         config.headers.XAuth = localStorageService.get('hash')?localStorageService.get('hash'):'not_auth';
+                    }
+                    if (localStorageService.get('lang')) {
+                        config.headers.XLang = localStorageService.get('lang');
                     }
                     return config;
                 }

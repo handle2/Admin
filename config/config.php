@@ -20,5 +20,6 @@ return new \Phalcon\Config(array(
         'modelsDir' => __DIR__ . '/../models/',
         'viewsDir' => __DIR__ . '/../views/',
         'phpExcel' =>   'plugins/PHPExcel-1.8/Classes/',
-    )
+    ),
+    'defaultLanguage' => 'en'
 ));

@@ -21,9 +21,11 @@ class ControllerBase extends Controller
 
 
     public function beforeExecuteRoute(Dispatcher $dispatcher){
-        //todo login és missing_right error legyen külön
-
-        $this->lang = $this->session->get('lang');
+        //todo langot átrakni headerbe
+        $this->view->defaultLang = $this->config->defaultLanguage;
+        $lang = $this->request->getHeader("XLang");
+        //dd($lang);
+        $this->lang = !empty($lang)?$lang:$this->config->defaultLanguage;
 
         $result = $this->getPermission($this->router->getControllerName(),$this->router->getActionName());
         switch ($result['response']){

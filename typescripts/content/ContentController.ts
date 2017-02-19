@@ -25,6 +25,9 @@ module backApp {
         constructor(private scope, private location, private http, private window ,public contentService,public content, public contents, public labels) {
             if(content){
                 this._formData = content;
+                if(this._formData.langs.length<=0){
+                    this._formData.langs = {};
+                }
                 if(this._formData.labels){
                     for(var i = 0;i<this._formData.labels.length;i++){
                         this.frontLabels[this._formData.labels[i]] = true;

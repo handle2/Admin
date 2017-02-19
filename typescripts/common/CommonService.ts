@@ -19,6 +19,8 @@ module backApp{
         public user : IUser;
         public langs;
 
+        public defaultLang;
+
         public static instance : CommonService;
         constructor(private rootScope,private location,private window,private http,private localStorageService){
 
