@@ -99,12 +99,14 @@ class ControllerBase extends Controller
             $this->authUser->email = $profile->email;
             $this->authUser->name = $profile->name;
             $this->authUser->role = $profile->role;
-            $picture = $profile->getPictures();
-            /**@var ContentSettings\Document $picture*/
-            $this->view->cover = count($picture)>0?$picture[0]->croppedImage:false;
+            /** @var \ArrayObject|ContentSettings\Document[] $pictures */
+            $pictures = $profile->getPictures();
+
+            $this->view->cover = count($pictures)>0?$pictures[0]->getUrl():false;
 
             $roleSearch = RoleSearch::createRoleSearch();
             $roleSearch->code = $this->authUser->role;
+            /** @var ContentSettings\Role $ownRole */
             $ownRole = $roleSearch->findFirst();
             $this->authUser->availableRoles = count($ownRole->roles)>0?$ownRole->roles:[false];
 

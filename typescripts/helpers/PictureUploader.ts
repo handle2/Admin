@@ -5,7 +5,10 @@ module backApp {
      */
 
     interface FileReaderEventTarget extends EventTarget {
-        result:string
+        result:string;
+        fileName:string;
+        size:number;
+        type:string;
     }
 
     interface IMyScope extends ng.IScope
@@ -39,14 +42,6 @@ module backApp {
             angular.element(document.querySelector('#fileInput')).trigger('click');
         }
 
-        public setStuff(){
-            this.scope.images[this.current].bounds.left = 211;
-            this.scope.images[this.current].bounds.right = 780;
-            this.scope.images[this.current].bounds.top = 985;
-            this.scope.images[this.current].bounds.bottom = 701;
-            console.log(this.files[this.current].bounds);
-        }
-
     }
 
     var backApp = angular.module('backApp');
@@ -73,11 +68,17 @@ module backApp {
             link: function (scope : IMyScope, element, attributes) {
                 element.bind("change", function (changeEvent) {
                     for(var i = 0;i < changeEvent.target.files.length; i++){
-                        var reader = new FileReader();
+                        var reader : any = new FileReader();
+                        reader.fileName = changeEvent.target.files[i].name;
+                        reader.size = changeEvent.target.files[i].size;
+                        reader.type = changeEvent.target.files[i].type;
                         reader.onload = function (loadEvent:FileReaderEvent) {
                             scope.$apply(function () {
                                 var image = {
                                     sourceImage: loadEvent.target.result,
+                                    name: loadEvent.target.fileName,
+                                    size: loadEvent.target.size,
+                                    type: loadEvent.target.type,
                                     croppedImage : null,
                                     bounds:{
                                         left : 0,

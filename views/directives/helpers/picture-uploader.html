@@ -1,7 +1,7 @@
 <div class="row">
     <div style="font-size: 50px;max-width: 55px;" class="col-xs-1" data-ng-click="ctrl.addImages()">+</div>
     <div class="col-md-1" data-ng-repeat="(key, picture) in images">
-        <img style="max-height: 50px" data-ng-src="{{picture.sourceImage}}" data-ng-click="ctrl.setCurrent(key)">
+        <img style="max-height: 50px" data-ng-src="{{picture.url?picture.url:picture.sourceImage}}" data-ng-click="ctrl.setCurrent(key)">
     </div>
 </div>
 <div class="row">

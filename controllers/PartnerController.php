@@ -38,7 +38,14 @@ class PartnerController extends ControllerBase
         if($id){
             /** @var Profile $found */
             $found = $search->create($id);
-            $found->pictures = $found->getPictures();
+            /** @var \ArrayObject|Document[] $pictures */
+            $pictures = $found->getPictures();
+            foreach ($pictures as &$picture){
+                $picture->url = $picture->getUrl();
+            }
+
+            $found->pictures = $pictures;
+
         }else{
             $found = false;
         }
@@ -70,6 +77,9 @@ class PartnerController extends ControllerBase
                 $p = $pictureSearch->create($picture->id);
                 $p->sourceImage = $picture->sourceImage;
                 $p->croppedImage = $picture->croppedImage;
+                $p->name = $picture->name;
+                $p->type = $picture->type;
+                $p->size = $picture->size;
                 $p->bounds = $picture->bounds;
                 $p->save();
                 if($add){
