@@ -29,9 +29,10 @@ module backApp {
                 this._formData = partner;
             }
             if(partners && !partnerService.partners){
-                this.initOptions();
                 partnerService.partners = partners;
             }
+
+            this.initOptions();
 
 
 

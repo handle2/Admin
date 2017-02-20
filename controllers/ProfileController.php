@@ -10,12 +10,17 @@ class ProfileController extends ControllerBase
 {
     public function getUserAction(){
 
-        $profile = $this->authUser;
-        $roleSearch = RoleSearch::createRoleSearch();
-        $roleSearch->code = $this->urlMakeup($profile->role);
-        $role = $roleSearch->findFirst();
-        $profile->role = $role;
+        if($this->authUser){
+            $profile = $this->authUser;
+            $roleSearch = RoleSearch::createRoleSearch();
+            $roleSearch->code = $this->urlMakeup($profile->role);
+            $role = $roleSearch->findFirst();
+            $profile->role = $role;
 
-        return $this->api(200,json_encode($profile));
+            return $this->api(200,json_encode($profile));
+        }else{
+            return $this->api(200,json_encode("not logged in"));
+        }
+
     }
 }
