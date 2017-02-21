@@ -26,7 +26,7 @@ class RightController extends ControllerBase
         }
 
         if($right){
-            return $this->api(200,json_encode($right));
+            return $this->api(200,$right);
         }
         return $this->api(200,false);
     }
@@ -43,7 +43,7 @@ class RightController extends ControllerBase
         }
         $search->cacheByLogin($this->urlMakeup($this->authUser->username));
         $rights = $search->find();
-        return $this->api(200,json_encode($rights));
+        return $this->api(200,$rights);
     }
 
     public function saveAction(){
@@ -62,7 +62,7 @@ class RightController extends ControllerBase
         $right->actions = $form->actions;
 
         $right->save();
-        return $this->api(200,json_encode($right));
+        return $this->api(200,$right);
 
     }
 
@@ -77,7 +77,7 @@ class RightController extends ControllerBase
         $search->cacheByLogin($this->urlMakeup($this->authUser->username));
         $rights = $search->find();
 
-        return $this->api(200,json_encode($rights));
+        return $this->api(200,$rights);
     }
 
     public function deleteAction(){
@@ -87,7 +87,7 @@ class RightController extends ControllerBase
         $right = $search->create($id);
         $right->delete();
 
-        return $this->api(200,json_encode("törölve"));
+        return $this->api(200,"törölve");
 
     }
     

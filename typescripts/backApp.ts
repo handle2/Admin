@@ -101,7 +101,7 @@ module backApp{
                 }],
                 rights:	["$route","$http", function(route,http) {
                     return http.get('/admin/right/list').then(function successCallback(response) {
-                        return JSON.parse(response.data);
+                        return response.data;
                     });
                 }]
             }
@@ -202,12 +202,12 @@ module backApp{
                 }],
                 prodcategs:	["$route","$http", function(route,http) {
                     return http.get('/admin/product/getProdcategs').then(function successCallback(response) {
-                        return JSON.parse(response.data);
+                        return response.data;
                     });
                 }],
                 discounts:	["$route","$http", function(route,http) {
                     return http.get('/admin/discount/list').then(function successCallback(response) {
-                        return angular.fromJson(response.data);
+                        return response.data;
                     });
                 }]
             }
@@ -252,7 +252,7 @@ module backApp{
                 }],
                 contents:	["$route","$http", function(route,http) {
                     return http.get('/admin/content/list').then(function successCallback(response) {
-                        return angular.fromJson(response.data);
+                        return response.data;
                     });
                 }],
                 labels:	[function () {
@@ -267,7 +267,7 @@ module backApp{
             resolve:	{
                 content:	["$route","$http", function(route,http) {
                     return http.get('/admin/content/get/'+route.current.params.id).then(function successCallback(response) {
-                        return angular.fromJson(response.data);
+                        return response.data;
                     });
                 }],
                 contents:	[function () {
@@ -275,7 +275,7 @@ module backApp{
                 }],
                 labels:	["$route","$http", function(route,http) {
                     return http.get('/admin/label/list').then(function successCallback(response) {
-                        return angular.fromJson(response.data);
+                        return response.data;
                     });
                 }]
             }
@@ -290,7 +290,7 @@ module backApp{
                 }],
                 labels:	["$route","$http", function(route,http) {
                     return http.get('/admin/label/list').then(function successCallback(response) {
-                        return angular.fromJson(response.data);
+                        return response.data;
                     });
                 }]
             }
@@ -302,7 +302,7 @@ module backApp{
             resolve:	{
                 label:	["$route","$http", function(route,http) {
                     return http.get('/admin/label/get/'+route.current.params.id).then(function successCallback(response) {
-                        return angular.fromJson(response.data);
+                        return response.data;
                     });
                 }],
                 labels:	[function () {
@@ -320,7 +320,7 @@ module backApp{
                 }],
                 languages:	["$route","$http", function(route,http) {
                     return http.get('/admin/language/list').then(function successCallback(response) {
-                        return angular.fromJson(response.data);
+                        return response.data;
                     });
                 }]
             }
@@ -332,7 +332,7 @@ module backApp{
             resolve:	{
                 language:	["$route","$http", function(route,http) {
                     return http.get('/admin/language/get/'+route.current.params.id).then(function successCallback(response) {
-                        return angular.fromJson(response.data);
+                        return response.data;
                     });
                 }],
                 languages:	[function () {
@@ -350,7 +350,7 @@ module backApp{
                 }],
                 storages:	["$route","$http", function(route,http) {
                     return http.get('/admin/storage/list').then(function successCallback(response) {
-                        return angular.fromJson(response.data);
+                        return response.data;
                     });
                 }],
                 products:	[function () {
@@ -365,7 +365,7 @@ module backApp{
             resolve:	{
                 storage:	["$route","$http", function(route,http) {
                     return http.get('/admin/storage/get/'+route.current.params.id).then(function successCallback(response) {
-                        return angular.fromJson(response.data);
+                        return response.data;
                     });
                 }],
                 storages:	[function () {
@@ -373,7 +373,7 @@ module backApp{
                 }],
                 products:	["$route","$http", function(route,http) {
                     return http.get('/admin/product/list').then(function successCallback(response) {
-                        return angular.fromJson(response.data);
+                        return response.data;
                     });
                 }],
             }
@@ -388,7 +388,7 @@ module backApp{
                 }],
                 partners:	["$route","$http", function(route,http) {
                     return http.get('/admin/partner/list').then(function successCallback(response) {
-                        return angular.fromJson(response.data);
+                        return response.data;
                     });
                 }],
                 roles:	[function () {
@@ -403,7 +403,7 @@ module backApp{
             resolve:	{
                 partner:	["$route","$http", function(route,http) {
                     return http.get('/admin/partner/get/'+route.current.params.id).then(function successCallback(response) {
-                        return angular.fromJson(response.data);
+                        return response.data;
                     });
                 }],
                 partners:	[function () {
@@ -411,9 +411,39 @@ module backApp{
                 }],
                 roles:	["$route","$http", function(route,http) {
                     return http.get('/admin/role/list').then(function successCallback(response) {
-                        return angular.fromJson(response.data);
+                        return response.data;
                     });
                 }],
+            }
+        })
+        .when("/admin/cart", {
+            templateUrl : '/modules/Admin/views/directives/routes/cart/cart-index.html',
+            controller : 'CartController',
+            controllerAs: 'ctrl',
+            resolve:	{
+                cart:	[function () {
+                    return false;
+                }],
+                carts:	["$route","$http", function(route,http) {
+                    return http.get('/admin/cart/list').then(function successCallback(response) {
+                       return false;// return response.data;
+                    });
+                }],
+            }
+        })
+        .when("/admin/cart/edit/:id?", {
+            templateUrl : '/modules/Admin/views/directives/routes/cart/cart-edit.html',
+            controller : 'CartController',
+            controllerAs: 'ctrl',
+            resolve:	{
+                cart:	["$route","$http", function(route,http) {
+                    return http.get('/admin/get/'+route.current.params.id).then(function successCallback(response) {
+                        return response.data;
+                    });
+                }],
+                carts:	[function () {
+                    return false;
+                }]
             }
         })
         .when("/admin/master", {

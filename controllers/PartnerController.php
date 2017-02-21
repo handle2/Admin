@@ -25,7 +25,7 @@ class PartnerController extends ControllerBase
         $search->cacheByLogin($this->urlMakeup($this->authUser->username));
         $found = $search->find();
         if($found){
-            return $this->api(200,json_encode($found));
+            return $this->api(200,$found);
         }else{
             return $this->api(200,false);
         }
@@ -51,7 +51,7 @@ class PartnerController extends ControllerBase
         }
 
         if($found){
-            return $this->api(200,json_encode($found));
+            return $this->api(200,$found);
         }
         return $this->api(200,false);
     }
@@ -99,7 +99,7 @@ class PartnerController extends ControllerBase
         $profile = $search->create($id);
         $profile->delete();
 
-        return $this->api(200,json_encode("törölve"));
+        return $this->api(200,"törölve");
     }
 
     public function sendPasswordAction($id){

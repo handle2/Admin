@@ -14,10 +14,10 @@ module backApp {
         constructor(private scope, private http, private window, private productService, public prodcategs, public product, public products, public discounts){
 
             if(products){
-                productService.products = JSON.parse(products);
+                productService.products = products;
             }
             if(product){
-                this._formData = angular.fromJson(product);
+                this._formData = product;
                 this.categ = this._formData.categ;
                 for(var i = 0;i<prodcategs.length;i++){
                     if(prodcategs[i].url == this.categ){
@@ -31,7 +31,7 @@ module backApp {
             var self = this;
             var data = angular.toJson(ids);
             this.http.post('/admin/product/getInputs', data).then(function successCallback(response) {
-                self.inputs = JSON.parse(response.data);
+                self.inputs = response.data;
 
             }, function errorCallback(response) {
                 self.error = response.data;
@@ -41,10 +41,10 @@ module backApp {
         public save(back){
             var self = this;
             this._formData.categ = this.categ;
-            console.log(this._formData);
+
             var data = angular.toJson(this._formData);
             this.http.post('/admin/product/save',data).then(function (response) {
-                var id = angular.fromJson(response.data);
+                var id = response.data;
                 if(back){
                     self.window.open('/admin/product', '_self');
                 }else{

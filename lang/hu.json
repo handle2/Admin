@@ -51,6 +51,7 @@
   "sub-code":"Al kód",
   "pictures":"Képek",
   "product-upload":"Termék feltöltése",
+  "picture-upload":"Képszerkesztő",
   "text":"Szöveg",
   "textarea":"Szövegtömb",
   "radio": "Rádiógomb",
@@ -75,5 +76,7 @@
   "labels":"Címkék",
   "labels-upload":"Címke feltöltése",
   "master" : "Okoska",
-  "send_new_password":"Küldj út jelszót"
+  "send_new_password":"Küldj út jelszót",
+  "lead":"Fejléc",
+  "parent":"Szülő"
 }

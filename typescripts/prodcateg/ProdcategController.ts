@@ -47,11 +47,11 @@ module backApp {
         constructor(private scope, private http, private window , private localStorageService,private prodcategService, private prodcateg,private prodcategs,private extInputs) {
             this.exsInputs = extInputs;
             if(prodcateg){
-                this._formData = JSON.parse(prodcateg);
+                this._formData = prodcateg;
             }
             
             if((!prodcategService.prodcategs || prodcategService.prodcategs.length == 0) && prodcategs){
-                prodcategService.prodcategs = JSON.parse(prodcategs);
+                prodcategService.prodcategs = prodcategs;
             }
             this.initInputs(extInputs);
         }
@@ -69,7 +69,7 @@ module backApp {
             var self = this;
 
             self.http.get('/admin/prodcateg/list').then(function successCallback(response) {
-                self.prodcategService.prodcategs = JSON.parse(response.data);
+                self.prodcategService.prodcategs = response.data;
             }, function errorCallback(response) {
                 self.error = response.data;
             });

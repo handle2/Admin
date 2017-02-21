@@ -23,7 +23,7 @@ class ProductController extends ControllerBase
         $search->lang = $this->lang;
         $products = $search->find();
         if($products){
-            return $this->api(200,json_encode($products));
+            return $this->api(200,$products);
         }else{
             return $this->api(200,false);
         }
@@ -49,7 +49,7 @@ class ProductController extends ControllerBase
         }
 
         if($product){
-            return $this->api(200,json_encode($product));
+            return $this->api(200,$product);
         }
         return $this->api(200,false);
     }
@@ -58,7 +58,7 @@ class ProductController extends ControllerBase
         $search = ProdcategSearch::createProdcategSearch();
         $prodcategs = $search->find();
         if($prodcategs){
-            return $this->api(200,json_encode($prodcategs));
+            return $this->api(200,$prodcategs);
         }else{
             return $this->api(200,false);
         }
@@ -71,7 +71,7 @@ class ProductController extends ControllerBase
         $search->ids = $ids;
         $inputs = $search->find();
         if($inputs){
-            return $this->api(200,json_encode($inputs));
+            return $this->api(200,$inputs);
         }else{
             return $this->api(200,false);
         }
@@ -117,7 +117,7 @@ class ProductController extends ControllerBase
         $product = $search->create($id);
         $product->delete();
 
-        return $this->api(200,json_encode("törölve"));
+        return $this->api(200,"törölve");
     }
 
     public function uploadAction(){}

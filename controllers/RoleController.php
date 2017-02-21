@@ -25,7 +25,7 @@ class RoleController extends ControllerBase
         $search->cacheByLogin($this->urlMakeup($this->authUser->username));
         $roles = $search->find();
         if($roles){
-            return $this->api(200,json_encode($roles));
+            return $this->api(200,$roles);
         }else{
             return $this->api(404,false);
         }
@@ -44,7 +44,7 @@ class RoleController extends ControllerBase
         }
 
         if($role){
-            return $this->api(200,json_encode($role));
+            return $this->api(200,$role);
         }
         return $this->api(200,false);
     }
@@ -60,7 +60,7 @@ class RoleController extends ControllerBase
         $role->roles = $form->roles;
         $role->langs = $form->langs;
         $role->save();
-        return $this->api(200,json_encode($role));
+        return $this->api(200,$role);
     }
 
     public function deleteAction(){
@@ -70,7 +70,7 @@ class RoleController extends ControllerBase
         $role = $search->create($id);
         $role->delete();
 
-        return $this->api(200,json_encode("törölve"));
+        return $this->api(200,"törölve");
     }
 
     public function uploadAction(){}

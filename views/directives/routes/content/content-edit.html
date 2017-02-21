@@ -26,6 +26,29 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" data-ng-click="ctrl.accordion.text = !ctrl.accordion.text">
+                        {{'text'|translate}}
+                    </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
+                </h4>
+            </div>
+            <div id="collapseText" data-uib-collapse="ctrl.accordion.text" class="panel-collapse collapse in">
+                <div class="panel-body row">
+                    <div class="form-group">
+                        <label for="textareaLead">{{'lead'|translate}}</label>
+                        <textarea class="form-control" id="textareaLead" rows="3" data-ng-model="ctrl._formData.lead"></textarea>
+                    </div>
+                </div>
+                <div class="panel-body row">
+                    <div class="form-group">
+                        <label for="textareaText">{{'text'|translate}}</label>
+                        <textarea class="form-control" id="textareaText" rows="5" data-ng-model="ctrl._formData.text"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
                     <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" data-ng-click="ctrl.accordion.pictures = !ctrl.accordion.pictures">
                         {{'picture-upload'|translate}}
                     </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
@@ -50,6 +73,22 @@
                     <div data-ng-repeat="label in ctrl.labels">
                         <label class='checkbox-inline'><input type="checkbox" name="label.code+[]" data-ng-click="ctrl.toggleLabel(label.code)" data-ng-model="ctrl.frontLabels[label.code]">{{label.name}}</label>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default" data-ng-if="ctrl.parents.length>0">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" data-ng-click="ctrl.accordion.parent = !ctrl.accordion.parent">
+                        {{'parent'|translate}}
+                    </a><i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
+                </h4>
+            </div>
+            <div id="collapseParent" data-uib-collapse="ctrl.accordion.parent" class="panel-collapse collapse in">
+                <div class="panel-body row">
+                    <select data-ng-model="ctrl._formData.parent">
+                        <option data-ng-value="parent.url" data-ng-repeat="parent in ctrl.parents">{{parent.name}}</option>
+                    </select>
                 </div>
             </div>
         </div>

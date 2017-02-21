@@ -49,7 +49,7 @@ class AdminController extends ControllerBase
                 $ip = $_SERVER['REMOTE_ADDR'];
             }
             $login = ContentSettings\Login::createLogin(array('hash' => md5($profile->username),'ip'=>$ip,'id'=>$profile->id));
-            return $this->api(200,json_encode($login));
+            return $this->api(200,($login));
         }
 
         return $this->api(404,'username_or_password_fail');

@@ -38,7 +38,7 @@ module backApp{
         public reloadUserData(){
             var self = this;
             this.getLoggedUser().then(function (response) {
-                self.user = JSON.parse(response.data);
+                self.user = response.data;
             });
         }
 
@@ -53,7 +53,7 @@ module backApp{
         private getLangs(){
             var self = this;
             this.http.get('/admin/language/getLangs').then(function (response) {
-                self.langs = angular.fromJson(response.data);
+                self.langs = response.data;
             });
         }
     }

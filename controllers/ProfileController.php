@@ -17,9 +17,9 @@ class ProfileController extends ControllerBase
             $role = $roleSearch->findFirst();
             $profile->role = $role;
 
-            return $this->api(200,json_encode($profile));
+            return $this->api(200,($profile));
         }else{
-            return $this->api(200,json_encode("not logged in"));
+            return $this->api(200,("not logged in"));
         }
 
     }

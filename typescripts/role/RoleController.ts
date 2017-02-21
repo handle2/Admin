@@ -42,7 +42,7 @@ module backApp {
                 this.initRoles();
             }
             if(roleInit){
-                this._formData = JSON.parse(roleInit);
+                this._formData = roleInit;
                 for(var k = 0;k < this._formData.rights.length;k++){
                     this.rightsObject[this._formData.rights[k]] = true;
                 }
@@ -104,9 +104,9 @@ module backApp {
 
         public save(){
             var self = this;
-            var data = JSON.stringify(this._formData);
+            var data = angular.toJson(this._formData);
             self.http.post('/admin/role/save', data).then(function successCallback(response) {
-                self.roleService.roles.push(JSON.parse(response.data));
+                self.roleService.roles.push(response.data);
                 self.commonService.reloadUserData();
                 self.location.path('/admin/role')
             }, function errorCallback(response) {
@@ -119,7 +119,7 @@ module backApp {
             var self = this;
 
             self.http.get('/admin/role/list').then(function successCallback(response) {
-                self.roleService.roles = JSON.parse(response.data);
+                self.roleService.roles = response.data;
             }, function errorCallback(response) {
                 self.error = response.data;
             });

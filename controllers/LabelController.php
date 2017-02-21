@@ -19,7 +19,7 @@ class LabelController extends ControllerBase
         $search->lang = $this->lang;
         $found = $search->find();
         if($found){
-            return $this->api(200,json_encode($found));
+            return $this->api(200,$found);
         }else{
             return $this->api(200,false);
         }
@@ -36,7 +36,7 @@ class LabelController extends ControllerBase
         }
 
         if($found){
-            return $this->api(200,json_encode($found));
+            return $this->api(200,$found);
         }
         return $this->api(200,false);
     }
@@ -59,7 +59,7 @@ class LabelController extends ControllerBase
         $label = $search->create($id);
         $label->delete();
 
-        return $this->api(200,json_encode("törölve"));
+        return $this->api(200,"törölve");
     }
 
     public function uploadAction(){}

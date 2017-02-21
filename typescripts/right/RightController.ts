@@ -39,9 +39,9 @@ module backApp {
             }
             if(rightInit){
                 var self = this;
-                this._formData = JSON.parse(rightInit);
+                this._formData = rightInit;
                 this.http.get('/admin/right/getSub/'+this._formData.code).then(function successCallback(response) {
-                    self.subRights = JSON.parse(response.data);
+                    self.subRights = response.data;
                 });
             }
         }
@@ -50,7 +50,7 @@ module backApp {
             var self = this;
             
             self.http.get('/admin/right/list/'+type).then(function successCallback(response) {
-                self.rightService.rights = JSON.parse(response.data);
+                self.rightService.rights = response.data;
             }, function errorCallback(response) {
                 self.error = response.data;
             });
@@ -60,7 +60,7 @@ module backApp {
             var self = this;
             var data = JSON.stringify(this._formData);
             this.http.post('/admin/right/save',data).then(function (response) {
-                var newRight = JSON.parse(response.data);
+                var newRight = response.data;
                 self.saveSubs(newRight.code);
                 if(!self._formData.id){
                     self.rightService.rights.push(newRight);
@@ -96,7 +96,7 @@ module backApp {
                 }
                 var data = angular.toJson(this.subRights[i]);
                 this.http.post('/admin/right/save',data).then(function (response) {
-                    var res = JSON.parse(response.data);
+                    var res = response.data;
                     newRights.push(res);
                     self.success.push("Sikeres jogosultság mentés:"+res.code);
                 });
@@ -106,7 +106,7 @@ module backApp {
         }
 
         public removeSub(sub){
-            console.log(sub.$$hashKey,this.subRights);
+            
             if(sub.id){
                 this.http.post('/admin/right/delete',sub.id);
             }

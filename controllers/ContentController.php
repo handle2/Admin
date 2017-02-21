@@ -13,7 +13,7 @@ class ContentController extends ControllerBase{
         $search->lang = $this->lang;
         $contents = $search->find();
         if($contents){
-            return $this->api(200,json_encode($contents));
+            return $this->api(200,$contents);
         }else{
             return $this->api(200,false);
         }
@@ -31,7 +31,7 @@ class ContentController extends ControllerBase{
         }
 
         if($content){
-            return $this->api(200,json_encode($content));
+            return $this->api(200,$content);
         }
         return $this->api(200,false);
     }
@@ -49,6 +49,7 @@ class ContentController extends ControllerBase{
         $content->text = $form->text;
         $content->lead = $form->lead;
         $content->langs = $form->langs;
+        $content->parent = $form->parent;
 
         $pictureSearch = DocumentSearch::createDocumentSearch();
 
@@ -82,7 +83,22 @@ class ContentController extends ControllerBase{
         $content = $search->create($id);
         $content->delete();
 
-        return $this->api(200,json_encode("törölve"));
+        return $this->api(200,"törölve");
+    }
+
+    public function searchAction(){
+        $id = (int)$this->request->get('excludeId');
+        $type = $this->request->get('type');
+        $search = ContentSearch::createContentSearch();
+        if($id){
+            $search->excludeId = $id;
+        }
+        if($type){
+            $search->type = $type;
+        }
+        $search->disableCache();
+        $contents = $search->find();
+        return $this->api(200,$contents);
     }
 
     public function uploadAction(){}

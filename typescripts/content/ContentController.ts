@@ -11,7 +11,8 @@ module backApp {
             main : false,
             pictures : true,
             text : true,
-            labels: true
+            labels: true,
+            parent: true
         };
 
         public frontLabels : Array<any> = [];
@@ -21,6 +22,8 @@ module backApp {
         public _formData : any = {
             langs : {}
         };
+
+        public parents;
 
         constructor(private scope, private location, private http, private window ,public contentService,public content, public contents, public labels) {
             if(content){
@@ -37,6 +40,7 @@ module backApp {
             if(contents && !contentService.contents){
                 contentService.contents = contents;
             }
+            this.getPossibleParents(this._formData.id);
         }
 
         public toggleLabel(code:string){
@@ -65,6 +69,17 @@ module backApp {
                 }
             },function (response) {
 
+            });
+        }
+
+        public getPossibleParents(excludeId?){
+            var self = this;
+            var params = "?type=list";
+            if(excludeId){
+                params += '&excludeId='+excludeId;
+            }
+            this.http.get('/admin/content/search'+params).then(function (response) {
+                self.parents = angular.fromJson(response.data);
             });
         }
 

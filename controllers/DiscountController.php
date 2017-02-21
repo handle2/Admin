@@ -19,7 +19,7 @@ class DiscountController extends ControllerBase
         $search->lang = $this->lang;
         $discounts = $search->find();
         if($discounts){
-            return $this->api(200,json_encode($discounts));
+            return $this->api(200,($discounts));
         }else{
             return $this->api(200,false);
         }
@@ -36,7 +36,7 @@ class DiscountController extends ControllerBase
         }
 
         if($discount){
-            return $this->api(200,json_encode($discount));
+            return $this->api(200,($discount));
         }
         return $this->api(200,false);
     }
@@ -61,7 +61,7 @@ class DiscountController extends ControllerBase
         $discount = $search->create($id);
         $discount->delete();
 
-        return $this->api(200,json_encode("törölve"));
+        return $this->api(200,("törölve"));
     }
 
     public function uploadAction(){}

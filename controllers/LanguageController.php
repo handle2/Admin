@@ -32,7 +32,7 @@ class LanguageController extends ControllerBase
         $search->lang = $this->lang;
         $found = $search->find();
         if($found){
-            return $this->api(200,json_encode($found));
+            return $this->api(200,($found));
         }else{
             return $this->api(200,false);
         }
@@ -49,7 +49,7 @@ class LanguageController extends ControllerBase
         }
 
         if($found){
-            return $this->api(200,json_encode($found));
+            return $this->api(200,($found));
         }
         return $this->api(200,false);
     }
@@ -72,7 +72,7 @@ class LanguageController extends ControllerBase
         $language = $search->create($id);
         $language->delete();
 
-        return $this->api(200,json_encode("törölve"));
+        return $this->api(200,("törölve"));
     }
 
     public function uploadAction(){}
