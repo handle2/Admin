@@ -40,7 +40,7 @@ module backApp {
             if(contents && !contentService.contents){
                 contentService.contents = contents;
             }
-            this.getPossibleParents(this._formData.id);
+            //this.getPossibleParents(this._formData.id);
         }
 
         public toggleLabel(code:string){
