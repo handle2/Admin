@@ -65,18 +65,30 @@ module backApp {
             this.init();
         }
 
+        private initBasic(){
+            for(var i = 0;i<this.products.length; i++){
+                var prodObj = {
+                    id: this.products[i].id,
+                    name: this.products[i].name,
+                    price: 0,
+                    quantity: 0
+                };
+                var isIn = false;
+                for(var y = 0;y<this._formData.products.length;y++){
+                    if(prodObj.id == this._formData.products[y].id){
+                        isIn = true;
+                    }
+                }
+                if(!isIn){
+                    this._formData.products.push(prodObj);
+                }
+            }
+        }
+
         public initProducts(type){
 
             if(type == 'basic'){
-                for(var i = 0;i<this.products.length; i++){
-                    var prodObj = {
-                        id: this.products[i].id,
-                        name: this.products[i].name,
-                        price: 0,
-                        quantity: 0
-                    };
-                    this._formData.products.push(prodObj);
-                }
+                this.initBasic();
             } else {
                 this._formData.products = [];
             }
@@ -85,6 +97,9 @@ module backApp {
         private init(){
             if(this.storage){
                 this._formData = this.storage;
+                if(this._formData.type == 'basic') {
+                    this.initBasic();
+                }
             }
             if(!this.storageService.storages){
                 this.storageService.storages = this.storages;

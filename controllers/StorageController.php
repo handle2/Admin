@@ -49,8 +49,8 @@ class StorageController extends ControllerBase
         $storage->name = $form->name;
         $storage->products = $form->products;
         $storage->type = $form->type;
-        $storage->dateFrom = $form->dateFrom;
-        $storage->dateTo = $form->dateTo;
+        $storage->dateFrom = strtotime($form->dateFrom);
+        $storage->dateTo = strtotime($form->dateTo);
         $storage->code = !empty($form->code)?$this->urlMakeup($form->code):$this->urlMakeup($form->name);
         $storage->save();
         return $this->api(200,$storage->id);

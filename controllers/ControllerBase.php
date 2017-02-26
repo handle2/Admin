@@ -21,10 +21,10 @@ class ControllerBase extends Controller
 
 
     public function beforeExecuteRoute(Dispatcher $dispatcher){
-        //todo langot átrakni headerbe
+        
         $this->view->defaultLang = $this->config->defaultLanguage;
         $lang = $this->request->getHeader("XLang");
-        //dd($lang);
+
         $this->lang = !empty($lang)?$lang:$this->config->defaultLanguage;
 
         $result = $this->getPermission($this->router->getControllerName(),$this->router->getActionName());
@@ -52,8 +52,6 @@ class ControllerBase extends Controller
      * @return bool
      */
     public function getPermission($controller,$action){
-
-        $token = $this->request->getHeader('XAuth');
         
         $logged = $this->isLoggedIn();
         if(!$logged){
@@ -62,10 +60,12 @@ class ControllerBase extends Controller
         $rightSearch = RightSearch::createRightSearch();
         $rightSearch->action = $action;
         $rightSearch->controller = $controller;
+        /** @var ContentSettings\Right $rootedRight */
         $rootedRight = $rightSearch->findFirst();
 
         $roleSearch = RoleSearch::createRoleSearch();
         $roleSearch->code = $this->authUser->role;
+        /** @var ContentSettings\Role $selfRole */
         $selfRole = $roleSearch->findFirst();
 
         $enabledAction = true;

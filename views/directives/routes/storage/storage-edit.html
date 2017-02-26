@@ -4,8 +4,8 @@
     <div class="form-group">
 
         <div class="col-md-6">
-            <label class='radio-inline'><input type="radio" data-ng-click="ctrl.initProducts('basic')" data-ng-model="ctrl._formData.type" value="basic">{{'basic'|translate}}</label>
-            <label class='radio-inline'><input type="radio" data-ng-click="ctrl.initProducts('discount')" data-ng-model="ctrl._formData.type" value="discount">{{'discount'|translate}}</label>
+            <label class='radio-inline'><input data-ng-disabled="ctrl._formData.id" type="radio" data-ng-click="ctrl.initProducts('basic')" data-ng-model="ctrl._formData.type" value="basic">{{'basic'|translate}}</label>
+            <label class='radio-inline'><input data-ng-disabled="ctrl._formData.id" type="radio" data-ng-click="ctrl.initProducts('discount')" data-ng-model="ctrl._formData.type" value="discount">{{'discount'|translate}}</label>
         </div>
 
     </div>
