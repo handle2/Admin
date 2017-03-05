@@ -22,4 +22,4 @@ gulp.task('init',["typescript"], function() {
 
 gulp.task('watch',function () {
     gulp.watch('./typescripts/**/*.ts',['init']);
-})
+});

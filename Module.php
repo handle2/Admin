@@ -21,9 +21,9 @@ class Module
         $loader->registerNamespaces(array(
             'Modules\Admin\Controllers' => __DIR__ . '/controllers/',
             'Modules\BusinessLogic\Models' => 'modules/BusinessLogic/models/',
-            'Modules\BusinessLogic\AdminHelper' => 'modules/BusinessLogic/AdminHelper/',
             'Modules\BusinessLogic\ContentSettings' => 'modules/BusinessLogic/ContentSettings/',
             'Modules\BusinessLogic\Search' => 'modules/BusinessLogic/Searches/',
+            'Modules\BusinessLogic\Operations' => 'modules/BusinessLogic/Operations/',
         ));
 
         $loader->register();

@@ -10,8 +10,6 @@ use Modules\BusinessLogic\Models as Models;
 
 use Modules\BusinessLogic\ContentSettings;
 
-use Modules\BusinessLogic\AdminHelper as Admin;
-
 use Phalcon\Mvc\Dispatcher;
 
 class ControllerBase extends Controller

@@ -61,7 +61,7 @@ module backApp {
 
         public selectedItems = [];
 
-        constructor(private scope, private modalService, private http, private window,private storageService,private storage,private storages,public products){
+        constructor(private scope, private modalService,private moment,private http, private window,private storageService,private storage,private storages,public products){
             this.init();
         }
 
@@ -96,12 +96,28 @@ module backApp {
 
         private init(){
             if(this.storage){
+                if(typeof this.storage.dateTo === 'number'){
+                    this.storage.dateTo = this.moment.unix(this.storage.dateTo).format('YYYY-MM-DD');
+                }
+                if(typeof this.storage.dateFrom === 'number'){
+                    this.storage.dateFrom = this.moment.unix(this.storage.dateFrom).format('YYYY-MM-DD');
+                }
                 this._formData = this.storage;
                 if(this._formData.type == 'basic') {
                     this.initBasic();
                 }
             }
             if(!this.storageService.storages){
+                for(var i = 0;i<this.storages.length;i++){
+                    this.storages[i].dateTo = this.storages[i].dateTo?this.storages[i].dateTo:"";
+                    this.storages[i].dateFrom = this.storages[i].dateFrom?this.storages[i].dateFrom:"";
+                    if(typeof this.storages[i].dateTo === 'number'){
+                        this.storages[i].dateTo = this.moment.unix(this.storages[i].dateTo).format('YYYY-MM-DD');
+                    }
+                    if(typeof this.storages[i].dateFrom === 'number'){
+                        this.storages[i].dateFrom = this.moment.unix(this.storages[i].dateFrom).format('YYYY-MM-DD');
+                    }
+                }
                 this.storageService.storages = this.storages;
             }
         }
@@ -142,5 +158,5 @@ module backApp {
 
     var backApp = angular.module('backApp');
     backApp.controller('ModalController',['$scope','products','selectedProducts','close',ModalController]);
-    backApp.controller('StorageController', ['$scope','ModalService', '$http','$window','StorageService','storage','storages','products', StorageController]);
+    backApp.controller('StorageController', ['$scope','ModalService','moment', '$http','$window','StorageService','storage','storages','products', StorageController]);
 }

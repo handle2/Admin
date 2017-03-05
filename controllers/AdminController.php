@@ -1,7 +1,6 @@
 <?php
 namespace Modules\Admin\Controllers;
 
-use Modules\BusinessLogic\AdminHelper as Admin;
 use Modules\BusinessLogic\ContentSettings;
 use Modules\BusinessLogic\Search\ProfileSearch;
 

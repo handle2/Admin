@@ -1,8 +1,7 @@
 /// <reference path="./../typings/tsd.d.ts" />
 module backApp{
 
-
-    var backApp = angular.module('backApp',["ngRoute","LocalStorageModule","smart-table","ui.bootstrap","uiSwitch","angular-img-cropper","pascalprecht.translate","angular-loading-bar","jkuri.datepicker","angularModalService"]); //,"ngImgCrop"
+    var backApp = angular.module('backApp',["ngRoute","LocalStorageModule","smart-table","ui.bootstrap","uiSwitch","angular-img-cropper","pascalprecht.translate","angular-loading-bar","jkuri.datepicker","angularModalService","angularMoment"]); //,"ngImgCrop"
 
     backApp.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
         cfpLoadingBarProvider.includeSpinner = false;
